@@ -1,0 +1,15 @@
+RewriteEngine On
+RewriteBase /
+
+# 1. Canonical Redirect /index.html -> /
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
+RewriteRule ^index\.html$ https://fb4kdownloader.com/ [R=301,L]
+
+# 2. Redirect .html URLs to extensionless clean URLs
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.*)\.html\ HTTP/
+RewriteRule ^(.*)\.html$ https://fb4kdownloader.com/$1 [R=301,L]
+
+# 3. Internally resolve clean URLs to .html files
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [L]

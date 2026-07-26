@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bulk Links List Downloader - FB4KDownloader.com</title>
+  <meta name="description" content="Download multiple Facebook videos and reels in bulk queue. Paste Facebook URL list or import .TXT file to auto download to PC folder. Contact: support@fb4kdownloader.com">
+  <link rel="canonical" href="https://fb4kdownloader.com/bulk-fb-reel-downloader">
+  <link rel="stylesheet" href="styles.css?v=2.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <!-- Google AdSense Verification & Auto Ads Code -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9504324837751358" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <!-- Header / Glassmorphic Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="/" class="brand-logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-cloud-arrow-down"></i>
+        </div>
+        <div class="logo-text">
+          FB4K<span>Downloader</span> <span class="logo-badge-4k">4K ULTRA</span>
+        </div>
+      </a>
+
+      <div class="nav-links-wrapper">
+        <ul class="nav-links">
+          <li class="nav-item">
+            <a href="/" class="nav-link"><i class="fa-solid fa-house"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="/facebook-reels-downloader" class="nav-link"><i class="fa-solid fa-clapperboard"></i> Reels Downloader</a>
+          </li>
+          <li class="nav-item">
+            <a href="/fb-to-mp3" class="nav-link"><i class="fa-solid fa-music"></i> FB to MP3</a>
+          </li>
+          <li class="nav-item">
+            <a href="/bulk-fb-reel-downloader" class="nav-link active"><i class="fa-solid fa-list-check"></i> Bulk Downloader</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fa-solid fa-compass"></i> Resources ▾
+            </a>
+            <div class="dropdown-menu">
+              <a href="/about" class="dropdown-item"><i class="fa-solid fa-circle-info"></i> About Us</a>
+              <a href="/privacy" class="dropdown-item"><i class="fa-solid fa-user-shield"></i> Privacy Policy</a>
+              <a href="/terms" class="dropdown-item"><i class="fa-solid fa-file-contract"></i> Terms of Service</a>
+              <a href="/dmca" class="dropdown-item"><i class="fa-solid fa-scale-balanced"></i> DMCA Policy</a>
+              <a href="/contact" class="dropdown-item"><i class="fa-regular fa-envelope"></i> Contact Us</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="nav-actions">
+        <a href="https://chromewebstore.google.com/detail/fb4kdownloader-4k-faceboo/cmhlgochpmciomoodleglljgmoclhcif" target="_blank" class="btn-extension-nav">
+          <i class="fa-brands fa-chrome"></i> Extension
+        </a>
+        <a href="/contact" class="btn-contact-nav">
+          <i class="fa-regular fa-envelope"></i> Contact Us
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Body Content -->
+  <main class="main-content">
+    <div class="page-layout">
+      
+      <!-- LEFT SIDE SKYSCRAPER AD BANNER -->
+      <aside class="ad-skyscraper ad-left">
+        <span class="ad-label">Advertisement</span>
+        <div class="ad-content">
+          <p class="ad-placeholder-text"><i class="fa-solid fa-rectangle-ad"></i> Ad Placement</p>
+        </div>
+      </aside>
+
+      <!-- CENTER COLUMN -->
+      <div class="center-content">
+        
+        <!-- AD PLACEMENT 1: Header Leaderboard -->
+        <div class="ad-placement ad-leaderboard">
+          <span class="ad-label">Advertisement</span>
+          <div class="ad-content">
+            <p class="ad-placeholder-text"><i class="fa-solid fa-rectangle-ad"></i> Ad Banner Placement #1 (Header Leaderboard 728x90)</p>
+          </div>
+        </div>
+
+        <section class="hero-section" style="margin-bottom: 20px;">
+          <div class="hero-badge">
+            <span class="pulse-dot"></span> Bulk Links & .TXT Import Downloader Active
+          </div>
+          <h1 class="hero-title">Bulk Links Downloader</h1>
+          <p class="hero-subtitle">Paste multiple Facebook video links or import a .TXT file to extract & download all videos to your PC</p>
+
+          <!-- Input File Button -->
+          <input type="file" id="txt-file-input" accept=".txt,.csv" style="display: none;">
+
+          <!-- Batch Links Input Form -->
+          <form id="batch-list-form">
+            <div class="downloader-box batch-input-box" style="flex-direction: column; gap: 12px; padding: 20px;">
+              
+              <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <label for="links-textarea" style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+                  <i class="fa-solid fa-list" style="color: var(--neon-cyan);"></i> Paste Facebook Video Links (One URL per line):
+                </label>
+
+                <div style="display: flex; gap: 8px;">
+                  <button type="button" class="btn-paste" id="btn-import-file" style="position: static; background: rgba(0, 242, 254, 0.15); color: var(--neon-cyan); border: 1px solid var(--border-neon); padding: 6px 14px; border-radius: var(--radius-md);">
+                    <i class="fa-solid fa-file-import"></i> Import .TXT File
+                  </button>
+                  <button type="button" class="btn-paste" id="btn-paste-list" style="position: static; padding: 6px 14px;">
+                    <i class="fa-regular fa-paste"></i> Paste Links
+                  </button>
+                </div>
+              </div>
+
+              <textarea id="links-textarea" class="url-input" style="height: 180px; resize: vertical; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.5; border-radius: var(--radius-lg);" placeholder="https://www.facebook.com/watch/?v=123456789
+https://www.facebook.com/reel/987654321
+https://fb.watch/example123"></textarea>
+
+              <!-- Target PC Folder Selector Card Box -->
+              <div id="folder-card-wrapper" style="background: rgba(15, 23, 42, 0.7); border: 1px dashed var(--border-neon); padding: 16px; border-radius: var(--radius-lg); width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div id="folder-icon-box" style="width: 42px; height: 42px; background: rgba(0, 242, 254, 0.15); color: var(--neon-cyan); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                    <i class="fa-solid fa-folder-open"></i>
+                  </div>
+                  <div>
+                    <span id="folder-path-display" style="font-size: 0.9rem; color: var(--text-secondary); display: block; font-weight: 600;">
+                      PC Target Save Directory: <strong style="color: #fff;">Default PC Downloads Folder</strong>
+                    </span>
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">Select custom folder to enable 100% direct background file saving (0 Popups)</span>
+                  </div>
+                </div>
+
+                <button type="button" class="btn-info" id="btn-select-folder" style="border-color: var(--neon-cyan); color: var(--neon-cyan); font-weight: 700; white-space: nowrap;">
+                  <i class="fa-solid fa-folder-plus"></i> Select PC Folder
+                </button>
+              </div>
+
+              <button type="submit" class="btn-download" id="btn-batch-submit" style="width: 100%; justify-content: center; padding: 18px; font-size: 1.05rem; border-radius: var(--radius-xl); margin-top: 5px;">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> <span>Process & Auto-Download All Links</span>
+              </button>
+
+            </div>
+          </form>
+        </section>
+
+        <!-- Batch Extracted Results Container -->
+        <section id="batch-result-container" style="display: none; margin-top: 30px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+            <h2 style="font-size: 1.4rem; font-weight: 800;" id="page-found-title">
+              Extracted Video Queue (<span id="queue-count">0</span>)
+            </h2>
+
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <button class="btn-download" id="btn-start-bulk-download" style="padding: 10px 24px; font-size: 0.92rem;">
+                <i class="fa-solid fa-download"></i> Download Selected (<span id="selected-count">0</span>)
+              </button>
+            </div>
+          </div>
+
+          <!-- Video Cards Grid -->
+          <div class="batch-video-grid" id="batch-grid"></div>
+        </section>
+
+        <!-- AD PLACEMENT 2: Bottom Ad Banner -->
+        <div class="ad-placement ad-bottom" style="margin-top: 40px;">
+          <span class="ad-label">Advertisement</span>
+          <div class="ad-content">
+            <p class="ad-placeholder-text"><i class="fa-solid fa-rectangle-ad"></i> Ad Banner Placement #2 (Bottom Leaderboard 728x90)</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT SIDE SKYSCRAPER AD BANNER -->
+      <aside class="ad-skyscraper ad-right">
+        <span class="ad-label">Advertisement</span>
+        <div class="ad-content">
+          <p class="ad-placeholder-text"><i class="fa-solid fa-rectangle-ad"></i> Ad Placement</p>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="brand-logo" style="font-size: 1.2rem;">
+        <div class="logo-icon" style="width: 34px; height: 34px; font-size: 1rem;">
+          <i class="fa-solid fa-cloud-arrow-down"></i>
+        </div>
+        <div class="logo-text">FB4K<span>Downloader</span></div>
+      </div>
+      <ul class="footer-links">
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/dmca">DMCA Policy</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/terms">Terms of Service</a></li>
+        <li><a href="/contact">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Legal Trademark Non-Affiliation Disclaimer -->
+    <div class="footer-disclaimer">
+      FB4KDownloader is an independent utility and is not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. or Facebook.
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 FB4KDownloader.com - Created by <a href="/about" style="color: var(--neon-cyan); text-decoration: underline;">Shahrukh Ahmad (SRK AMD)</a>. Contact: <a href="mailto:support@fb4kdownloader.com" style="color: var(--neon-cyan); text-decoration: underline;">support@fb4kdownloader.com</a></p>
+    </div>
+  </footer>
+
+  <!-- Toast Container -->
+  <div class="toast" id="toast">
+    <i class="fa-solid fa-circle-check" style="color: var(--neon-green);"></i>
+    <span id="toast-msg">Notification</span>
+  </div>
+
+  <!-- Video Preview Modal -->
+  <div id="preview-modal" class="modal-overlay">
+    <div class="modal-content" style="max-width: 680px; padding: 20px;">
+      <button id="preview-modal-close" class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-header">
+        <h3 id="preview-video-title" style="font-size: 1.18rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 85%;">Video Preview</h3>
+      </div>
+      <div class="video-preview-container" style="background: #000; border-radius: 12px; overflow: hidden; aspect-ratio: 16/9; margin-top: 10px;">
+        <video id="preview-video-player" controls style="width: 100%; height: 100%; object-fit: contain;"></video>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quality Selection Modal -->
+  <div id="quality-modal" class="modal-overlay">
+    <div class="modal-content" style="max-width: 480px;">
+      <button id="quality-modal-close" class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-header">
+        <div class="card-header-icon"><i class="fa-solid fa-sliders"></i></div>
+        <h3>Select Bulk Quality</h3>
+      </div>
+      <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">
+        You have selected <strong id="modal-video-count" style="color: var(--neon-cyan);">0</strong> videos. Choose your preferred quality format to start downloading:
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px;">
+        <!-- 4K Radio Card -->
+        <div class="quality-radio-card active">
+          <input type="radio" name="bulk-quality" id="quality-4k" value="4k" checked style="display: none;">
+          <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; cursor: pointer;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--neon-cyan); display: flex; align-items: center; justify-content: center; background: rgba(0, 242, 254, 0.15);">
+                <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--neon-cyan);"></div>
+              </div>
+              <div style="text-align: left;">
+                <strong style="color: #fff; font-size: 0.95rem; display: block;">4K Ultra HD Upscaled</strong>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Upscale to 3840x2160 Lanczos</span>
+              </div>
+            </div>
+            <span class="badge-4k">4K UHD</span>
+          </div>
+        </div>
+
+        <!-- HD 1080p Radio Card -->
+        <div class="quality-radio-card">
+          <input type="radio" name="bulk-quality" id="quality-hd" value="1080p" style="display: none;">
+          <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; cursor: pointer;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center;">
+                <div style="width: 12px; height: 12px; border-radius: 50%; background: transparent;"></div>
+              </div>
+              <div style="text-align: left;">
+                <strong style="color: #fff; font-size: 0.95rem; display: block;">High Definition (1080p)</strong>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Original high resolution file</span>
+              </div>
+            </div>
+            <span class="badge-hd" style="background: #3b82f6;">1080P</span>
+          </div>
+        </div>
+
+        <!-- SD 720p Radio Card -->
+        <div class="quality-radio-card">
+          <input type="radio" name="bulk-quality" id="quality-sd" value="sd" style="display: none;">
+          <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; cursor: pointer;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center;">
+                <div style="width: 12px; height: 12px; border-radius: 50%; background: transparent;"></div>
+              </div>
+              <div style="text-align: left;">
+                <strong style="color: #fff; font-size: 0.95rem; display: block;">Standard Definition (720p)</strong>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Save data, faster download</span>
+              </div>
+            </div>
+            <span class="badge-hd" style="background: #10b981;">720P</span>
+          </div>
+        </div>
+
+        <!-- MP3 Radio Card -->
+        <div class="quality-radio-card">
+          <input type="radio" name="bulk-quality" id="quality-mp3" value="mp3" style="display: none;">
+          <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; cursor: pointer;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center;">
+                <div style="width: 12px; height: 12px; border-radius: 50%; background: transparent;"></div>
+              </div>
+              <div style="text-align: left;">
+                <strong style="color: #fff; font-size: 0.95rem; display: block;">MP3 Audio (320kbps)</strong>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Transcode stream on-the-fly</span>
+              </div>
+            </div>
+            <span class="badge-hd" style="background: #a855f7;">MP3</span>
+          </div>
+        </div>
+      </div>
+
+      <button id="btn-confirm-bulk-download" class="btn-download" style="width: 100%; justify-content: center;">
+        <i class="fa-solid fa-circle-play"></i> Start Bulk Processing
+      </button>
+    </div>
+  </div>
+
+  <script src="bulk-fb-reel-downloader.js"></script>
+</body>
+</html>

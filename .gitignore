@@ -1,0 +1,13 @@
+node_modules/
+.env
+*.log
+.DS_Store
+temp/
+tmp/
+*.zip
+*.part
+test-*.js
+test_*.js
+*.png
+*.jpg
+*.jpeg

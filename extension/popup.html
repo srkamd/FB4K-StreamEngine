@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FB4KDownloader Extension</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="extension-container">
+    
+    <!-- Header -->
+    <div class="ext-header">
+      <div class="ext-logo">
+        <div class="logo-icon"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+        <div class="logo-text">FB4K<span>Downloader</span></div>
+      </div>
+      <span class="version-badge">v1.0.2</span>
+    </div>
+
+    <!-- Active Tab Status -->
+    <div class="tab-status" id="tab-status">
+      <i class="fa-solid fa-circle-check status-icon"></i>
+      <span id="status-text">Facebook Video Tab Detected!</span>
+    </div>
+
+    <!-- Downloader Box -->
+    <div class="ext-body">
+      <label class="input-label">Facebook Reel / Video Link:</label>
+      <div class="input-group">
+        <input type="text" id="ext-url-input" placeholder="Paste or auto-detect FB link...">
+        <button id="btn-ext-paste" title="Paste link"><i class="fa-regular fa-paste"></i></button>
+      </div>
+
+      <div class="format-select-group">
+        <label class="input-label">Select Download Format:</label>
+        <select id="ext-format-select" class="format-select">
+          <option value="4k" selected>4K Ultra HD (Upscaled)</option>
+          <option value="1080p">1080p Full HD</option>
+          <option value="720p">720p SD Quality</option>
+          <option value="mp3">MP3 Audio Format</option>
+        </select>
+      </div>
+
+      <button id="btn-ext-download" class="btn-primary">
+        <i class="fa-solid fa-download"></i> Download Video / Audio
+      </button>
+
+      <div class="divider"><span>OR</span></div>
+
+      <button id="btn-open-webapp" class="btn-secondary">
+        <i class="fa-solid fa-globe"></i> Open FB4KDownloader.com
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="ext-footer">
+      <span>FB4KDownloader.com &copy; 2026</span>
+      <a href="https://fb4kdownloader.com/contact" target="_blank" id="link-extension-help">Need Help?</a>
+    </div>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

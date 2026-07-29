@@ -1,6 +1,11 @@
 RewriteEngine On
 RewriteBase /
 
+# Force non-www redirect permanently (301)
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+
 # 1. Canonical Redirect /index.html -> /
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
 RewriteRule ^index\.html$ https://fb4kdownloader.com/ [R=301,L]

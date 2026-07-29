@@ -85,10 +85,25 @@ app.use((req, res, next) => {
   next();
 });
 
-// 🔀 SEO CANONICALIZATION: 301 Permanent Redirect /index.html -> /
+// 🔀 SEO CANONICALIZATION: 301 Permanent Redirects for Clean URLs
 app.use((req, res, next) => {
   if (req.path === '/index.html') {
     return res.redirect(301, '/');
+  }
+  if (req.path.endsWith('.html')) {
+    const cleanPath = req.path.slice(0, -5);
+    
+    if (cleanPath === '/reels') {
+      return res.redirect(301, '/facebook-reels-downloader');
+    }
+    if (cleanPath === '/private') {
+      return res.redirect(301, '/facebook-private-video-downloader');
+    }
+    if (cleanPath === '/mp3') {
+      return res.redirect(301, '/fb-to-mp3');
+    }
+    
+    return res.redirect(301, cleanPath);
   }
   next();
 });

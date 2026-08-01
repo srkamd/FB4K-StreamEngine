@@ -130,6 +130,34 @@
 
         </div>
 
+        <!-- RICH TEXT STORY SECTION FOR pSEO & COMPLIANCE -->
+        <article class="article-box" style="margin-top: 30px; padding: 30px; background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border-color); text-align: left; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
+          <h2 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
+            <i class="fa-solid fa-server" style="color: var(--neon-cyan);"></i> Our Mission & Technical Architecture
+          </h2>
+          <div style="color: var(--text-secondary); line-height: 1.8; font-size: 0.96rem; display: flex; flex-direction: column; gap: 16px;">
+            <p>
+              FB4KDownloader.com was born out of a desire to create a clean, high-performance web utility that bypasses the common annoyances of modern downloader sites. Most media downloaders are cluttered with intrusive adware, malicious redirects, and rigid limits. Our mission is to provide an open, free, and completely secure gateway to save public Facebook media for personal archives.
+            </p>
+            <p>
+              Under the hood, FB4KDownloader is powered by a modern, asynchronous <strong>Node.js</strong> and <strong>Express</strong> backend framework. We do not use third-party scraping APIs; instead, we have built a custom native HTTPS streaming crawler that interacts directly with Facebook's CDN. We optimize outbound transfers using pooled Keep-Alive sockets, which drastically cuts latency and maintains high-speed downloads.
+            </p>
+            
+            <h3 style="color: #fff; font-size: 1.15rem; margin-top: 10px; font-weight: 800;">🛠️ The Core Technology Stack</h3>
+            <ul style="padding-left: 20px; list-style-type: disc; display: flex; flex-direction: column; gap: 8px;">
+              <li><strong>Dynamic Transcoding Engine:</strong> We use optimized <strong>FFmpeg</strong> static binaries to upscale video dimensions and re-encode frames using H.264 video compression codecs at custom CRF profiles.</li>
+              <li><strong>Extensionless Clean Routing:</strong> Built with SEO best practices, our clean URL structure ensures smooth routing, preventing duplicate crawl alerts.</li>
+              <li><strong>Asset Caching Middleware:</strong> Express cache-control layers cache static scripts (styles and JS) inside the user's browser, enabling lightning-fast site navigation.</li>
+              <li><strong>GZIP Compression:</strong> Compresses HTML, CSS, and JS files on the fly, reducing First Contentful Paint (FCP) loads for mobile users.</li>
+            </ul>
+
+            <h3 style="color: #fff; font-size: 1.15rem; margin-top: 10px; font-weight: 800;">🔒 Privacy-First Commitment</h3>
+            <p>
+              We believe privacy is a fundamental digital right. Our platform utilizes local YUV extraction buffers that exist temporarily and are instantly destroyed. None of your URLs, filenames, video titles, or user IP addresses are ever logged or saved. We do not track you, keeping your download activity entirely anonymous.
+            </p>
+          </div>
+        </article>
+
         <!-- Ad Placement 2 -->
         <div class="ad-placement ad-bottom" style="margin-top: 40px;">
           <span class="ad-label">Advertisement</span>

@@ -15,5 +15,9 @@
     "express": "^4.19.2",
     "express-rate-limit": "^8.6.0",
     "ffmpeg-static": "^5.2.0"
+  },
+  "overrides": {
+    "ip-address": "10.3.1",
+    "brace-expansion": "2.1.4"
   }
 }

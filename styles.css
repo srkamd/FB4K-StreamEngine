@@ -1249,11 +1249,11 @@ body::after {
   }
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 900px) {
   .nav-container {
     flex-direction: column;
-    align-items: stretch;
-    gap: 14px;
+    align-items: center;
+    gap: 12px;
   }
 
   .nav-links-wrapper {
@@ -1262,16 +1262,21 @@ body::after {
     border-radius: var(--radius-pill);
     padding: 5px;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .nav-links-wrapper::-webkit-scrollbar {
+    display: none;
   }
 
   .nav-links {
-    white-space: nowrap;
+    display: flex;
+    flex-wrap: nowrap;
     width: max-content;
+    gap: 6px;
   }
 
   .nav-actions {
-    justify-content: space-between;
-    width: 100%;
+    display: none !important; /* Hides chrome extension on mobile/tablet */
   }
 
   .content-grid {
@@ -1283,38 +1288,38 @@ body::after {
   }
   
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
 }
 
 @media (max-width: 650px) {
   .navbar {
-    padding: 10px 0;
+    padding: 8px 0;
   }
 
   .logo-text {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
 
   .logo-icon {
     width: 36px;
     height: 36px;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
   }
 
   .hero-title {
-    font-size: 1.95rem;
-    line-height: 1.22;
+    font-size: 1.8rem;
+    line-height: 1.25;
   }
 
   .hero-subtitle {
-    font-size: 0.92rem;
-    margin-bottom: 22px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
   }
 
   .downloader-box {
     flex-direction: column;
-    padding: 10px;
+    padding: 8px;
     border-radius: var(--radius-xl);
   }
 
@@ -1323,26 +1328,26 @@ body::after {
   }
 
   .url-input {
-    font-size: 16px; /* Prevents auto-zoom in Android & iOS WebViews */
-    padding: 14px 40px 14px 44px;
+    font-size: 16px;
+    padding: 14px 36px 14px 40px;
     border-radius: var(--radius-lg);
   }
 
   .input-icon {
     left: 14px;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
   }
 
   .btn-paste {
     right: 8px;
-    padding: 6px 12px;
-    font-size: 0.78rem;
+    padding: 5px 10px;
+    font-size: 0.75rem;
   }
 
   .btn-download {
     width: 100%;
-    padding: 15px;
-    font-size: 1rem;
+    padding: 14px;
+    font-size: 0.95rem;
     justify-content: center;
     border-radius: var(--radius-lg);
   }
@@ -1350,12 +1355,12 @@ body::after {
   .hero-actions {
     flex-direction: column;
     width: 100%;
-    gap: 10px;
+    gap: 8px;
   }
 
   .hero-actions .btn-info {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
   }
 
   .download-options {
@@ -1367,32 +1372,32 @@ body::after {
   }
 
   .card-box {
-    padding: 20px;
+    padding: 18px;
     border-radius: var(--radius-xl);
   }
 
   .footer-content {
     flex-direction: column;
     text-align: center;
-    gap: 14px;
+    gap: 12px;
   }
 
   .footer-links {
     justify-content: center;
-    gap: 12px;
-    font-size: 0.85rem;
+    gap: 10px;
+    font-size: 0.8rem;
   }
 
   .footer-disclaimer {
-    font-size: 0.75rem;
-    padding: 12px 16px 0;
+    font-size: 0.72rem;
+    padding: 10px 12px 0;
   }
 
   .toast {
-    left: 16px;
-    right: 16px;
-    bottom: calc(16px + env(safe-area-inset-bottom));
-    max-width: calc(100vw - 32px);
+    left: 12px;
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    max-width: calc(100vw - 24px);
     justify-content: center;
     text-align: center;
   }

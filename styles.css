@@ -1,34 +1,36 @@
 /* ==========================================================================
-   FB4KDownloader.com - Ultra Premium Dark Theme & Mobile WebView CSS Engine
+   FB4KDownloader.com - Ultra Premium Elegant Theme (Inspired by MyLogoQR.com)
    ========================================================================== */
 
-:root {
-  /* Color Tokens */
-  --bg-dark: #030712;
-  --bg-card: rgba(11, 19, 41, 0.75);
-  --bg-card-solid: #0b1329;
-  --bg-input: rgba(7, 14, 32, 0.8);
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
-  --neon-cyan: #00f2fe;
-  --neon-blue: #4facfe;
-  --neon-purple: #a855f7;
-  --neon-pink: #ec4899;
+:root {
+  /* Color Tokens matching MyLogoQR.com */
+  --bg-dark: #090d16;
+  --bg-card: rgba(17, 24, 39, 0.65);
+  --bg-card-solid: #111827;
+  --bg-input: rgba(15, 23, 42, 0.6);
+
+  --neon-cyan: #22d3ee;
+  --neon-blue: #06b6d4;
+  --neon-purple: #6366f1;
+  --neon-pink: #4f46e5;
   --neon-green: #10b981;
 
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
 
-  --border-glass: rgba(255, 255, 255, 0.08);
-  --border-neon: rgba(0, 242, 254, 0.25);
-  --border-purple: rgba(168, 85, 247, 0.35);
+  --border-glass: rgba(255, 255, 255, 0.06);
+  --border-neon: rgba(99, 102, 241, 0.25);
+  --border-purple: rgba(99, 102, 241, 0.35);
 
-  --gradient-btn: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-  --gradient-badge: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+  --gradient-btn: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+  --gradient-badge: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
 
-  --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.6);
-  --shadow-neon: 0 0 35px rgba(0, 242, 254, 0.2);
-  --shadow-purple: 0 0 35px rgba(168, 85, 247, 0.25);
+  --shadow-card: 0 15px 35px -12px rgba(0, 0, 0, 0.5), 0 2px 5px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 35px rgba(99, 102, 241, 0.15);
+  --shadow-purple: 0 0 35px rgba(99, 102, 241, 0.25);
 
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -54,7 +56,7 @@ html, body {
   overflow-x: hidden;
   background-color: var(--bg-dark);
   color: var(--text-primary);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -63,18 +65,35 @@ html, body {
   -webkit-text-size-adjust: 100%;
 }
 
-/* Background Ambient Glow FX */
-body::before {
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Background Ambient Glow FX matching MyLogoQR.com */
+body::before, body::after {
   content: '';
   position: fixed;
-  top: -200px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1000px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(0, 242, 254, 0.08) 0%, rgba(168, 85, 247, 0.05) 50%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(120px);
   pointer-events: none;
   z-index: 0;
+  opacity: 0.15;
+}
+
+body::before {
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vh;
+  background: #6366f1;
+}
+
+body::after {
+  bottom: -10%;
+  right: -10%;
+  width: 50vw;
+  height: 50vh;
+  background: #06b6d4;
 }
 
 /* Glassmorphic Navigation Bar */

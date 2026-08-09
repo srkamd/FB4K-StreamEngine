@@ -45,49 +45,30 @@
 
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-/* Light Blue Theme Variables (Active when .dark is absent) */
-html:not(.dark) {
-  --bg-dark: #f0f4f8; /* Soft light blue/slate background */
-  --bg-card: rgba(255, 255, 255, 0.85); /* Semi-transparent white card */
-  --bg-card-solid: #ffffff;
-  --bg-input: rgba(255, 255, 255, 0.9);
-  --bg-navbar: rgba(240, 244, 248, 0.85);
-  --bg-dropdown: rgba(255, 255, 255, 0.95);
-
-  --neon-cyan: #4f46e5; /* Use indigo for primary readable actions */
-  --neon-blue: #06b6d4;
-  --neon-purple: #4f46e5;
-  --neon-pink: #d946ef;
-  --neon-green: #059669;
-
-  --text-primary: #0f172a; /* Slate 900 */
-  --text-secondary: #475569; /* Slate 600 */
-  --text-muted: #64748b;
-
-  --hero-title-gradient: linear-gradient(180deg, #0f172a 0%, #334155 100%);
-
-  --border-glass: rgba(15, 23, 42, 0.08);
-  --border-neon: rgba(79, 70, 229, 0.2);
-  --border-purple: rgba(79, 70, 229, 0.25);
-
-  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
-  --shadow-glow: 0 0 25px rgba(79, 70, 229, 0.1);
-  --shadow-purple: 0 0 25px rgba(79, 70, 229, 0.12);
+/* Stacked Logo Typography */
+.logo-text-group {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  text-align: left;
 }
 
-html:not(.dark) body::before, html:not(.dark) body::after {
-  opacity: 0.08; /* Softer blurs on light mode */
+.logo-text-top {
+  font-size: 1.32rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  font-family: 'Outfit', sans-serif;
 }
 
-/* Color Adaptation Overrides to defeat inline color: #fff */
-html:not(.dark) h1, html:not(.dark) h2, html:not(.dark) h3, html:not(.dark) h4, html:not(.dark) h5, html:not(.dark) h6,
-html:not(.dark) .card-box h3, html:not(.dark) .card-box h2, html:not(.dark) .card-box h4,
-html:not(.dark) .card-box strong, html:not(.dark) .faq-question, html:not(.dark) .meta-info, html:not(.dark) .updates-list strong {
-  color: var(--text-primary) !important;
-}
-html:not(.dark) .card-box p, html:not(.dark) .card-box li, html:not(.dark) .card-box span {
-  color: var(--text-secondary) !important;
+.logo-text-bottom {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-family: 'Outfit', sans-serif;
+  margin-top: -1px;
 }
 
 /* Reset & Mobile WebView Base */

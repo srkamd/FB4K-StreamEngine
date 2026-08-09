@@ -260,33 +260,4 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => cookieDiv.remove(), 500);
     });
   }
-
-  // Theme Switching Logic
-  const themeToggle = document.getElementById('theme-toggle');
-  const themeIconLight = document.getElementById('theme-icon-light');
-  const themeIconDark = document.getElementById('theme-icon-dark');
-
-  function updateThemeUI(isDark) {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-      if (themeIconLight) themeIconLight.style.display = 'none';
-      if (themeIconDark) themeIconDark.style.display = 'inline-block';
-    } else {
-      document.documentElement.classList.remove('dark');
-      if (themeIconLight) themeIconLight.style.display = 'inline-block';
-      if (themeIconDark) themeIconDark.style.display = 'none';
-    }
-  }
-
-  // Set initial UI state
-  const isDarkInitial = document.documentElement.classList.contains('dark');
-  updateThemeUI(isDarkInitial);
-
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const isDark = document.documentElement.classList.toggle('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      updateThemeUI(isDark);
-    });
-  }
 });

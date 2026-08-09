@@ -12,14 +12,7 @@
   <link rel="stylesheet" href="styles.css?v=2.1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <script>
-    if (localStorage.getItem('theme') === 'light' || 
-        (!localStorage.getItem('theme') && !window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.remove('dark');
-    } else {
-      document.documentElement.classList.add('dark');
-    }
-  </script>
+  
   <!-- Google AdSense Verification & Auto Ads Code -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9504324837751358" crossorigin="anonymous"></script>
 </head>
@@ -28,12 +21,13 @@
   <!-- Header / Glassmorphic Navigation -->
   <header class="navbar">
     <div class="nav-container">
-      <a href="/" class="brand-logo">
+            <a href="/" class="brand-logo">
         <div class="logo-icon">
           <i class="fa-solid fa-cloud-arrow-down"></i>
         </div>
-        <div class="logo-text">
-          FB4K<span>Downloader</span> <span class="logo-badge-4k">4K ULTRA</span>
+        <div class="logo-text-group">
+          <div class="logo-text-top">FB4K</div>
+          <div class="logo-text-bottom">Downloader</div>
         </div>
       </a>
 
@@ -68,10 +62,7 @@
       </div>
 
       <div class="nav-actions">
-        <button id="theme-toggle" class="btn-contact-nav" style="padding: 10px 14px; margin-right: 5px;" aria-label="Toggle Theme">
-          <i class="fa-regular fa-sun" id="theme-icon-light" style="display: none;"></i>
-          <i class="fa-regular fa-moon" id="theme-icon-dark"></i>
-        </button>
+        
         <a href="https://chromewebstore.google.com/detail/fb4kdownloader-4k-faceboo/cmhlgochpmciomoodleglljgmoclhcif" target="_blank" class="btn-extension-nav">
           <i class="fa-brands fa-chrome"></i> Extension
         </a>
@@ -173,7 +164,11 @@
         <div class="logo-icon" style="width: 34px; height: 34px; font-size: 1rem;">
           <i class="fa-solid fa-cloud-arrow-down"></i>
         </div>
-        <div class="logo-text">FB4K<span>Downloader</span></div>
+        
+        <div class="logo-text-group">
+          <div class="logo-text-top">FB4K</div>
+          <div class="logo-text-bottom">Downloader</div>
+        </div>
       </div>
       <ul class="footer-links">
         <li><a href="/about">About Us</a></li>

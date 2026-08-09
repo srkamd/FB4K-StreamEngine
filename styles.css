@@ -132,27 +132,49 @@ body::after {
 }
 
 .logo-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: var(--radius-md);
-  background: var(--gradient-btn);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(99, 102, 241, 0.12);
+  border: 1.5px solid rgba(0, 242, 254, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.3rem;
-  color: #030712;
-  box-shadow: var(--shadow-neon);
+  font-size: 1.2rem;
+  color: var(--neon-cyan);
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+  transition: var(--transition);
+}
+
+.brand-logo:hover .logo-icon {
+  transform: scale(1.08) rotate(-6deg);
+  border-color: var(--neon-cyan);
+  background: rgba(0, 242, 254, 0.18);
+  box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
 }
 
 .logo-text {
-  font-size: 1.4rem;
+  font-size: 1.52rem;
   font-weight: 900;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   font-family: 'Outfit', sans-serif;
+  background: linear-gradient(135deg, #ffffff 30%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-flex;
+  align-items: center;
+  transition: var(--transition);
 }
 
 .logo-text span {
-  color: var(--neon-cyan);
+  background: linear-gradient(135deg, #00f2fe 0%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+}
+
+.brand-logo:hover .logo-text {
+  filter: brightness(1.1);
 }
 
 .logo-badge-4k {

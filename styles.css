@@ -45,31 +45,7 @@
 
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-/* Stacked Logo Typography */
-.logo-text-group {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
-  text-align: left;
-}
 
-.logo-text-top {
-  font-size: 1.32rem;
-  font-weight: 900;
-  color: #ffffff;
-  letter-spacing: -0.02em;
-  font-family: 'Outfit', sans-serif;
-}
-
-.logo-text-bottom {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--neon-cyan);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  font-family: 'Outfit', sans-serif;
-  margin-top: -1px;
-}
 
 /* Reset & Mobile WebView Base */
 *, *::before, *::after {

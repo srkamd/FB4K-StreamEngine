@@ -23,6 +23,8 @@
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
 
+  --hero-title-gradient: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+
   --border-glass: rgba(255, 255, 255, 0.06);
   --border-neon: rgba(99, 102, 241, 0.25);
   --border-purple: rgba(99, 102, 241, 0.35);
@@ -63,6 +65,8 @@ html:not(.dark) {
   --text-secondary: #475569; /* Slate 600 */
   --text-muted: #64748b;
 
+  --hero-title-gradient: linear-gradient(180deg, #0f172a 0%, #334155 100%);
+
   --border-glass: rgba(15, 23, 42, 0.08);
   --border-neon: rgba(79, 70, 229, 0.2);
   --border-purple: rgba(79, 70, 229, 0.25);
@@ -74,6 +78,16 @@ html:not(.dark) {
 
 html:not(.dark) body::before, html:not(.dark) body::after {
   opacity: 0.08; /* Softer blurs on light mode */
+}
+
+/* Color Adaptation Overrides to defeat inline color: #fff */
+html:not(.dark) h1, html:not(.dark) h2, html:not(.dark) h3, html:not(.dark) h4, html:not(.dark) h5, html:not(.dark) h6,
+html:not(.dark) .card-box h3, html:not(.dark) .card-box h2, html:not(.dark) .card-box h4,
+html:not(.dark) .card-box strong, html:not(.dark) .faq-question, html:not(.dark) .meta-info, html:not(.dark) .updates-list strong {
+  color: var(--text-primary) !important;
+}
+html:not(.dark) .card-box p, html:not(.dark) .card-box li, html:not(.dark) .card-box span {
+  color: var(--text-secondary) !important;
 }
 
 /* Reset & Mobile WebView Base */
@@ -462,7 +476,7 @@ body::after {
   font-weight: 900;
   letter-spacing: -0.03em;
   margin-bottom: 16px;
-  background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+  background: var(--hero-title-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   line-height: 1.15;
@@ -483,7 +497,7 @@ body::after {
 
 /* DOWNLOADER HERO BOX */
 .downloader-box {
-  background: rgba(11, 19, 41, 0.8);
+  background: var(--bg-card);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
   border: 1px solid var(--border-neon);
@@ -624,7 +638,7 @@ body::after {
 /* Results Section */
 .result-card {
   display: none;
-  background: rgba(11, 19, 41, 0.85);
+  background: var(--bg-card);
   backdrop-filter: blur(25px);
   border: 1px solid var(--border-neon);
   border-radius: var(--radius-2xl);
@@ -779,7 +793,7 @@ body::after {
 }
 
 .modal-content {
-  background: rgba(11, 19, 41, 0.96);
+  background: var(--bg-dropdown);
   border: 1px solid var(--border-neon);
   border-radius: var(--radius-2xl);
   padding: 30px;
@@ -829,7 +843,7 @@ body::after {
 }
 
 .card-box {
-  background: rgba(15, 23, 42, 0.65);
+  background: var(--bg-card);
   backdrop-filter: blur(20px);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-2xl);
@@ -969,7 +983,7 @@ body::after {
    ========================================================================== */
 .batch-results-wrapper {
   margin-top: 40px;
-  background: rgba(11, 19, 41, 0.85);
+  background: var(--bg-card);
   backdrop-filter: blur(25px);
   border: 1px solid var(--border-neon);
   border-radius: var(--radius-2xl);
@@ -1022,7 +1036,7 @@ body::after {
 }
 
 .batch-video-card {
-  background: rgba(15, 23, 42, 0.45);
+  background: var(--bg-input);
   border: 1px solid var(--border-glass);
   border-radius: 8px;
   overflow: hidden;

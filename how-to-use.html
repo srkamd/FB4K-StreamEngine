@@ -404,20 +404,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=2.2"></script>
-  <script>
-    // FAQ Toggle Handler
-    document.querySelectorAll('.faq-question').forEach(button => {
-      button.addEventListener('click', () => {
-        const item = button.parentElement;
-        const isActive = item.classList.contains('active');
-        
-        document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
-        if (!isActive) {
-          item.classList.add('active');
-        }
-      });
-    });
-  </script>
+  <script src="app.js?v=3.0"></script>
 </body>
 </html>

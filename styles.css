@@ -340,6 +340,9 @@ body::after {
 .center-content {
   flex: 1;
   min-width: 0;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 /* Skyscraper Ads (Desktop Sidebars) */
@@ -1146,57 +1149,55 @@ body::after {
   background: rgba(0, 242, 254, 0.03);
 }
 
-/* Footer */
+/* Footer Styles Upgrade */
 .footer {
   background: #02050c;
   border-top: 1px solid var(--border-glass);
-  padding: 44px 0 calc(26px + env(safe-area-inset-bottom));
+  padding: 60px 0 calc(30px + env(safe-area-inset-bottom));
   margin-top: auto;
   color: var(--text-muted);
-  font-size: 0.9rem;
 }
 
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  gap: 20px;
+.footer-container {
   max-width: 1500px;
-  margin: 0 auto 20px;
+  margin: 0 auto;
   padding: 0 24px;
 }
 
-.footer-links {
-  display: flex;
-  gap: 20px;
-  list-style: none;
-  flex-wrap: wrap;
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.2fr;
+  gap: 40px;
 }
 
-.footer-links a {
+.footer-col h4 {
+  font-family: 'Outfit', sans-serif;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-col ul li a {
   color: var(--text-secondary);
   text-decoration: none;
+  font-size: 0.88rem;
   transition: var(--transition);
-  font-weight: 600;
 }
 
-.footer-links a:hover {
-  color: var(--neon-cyan);
+.footer-col ul li a:hover {
+  color: var(--neon-cyan) !important;
+  padding-left: 4px;
 }
 
-/* Legal Disclaimer */
 .footer-disclaimer {
-  max-width: 1200px;
-  margin: 0 auto 18px;
-  padding: 0 24px;
-  text-align: center;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-  border-top: 1px dashed rgba(255, 255, 255, 0.08);
-  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 20px;
 }
 
 .footer-bottom {
@@ -1204,6 +1205,29 @@ body::after {
   padding-top: 16px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   font-size: 0.85rem;
+}
+
+@media (max-width: 992px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    text-align: center;
+  }
+  .brand-col, .status-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer-col ul li a:hover {
+    padding-left: 0;
+  }
 }
 
 /* Toast Notification */

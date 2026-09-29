@@ -11,3 +11,7 @@ test_*.js
 *.png
 *.jpg
 *.jpeg
+!images/*.jpg
+!images/*.png
+!images/*.jpeg
+!favicon.svg

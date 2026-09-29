@@ -133,6 +133,15 @@ app.get('/contact', (req, res) => res.sendFile(path.join(__dirname, 'contact.htm
 app.get('/facebook-reels-downloader', (req, res) => res.sendFile(path.join(__dirname, 'reels.html')));
 app.get('/facebook-private-video-downloader', (req, res) => res.sendFile(path.join(__dirname, 'private.html')));
 app.get('/fb-to-mp3', (req, res) => res.sendFile(path.join(__dirname, 'mp3.html')));
+app.get('/blog', (req, res) => res.sendFile(path.join(__dirname, 'blog.html')));
+app.get('/blog/:slug', (req, res) => {
+  const filePath = path.join(__dirname, 'blog', `${req.params.slug}.html`);
+  const fs = require('fs');
+  if (fs.existsSync(filePath)) {
+    return res.sendFile(filePath);
+  }
+  res.status(404).redirect('/blog');
+});
 
 // Static File Server with Clean Extensions Engine
 app.use(express.static(path.join(__dirname), {

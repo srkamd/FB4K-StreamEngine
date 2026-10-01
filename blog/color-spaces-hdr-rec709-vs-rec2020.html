@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/styles.css?v=14.2">
+  <link rel="stylesheet" href="/styles.css?v=14.3">
 </head>
 <body class="min-h-screen pb-12 transition-colors duration-300">
   <!-- Navigation Header -->
@@ -61,7 +61,7 @@
       <h1 class="article-title">Color Spaces & HDR: Rec.709 vs Rec.2020 and Tone-Mapping for Web Displays</h1>
       <div class="article-meta-bar">
         <span><i class="fa-regular fa-user"></i> Shahrukh Ahmad (SRK AMD)</span>
-        <span><i class="fa-regular fa-calendar"></i> Updated September 29, 2026</span>
+        <span><i class="fa-regular fa-calendar"></i> Updated October 1, 2026</span>
         <span><i class="fa-regular fa-clock"></i> 9 min read</span>
       </div>
     </header>
@@ -77,12 +77,22 @@
     <article class="article-content">
       
       <p>
-        Uploading 10-bit HDR video to Facebook without tone-mapping defaults the video into standard dynamic range (Rec.709), creating washed-out contrast and clipped highlights.
+        Have you ever recorded a stunning 10-bit HDR video on your iPhone or mirrorless camera, uploaded it to Facebook, and discovered that the resulting clip looks washed-out, milky gray, or has blown-out neon highlights?
       </p>
-      <h2>Applying Color Space Transforms</h2>
       <p>
-        Always export your social media masters with a Rec.709 color transform and Gamma 2.4 tone curve to ensure your colors look identical on every screen.
+        This common issue is caused by an unmanaged <strong>color space mismatch</strong>. Modern smartphones capture video in the wide <strong>Rec.2020</strong> color gamut using High Dynamic Range transfer functions (HLG or Apple Log). However, most web browsers and social media transcoders default to standard dynamic range (<strong>Rec.709</strong>). When an HDR file is uploaded without tone-mapping, color clipping ruins contrast.
       </p>
+
+      <h2>Tone-Mapping: Converting HDR to Flawless Web SDR</h2>
+      <p>
+        To ensure your video looks vibrant and consistent across every phone screen and desktop monitor, apply a <strong>Color Space Transform (CST)</strong> before exporting your final master:
+      </p>
+      <ol>
+        <li><strong>Input Color Space:</strong> Set to your camera's native profile (e.g. Apple Log, Sony S-Gamut3.Cine, or Rec.2020 HLG).</li>
+        <li><strong>Output Color Space:</strong> Set to <strong>Rec.709 (ITU-R BT.709)</strong>.</li>
+        <li><strong>Output Gamma:</strong> Set to <strong>Gamma 2.4</strong> (or sRGB for pure web display).</li>
+        <li><strong>Tone Mapping Method:</strong> Select DaVinci Tone Mapping or ACEScc to compress highlight roll-off gracefully without clipping skin tones.</li>
+      </ol>
 
       <div class="article-tool-cta">
         <h3>Ready to download or archive Facebook video in 4K?</h3>
@@ -95,7 +105,7 @@
       <div class="author-bio-card">
         <div class="author-bio-avatar"><i class="fa-solid fa-code"></i></div>
         <div class="author-bio-details">
-          <h4>Compiled by Shahrukh Ahmad (SRK AMD)</h4>
+          <h4>Written by Shahrukh Ahmad (SRK AMD)</h4>
           <p>
             Lead software engineer at FB4KDownloader.com. Dedicated to building open, client-side web media utilities, demystifying video engineering, and empowering digital creators with reliable archiving tools.
           </p>

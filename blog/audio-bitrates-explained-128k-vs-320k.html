@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/styles.css?v=14.2">
+  <link rel="stylesheet" href="/styles.css?v=14.3">
 </head>
 <body class="min-h-screen pb-12 transition-colors duration-300">
   <!-- Navigation Header -->
@@ -61,7 +61,7 @@
       <h1 class="article-title">128kbps vs 320kbps MP3: Spectral Frequency Analysis & Differences</h1>
       <div class="article-meta-bar">
         <span><i class="fa-regular fa-user"></i> Shahrukh Ahmad (SRK AMD)</span>
-        <span><i class="fa-regular fa-calendar"></i> Updated September 29, 2026</span>
+        <span><i class="fa-regular fa-calendar"></i> Updated October 1, 2026</span>
         <span><i class="fa-regular fa-clock"></i> 8 min read</span>
       </div>
     </header>
@@ -77,15 +77,53 @@
     <article class="article-content">
       
       <p>
-        The human hearing frequency spectrum spans from roughly 20 Hz to 20,000 Hz. In a 128kbps MP3 stream, the encoder applies a ruthless <strong>16 kHz low-pass brickwall filter</strong>. Every subtle overtone, acoustic room reverb tail, and cymbal shimmer above 16,000 Hz is permanently discarded to conserve bits.
-      </p>
-      <h2>Perceptual Masking and Double Compression</h2>
-      <p>
-        When you upload a video or podcast to Facebook, Meta automatically compresses the audio track down to 128kbps AAC. If you subsequently download that audio using a generic downloader that outputs 128kbps MP3, your file undergoes <strong>generational double-lossy compression</strong>.
+        Discussions about MP3 audio quality are often split between audiophiles who insist all lossy compression sounds awful and casual listeners who claim 128 kbps sounds identical to CD audio. But when you inspect audio files under a spectral frequency analyzer, the differences between <strong>128 kbps</strong> and <strong>320 kbps</strong> are clear, measurable mathematical facts.
       </p>
       <p>
-        In contrast, converting the stream directly into a <strong>320kbps MP3 container</strong> ensures that every surviving harmonic frequency between 16kHz and 20.5kHz is accurately captured without introducing secondary quantization noise.
+        The human auditory system perceives frequencies from approximately 20 Hz up to 20,000 Hz. When an encoder compresses audio down to 128 kbps, it runs out of data capacity. To preserve intelligible speech in the mid-range (300 Hz to 4 kHz), it applies an aggressive <strong>16,000 Hz low-pass brickwall filter</strong>. Every harmonic overtone, acoustic room reflection, and cymbal shimmer above 16 kHz is permanently deleted.
       </p>
+
+      <h2>Why Double-Compression Destroys Social Audio</h2>
+      <p>
+        When you upload content to Facebook, Meta automatically compresses the audio track to 128 kbps AAC. If you subsequently download that video using a generic tool that re-encodes the stream into a 128 kbps MP3, your audio suffers from <strong>generational loss</strong>.
+      </p>
+      <p>
+        Quantization artifacts multiply, making sibilant consonants ("s", "t", "sh") sound watery, metallic, and garbled. Converting directly into a <strong>320 kbps MP3 container</strong> captures every surviving frequency up to 20.5 kHz without introducing secondary lossy degradation.
+      </p>
+
+      <h2>Practical Listening Test Results</h2>
+      <div class="article-table-wrapper">
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>Bitrate</th>
+              <th>Frequency Ceiling</th>
+              <th>Perceived Quality</th>
+              <th>Best Use Case</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>128 kbps MP3</td>
+              <td>16.0 kHz Low-Pass</td>
+              <td>Flat high end, slight sibilance</td>
+              <td>Spoken podcasts, voice memos</td>
+            </tr>
+            <tr>
+              <td>192 kbps MP3</td>
+              <td>18.5 kHz Cutoff</td>
+              <td>Clean, acceptable for casual listening</td>
+              <td>Everyday web audio</td>
+            </tr>
+            <tr>
+              <td>320 kbps MP3</td>
+              <td>20.5 kHz (Full Range)</td>
+              <td>Transparent, identical to uncompressed</td>
+              <td>Music archival, studio monitoring</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <div class="article-tool-cta">
         <h3>Ready to download or archive Facebook video in 4K?</h3>
@@ -98,7 +136,7 @@
       <div class="author-bio-card">
         <div class="author-bio-avatar"><i class="fa-solid fa-code"></i></div>
         <div class="author-bio-details">
-          <h4>Compiled by Shahrukh Ahmad (SRK AMD)</h4>
+          <h4>Written by Shahrukh Ahmad (SRK AMD)</h4>
           <p>
             Lead software engineer at FB4KDownloader.com. Dedicated to building open, client-side web media utilities, demystifying video engineering, and empowering digital creators with reliable archiving tools.
           </p>

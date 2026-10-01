@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/styles.css?v=14.2">
+  <link rel="stylesheet" href="/styles.css?v=14.3">
 </head>
 <body class="min-h-screen pb-12 transition-colors duration-300">
   <!-- Navigation Header -->
@@ -61,7 +61,7 @@
       <h1 class="article-title">Video Codecs Explained: H.264 (AVC) vs H.265 (HEVC) vs AV1</h1>
       <div class="article-meta-bar">
         <span><i class="fa-regular fa-user"></i> Shahrukh Ahmad (SRK AMD)</span>
-        <span><i class="fa-regular fa-calendar"></i> Updated September 29, 2026</span>
+        <span><i class="fa-regular fa-calendar"></i> Updated October 1, 2026</span>
         <span><i class="fa-regular fa-clock"></i> 10 min read</span>
       </div>
     </header>
@@ -77,11 +77,28 @@
     <article class="article-content">
       
       <p>
-        The world of digital video compression is currently undergoing its most significant generational shift in two decades. While <strong>H.264 (AVC)</strong> has served as the backbone of online streaming since the mid-2000s, rising 4K and 8K display penetration has forced engineers to seek higher compression efficiency.
+        Digital video compression is currently undergoing its most significant generational transition in twenty years. For two decades, <strong>H.264 (Advanced Video Coding)</strong> has powered the open internet. But as 4K and 8K displays have become household standards, platforms have reached the physical limits of what H.264 can compress without choking internet bandwidth.
       </p>
-      <h2>H.264 vs HEVC vs AV1 Comparison</h2>
       <p>
-        H.264 offers 99.9% device compatibility. HEVC cuts bitrates by 50% but suffers from complex patent licensing royalties. AV1 is the 100% royalty-free open standard backed by Apple, Google, Meta, and Netflix, offering 30% higher compression efficiency than HEVC.
+        Today, the compression landscape is split between <strong>H.265 (HEVC)</strong> and the open-source <strong>AV1</strong> standard. Understanding the differences in compression efficiency, hardware support, and patent licensing will help you make the right export choices for your video catalog.
+      </p>
+
+      <h2>1. H.264 (AVC): The Indestructible Workhorse</h2>
+      <p>
+        Released in 2003, H.264 partitions frames into 16x16 pixel macroblocks. Its real advantage in 2026 is universal hardware decoding: every inexpensive Smart TV, older budget smartphone, and web browser decodes H.264 flawlessly with negligible battery drain. If absolute reliability across every possible viewer is your priority, H.264 remains unbeatable.
+      </p>
+
+      <h2>2. H.265 (HEVC): 50% More Efficient, Plagued by Patents</h2>
+      <p>
+        HEVC replaces macroblocks with dynamic <strong>Coding Tree Units (CTUs)</strong> measuring up to 64x64 pixels. This allows the encoder to compress large areas of uniform color (like sky or studio backdrops) with incredible efficiency, delivering equal visual quality at half the file size of H.264.
+      </p>
+      <p>
+        However, HEVC's adoption was crippled by aggressive, fragmented patent licensing pools (MPEG LA, HEVC Advance, Velos Media). Web browsers like Google Chrome refused to pay royalties for years, preventing HEVC from becoming the universal web standard.
+      </p>
+
+      <h2>3. AV1: The Royalty-Free Future</h2>
+      <p>
+        Recognizing the licensing dead-end of HEVC, tech giants including Apple, Google, Meta, Netflix, Microsoft, and Amazon formed the <strong>Alliance for Open Media (AOMedia)</strong> to develop AV1. AV1 is 100% royalty-free, outperforms HEVC by 30% in data efficiency, and is now backed by dedicated hardware decoding silicon in Apple M3/A17 chips, Intel Core Ultra, and Nvidia RTX 40-series cards.
       </p>
 
       <div class="article-tool-cta">
@@ -95,7 +112,7 @@
       <div class="author-bio-card">
         <div class="author-bio-avatar"><i class="fa-solid fa-code"></i></div>
         <div class="author-bio-details">
-          <h4>Compiled by Shahrukh Ahmad (SRK AMD)</h4>
+          <h4>Written by Shahrukh Ahmad (SRK AMD)</h4>
           <p>
             Lead software engineer at FB4KDownloader.com. Dedicated to building open, client-side web media utilities, demystifying video engineering, and empowering digital creators with reliable archiving tools.
           </p>

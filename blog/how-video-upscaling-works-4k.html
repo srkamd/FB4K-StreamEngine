@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/styles.css?v=14.2">
+  <link rel="stylesheet" href="/styles.css?v=14.3">
 </head>
 <body class="min-h-screen pb-12 transition-colors duration-300">
   <!-- Navigation Header -->
@@ -61,7 +61,7 @@
       <h1 class="article-title">How 4K Video Upscaling Works: Bilinear Filtering vs AI Super-Resolution</h1>
       <div class="article-meta-bar">
         <span><i class="fa-regular fa-user"></i> Shahrukh Ahmad (SRK AMD)</span>
-        <span><i class="fa-regular fa-calendar"></i> Updated September 29, 2026</span>
+        <span><i class="fa-regular fa-calendar"></i> Updated October 1, 2026</span>
         <span><i class="fa-regular fa-clock"></i> 9 min read</span>
       </div>
     </header>
@@ -77,14 +77,28 @@
     <article class="article-content">
       
       <p>
-        When you scale a 1080p Full HD video (1920x1080 = 2.07 million pixels) up to 4K Ultra HD (3840x2160 = 8.29 million pixels), your software has to literally invent <strong>75% of the information</strong> in the output image. Every single original pixel must now be represented by four pixels.
-      </p>
-      <h2>Classical Interpolation vs Neural ESRGAN</h2>
-      <p>
-        Traditional mathematical scalars (Bilinear, Bicubic, Lanczos) evaluate adjacent color values and calculate smooth gradients across empty space. While fast, mathematical interpolation cannot reconstruct lost micro-textures.
+        When you scale a 1080p Full HD video (1920x1080 = 2.07 million pixels) up to 4K Ultra HD (3840x2160 = 8.29 million pixels), your computer must generate <strong>75% of the final image data out of thin air</strong>. For every single pixel present in the original video, the upscaled file requires four pixels.
       </p>
       <p>
-        Modern <strong>Deep Convolutional Neural Networks</strong> (like ESRGAN and Real-CUGAN) recognize semantic patterns—knowing what human skin, hair strands, or woven cotton look like—and synthesize realistic high-frequency detail directly into the upscaled frames.
+        How those synthetic pixels are generated marks the difference between a blurry, washed-out mess and a crisp, cinematic 4K presentation on modern 65-inch Smart TVs.
+      </p>
+
+      <h2>Mathematical Interpolation: Fast but Soft</h2>
+      <p>
+        Traditional scaling algorithms—such as Bilinear, Bicubic, and Lanczos—use mathematical equations to calculate weighted color averages between neighboring pixels:
+      </p>
+      <ul>
+        <li><strong>Bilinear:</strong> Samples the nearest 2x2 grid of pixels. It runs fast on low-power devices but produces noticeably blurry edges.</li>
+        <li><strong>Bicubic:</strong> Samples a 4x4 grid of 16 pixels. Produces smoother curves than Bilinear, but can introduce ringing halos around sharp contrasts.</li>
+        <li><strong>Lanczos:</strong> Uses a sinc function over an 8x8 grid. It is the sharpest mathematical filter available in FFmpeg, but still cannot reconstruct details that were never recorded by the camera sensor.</li>
+      </ul>
+
+      <h2>Deep Learning Super-Resolution: Neural Feature Synthesis</h2>
+      <p>
+        Modern neural super-resolution models (like ESRGAN, Real-CUGAN, and Topaz Video AI) take a fundamentally different approach. Trained on millions of paired low-resolution and high-resolution images, these deep neural networks recognize semantic context.
+      </p>
+      <p>
+        When the model detects an eye, a fabric weave, or a brick wall, it doesn't just average colors—it synthesizes realistic micro-textures based on its trained understanding of how light interacts with real-world surfaces. This eliminates pixelation and delivers genuine perceived sharpness on high-resolution displays.
       </p>
 
       <div class="article-tool-cta">
@@ -98,7 +112,7 @@
       <div class="author-bio-card">
         <div class="author-bio-avatar"><i class="fa-solid fa-code"></i></div>
         <div class="author-bio-details">
-          <h4>Compiled by Shahrukh Ahmad (SRK AMD)</h4>
+          <h4>Written by Shahrukh Ahmad (SRK AMD)</h4>
           <p>
             Lead software engineer at FB4KDownloader.com. Dedicated to building open, client-side web media utilities, demystifying video engineering, and empowering digital creators with reliable archiving tools.
           </p>

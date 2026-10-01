@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/styles.css?v=14.2">
+  <link rel="stylesheet" href="/styles.css?v=14.3">
 </head>
 <body class="min-h-screen pb-12 transition-colors duration-300">
   <!-- Navigation Header -->
@@ -61,7 +61,7 @@
       <h1 class="article-title">Audio Loudness Normalization: Mastering to the -14 LUFS Broadcast Standard</h1>
       <div class="article-meta-bar">
         <span><i class="fa-regular fa-user"></i> Shahrukh Ahmad (SRK AMD)</span>
-        <span><i class="fa-regular fa-calendar"></i> Updated September 29, 2026</span>
+        <span><i class="fa-regular fa-calendar"></i> Updated October 1, 2026</span>
         <span><i class="fa-regular fa-clock"></i> 8 min read</span>
       </div>
     </header>
@@ -77,11 +77,18 @@
     <article class="article-content">
       
       <p>
-        Social platforms normalize audio according to ITU-R BS.1770-4. Meta targets an integrated loudness of approximately <strong>-14 LUFS</strong> with a <strong>-1.0 dB True Peak ceiling</strong>.
+        During the early days of online video, platforms were plagued by the "Loudness Wars"—creators would push limiters as hard as possible so their videos blasted louder than competitors. Today, automated algorithms enforce international loudness normalization standards based on the <strong>ITU-R BS.1770-4</strong> specification.
       </p>
       <p>
-        Mastering to this target ensures your video avoids harsh automated ducking and compression limiters.
+        Meta targets an integrated loudness level of approximately <strong>-14 LUFS</strong> (Loudness Units relative to Full Scale). If you master your audio too hot (e.g. pushing a podcast track to -8 LUFS), Facebook's automated ingest limiter aggressively ducks your volume, making speech sound muffled, dynamic range squashed, and background music pump awkwardly.
       </p>
+
+      <h2>The Social Video Audio Mastering Checklist</h2>
+      <ul>
+        <li><strong>Integrated Loudness Target:</strong> Aim for <strong>-14 LUFS</strong> (+/- 1 LUFS) across the full duration of your clip using an ITU loudness meter (Youlean Loudness Meter, iZotope Insight).</li>
+        <li><strong>True Peak Ceiling:</strong> Always set your master peak limiter ceiling to <strong>-1.0 dB True Peak (dBTP)</strong>. This critical headroom prevents inter-sample clipping when Meta's transcoders convert your audio into lossy AAC format.</li>
+        <li><strong>Dialogue EQ:</strong> Apply a high-pass filter at 80 Hz to eliminate low-frequency air conditioning hum, and use gentle multiband compression to ensure clear speech intelligibility on tiny smartphone speakers.</li>
+      </ul>
 
       <div class="article-tool-cta">
         <h3>Ready to download or archive Facebook video in 4K?</h3>
@@ -94,7 +101,7 @@
       <div class="author-bio-card">
         <div class="author-bio-avatar"><i class="fa-solid fa-code"></i></div>
         <div class="author-bio-details">
-          <h4>Compiled by Shahrukh Ahmad (SRK AMD)</h4>
+          <h4>Written by Shahrukh Ahmad (SRK AMD)</h4>
           <p>
             Lead software engineer at FB4KDownloader.com. Dedicated to building open, client-side web media utilities, demystifying video engineering, and empowering digital creators with reliable archiving tools.
           </p>

@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/styles.css?v=14.1">
+  <link rel="stylesheet" href="/styles.css?v=14.2">
 </head>
 <body class="min-h-screen pb-12 transition-colors duration-300">
   <!-- Navigation Header -->
@@ -66,22 +66,7 @@
       </div>
     </header>
 
-    
-      <div class="article-diagram-card">
-        <div class="article-diagram-title"><i class="fa-solid fa-sliders"></i> ITU-R BS.1770-4 Loudness Metering Ceiling</div>
-        <svg viewBox="0 0 800 180" style="width:100%;height:auto;display:block;">
-          <rect width="800" height="180" fill="#0b1120" rx="12"/>
-          <!-- Dynamic Ceiling Bar -->
-          <rect x="80" y="40" width="640" height="35" rx="6" fill="#1e293b"/>
-          <rect x="80" y="40" width="480" height="35" rx="6" fill="url(#specGrad1)" opacity="0.8"/>
-          <!-- -14 LUFS Target Marker -->
-          <line x1="560" y1="25" x2="560" y2="90" stroke="#00f2fe" stroke-width="3"/>
-          <text x="560" y="110" fill="#00f2fe" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif">Target: -14 LUFS Integrated</text>
-          <!-- -1.0 True Peak Marker -->
-          <line x1="680" y1="25" x2="680" y2="90" stroke="#ec4899" stroke-width="3"/>
-          <text x="680" y="110" fill="#ec4899" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif">Ceiling: -1.0 dB True Peak</text>
-        </svg>
-      </div>
+    <div class="article-hero-media"><img src="/images/audio-loudness.jpg" alt="Audio Loudness Normalization: Mastering to the -14 LUFS Broadcast Standard"></div>
     
       <div class="metric-grid-3">
         <div class="metric-pill"><div class="metric-val">-14 LUFS</div><div class="metric-lbl">Integrated Target Level</div></div>
@@ -92,18 +77,11 @@
     <article class="article-content">
       
       <p>
-        In the early days of online video, platforms suffered from the "Loudness Wars"—creators would push limiters to their absolute maximum (+2 dB) so their videos sounded louder than their competitors. Today, social media algorithms enforce automated <strong>loudness normalization</strong> using the international <strong>ITU-R BS.1770-4</strong> standard.
+        Social platforms normalize audio according to ITU-R BS.1770-4. Meta targets an integrated loudness of approximately <strong>-14 LUFS</strong> with a <strong>-1.0 dB True Peak ceiling</strong>.
       </p>
       <p>
-        Meta targets an integrated loudness of approximately <strong>-14 LUFS</strong> (Loudness Units Full Scale). If you master your audio too hot (e.g. -8 LUFS), the automated ingest system will aggressively lower your volume, causing pumping and squashed dynamic range.
+        Mastering to this target ensures your video avoids harsh automated ducking and compression limiters.
       </p>
-
-      <h2>The Audio Mastering Checklist for Social Video</h2>
-      <ol>
-        <li><strong>Integrated Loudness:</strong> Target -14 LUFS (+/- 1 LUFS) across the entire duration of the clip.</li>
-        <li><strong>True Peak Limiting:</strong> Set your master limiter ceiling to <strong>-1.0 dB True Peak</strong>. This leaves sufficient headroom for lossy AAC encoding codecs to avoid inter-sample clipping artifacts.</li>
-        <li><strong>Dialogue Clarity:</strong> Apply a high-pass filter at 80 Hz on vocal tracks to remove air conditioner rumble, followed by gentle multiband compression to keep speech intelligible on mobile phone speakers.</li>
-      </ol>
 
       <div class="article-tool-cta">
         <h3>Ready to download or archive Facebook video in 4K?</h3>

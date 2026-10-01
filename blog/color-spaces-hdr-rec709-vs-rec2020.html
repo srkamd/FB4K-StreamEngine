@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/styles.css?v=14.1">
+  <link rel="stylesheet" href="/styles.css?v=14.2">
 </head>
 <body class="min-h-screen pb-12 transition-colors duration-300">
   <!-- Navigation Header -->
@@ -66,22 +66,7 @@
       </div>
     </header>
 
-    
-      <div class="article-diagram-card">
-        <div class="article-diagram-title"><i class="fa-solid fa-palette"></i> CIE 1931 Chromaticity Gamut Comparison</div>
-        <svg viewBox="0 0 800 200" style="width:100%;height:auto;display:block;">
-          <rect width="800" height="200" fill="#0b1120" rx="12"/>
-          <!-- CIE Outer Horseshoe Representation -->
-          <polygon points="120,170 300,30 460,140 120,170" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,4"/>
-          <text x="300" y="24" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif">Visible Human Spectrum</text>
-          <!-- Rec 2020 Triangle -->
-          <polygon points="150,165 310,48 430,135" fill="rgba(168, 85, 247, 0.15)" stroke="#a855f7" stroke-width="2.5"/>
-          <text x="380" y="80" fill="#a855f7" font-size="12" font-weight="bold" font-family="sans-serif">Rec.2020 (Wide Color Gamut)</text>
-          <!-- Rec 709 Triangle -->
-          <polygon points="180,160 290,75 380,130" fill="rgba(0, 242, 254, 0.25)" stroke="#00f2fe" stroke-width="2.5"/>
-          <text x="260" y="115" fill="#00f2fe" font-size="12" font-weight="bold" font-family="sans-serif">Rec.709 (SDR Standard)</text>
-        </svg>
-      </div>
+    <div class="article-hero-media"><img src="/images/color-spaces.jpg" alt="Color Spaces & HDR: Rec.709 vs Rec.2020 and Tone-Mapping for Web Displays"></div>
     
       <div class="metric-grid-3">
         <div class="metric-pill"><div class="metric-val">Rec.709</div><div class="metric-lbl">Standard Dynamic Range</div></div>
@@ -92,22 +77,12 @@
     <article class="article-content">
       
       <p>
-        Have you ever filmed a stunning 10-bit HDR video on an iPhone, uploaded it to Facebook, and discovered that the resulting video looks milky, gray, or has completely blown-out neon highlights?
+        Uploading 10-bit HDR video to Facebook without tone-mapping defaults the video into standard dynamic range (Rec.709), creating washed-out contrast and clipped highlights.
       </p>
+      <h2>Applying Color Space Transforms</h2>
       <p>
-        The culprit is an unmanaged <strong>color space mismatch</strong>. Modern smartphones capture video in the vast <strong>Rec.2020</strong> color gamut using High Dynamic Range transfer functions (HLG or Dolby Vision). But when uploaded without tone-mapping, social platforms display the video within the standard dynamic range <strong>Rec.709</strong> profile, creating severe luminance clipping.
+        Always export your social media masters with a Rec.709 color transform and Gamma 2.4 tone curve to ensure your colors look identical on every screen.
       </p>
-
-      <h2>Tone-Mapping: Preserving Vibrancy Without Clipping</h2>
-      <p>
-        To prevent washed-out colors on viewers' screens, always apply a <strong>Color Space Transform (CST)</strong> inside DaVinci Resolve or Premiere Pro before exporting:
-      </p>
-      <ul>
-        <li><strong>Input Color Space:</strong> Apple Log, Sony S-Gamut3.Cine, or Rec.2020 HLG.</li>
-        <li><strong>Output Color Space:</strong> Rec.709 (ITU-R BT.709).</li>
-        <li><strong>Output Gamma:</strong> Gamma 2.4 (or sRGB for pure web consumption).</li>
-        <li><strong>Tone-Mapping Method:</strong> DaVinci Tone Mapping or ACEScc to compress highlight roll-off gracefully.</li>
-      </ul>
 
       <div class="article-tool-cta">
         <h3>Ready to download or archive Facebook video in 4K?</h3>

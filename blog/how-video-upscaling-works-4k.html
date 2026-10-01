@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/styles.css?v=14.1">
+  <link rel="stylesheet" href="/styles.css?v=14.2">
 </head>
 <body class="min-h-screen pb-12 transition-colors duration-300">
   <!-- Navigation Header -->
@@ -66,31 +66,7 @@
       </div>
     </header>
 
-    
-      <div class="article-diagram-card">
-        <div class="article-diagram-title"><i class="fa-solid fa-microchip"></i> Neural Super-Resolution Architecture</div>
-        <svg viewBox="0 0 800 200" style="width:100%;height:auto;display:block;">
-          <rect width="800" height="200" fill="#0b1120" rx="12"/>
-          <!-- Low Res Input -->
-          <rect x="50" y="50" width="100" height="100" rx="8" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
-          <text x="100" y="95" fill="#f8fafc" font-size="14" font-weight="bold" text-anchor="middle" font-family="sans-serif">1080p</text>
-          <text x="100" y="115" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif">2.07M Pixels</text>
-          <!-- Arrow 1 -->
-          <path d="M 160,100 L 220,100" stroke="#00f2fe" stroke-width="3" marker-end="url(#arrow)"/>
-          <!-- Feature Extraction -->
-          <rect x="230" y="40" width="150" height="120" rx="8" fill="#0f172a" stroke="#00f2fe" stroke-width="2"/>
-          <text x="305" y="85" fill="#00f2fe" font-size="13" font-weight="bold" text-anchor="middle" font-family="sans-serif">ESRGAN Neural Net</text>
-          <text x="305" y="105" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif">Residual Dense Blocks</text>
-          <text x="305" y="125" fill="#a855f7" font-size="11" text-anchor="middle" font-family="sans-serif">Texture Synthesis</text>
-          <!-- Arrow 2 -->
-          <path d="M 390,100 L 450,100" stroke="#00f2fe" stroke-width="3"/>
-          <!-- High Res Output -->
-          <rect x="460" y="30" width="180" height="140" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
-          <text x="550" y="85" fill="#10b981" font-size="18" font-weight="bold" text-anchor="middle" font-family="sans-serif">4K UHD Master</text>
-          <text x="550" y="110" fill="#f8fafc" font-size="12" text-anchor="middle" font-family="sans-serif">3840 x 2160</text>
-          <text x="550" y="130" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif">8.29M Pixels (+300%)</text>
-        </svg>
-      </div>
+    <div class="article-hero-media"><img src="/images/ai-upscaling.jpg" alt="How 4K Video Upscaling Works: Bilinear Filtering vs AI Super-Resolution"></div>
     
       <div class="metric-grid-3">
         <div class="metric-pill"><div class="metric-val">300%</div><div class="metric-lbl">Pixel Expansion Factor</div></div>
@@ -103,16 +79,12 @@
       <p>
         When you scale a 1080p Full HD video (1920x1080 = 2.07 million pixels) up to 4K Ultra HD (3840x2160 = 8.29 million pixels), your software has to literally invent <strong>75% of the information</strong> in the output image. Every single original pixel must now be represented by four pixels.
       </p>
+      <h2>Classical Interpolation vs Neural ESRGAN</h2>
       <p>
-        How those synthetic pixels are generated defines the boundary between blurry amateur interpolation and crisp, cinematic 4K clarity.
-      </p>
-
-      <h2>Classical Mathematical Interpolation vs Neural ESRGAN</h2>
-      <p>
-        Traditional mathematical scalars (Bilinear, Bicubic, Lanczos) evaluate adjacent color values and calculate smooth gradients across empty space. While fast, mathematical interpolation cannot reconstruct lost micro-textures—skin pores, eyelashes, fabric weaves, and leaves turn soft and mushy.
+        Traditional mathematical scalars (Bilinear, Bicubic, Lanczos) evaluate adjacent color values and calculate smooth gradients across empty space. While fast, mathematical interpolation cannot reconstruct lost micro-textures.
       </p>
       <p>
-        Modern <strong>Deep Convolutional Neural Networks</strong> (like ESRGAN and Real-CUGAN) operate completely differently. Trained on millions of paired low-resolution and high-resolution frames, these AI models recognize patterns—knowing what human skin or woven cotton looks like—and synthesize realistic high-frequency detail directly into the upscaled frames.
+        Modern <strong>Deep Convolutional Neural Networks</strong> (like ESRGAN and Real-CUGAN) recognize semantic patterns—knowing what human skin, hair strands, or woven cotton look like—and synthesize realistic high-frequency detail directly into the upscaled frames.
       </p>
 
       <div class="article-tool-cta">

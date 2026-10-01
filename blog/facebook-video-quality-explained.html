@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/styles.css?v=14.1">
+  <link rel="stylesheet" href="/styles.css?v=14.2">
 </head>
 <body class="min-h-screen pb-12 transition-colors duration-300">
   <!-- Navigation Header -->
@@ -66,7 +66,7 @@
       </div>
     </header>
 
-    <div class="article-hero-media"><img src="/images/fb-video-compression.jpg" alt="Why Facebook Compresses Video Quality Infographic"></div>
+    <div class="article-hero-media"><img src="/images/fb-video-compression.jpg" alt="Why Facebook Compresses Video Quality & How to Preserve 1080p and 4K"></div>
     
       <div class="metric-grid-3">
         <div class="metric-pill"><div class="metric-val">CRF 18</div><div class="metric-lbl">Target Rate Factor</div></div>
@@ -159,9 +159,6 @@
       </div>
 
       <h2>The Master FFmpeg Export Command for Facebook</h2>
-      <p>
-        If you want zero-recompression artifacts, transcode your master video using the following exact parameters before uploading:
-      </p>
       <pre style="background: #0f172a; padding: 18px; border-radius: 12px; border: 1px solid rgba(0,242,254,0.2); overflow-x: auto; color: #38bdf8; font-family: monospace; font-size: 0.9rem;"><code>ffmpeg -i master_input.mov \
   -c:v libx264 -preset slow -crf 18 \
   -profile:v high -level 4.2 \
@@ -171,12 +168,6 @@
   -c:a aac -b:a 320k -ar 48000 \
   -movflags +faststart \
   output_facebook_optimized.mp4</code></pre>
-
-      <div class="article-tool-cta">
-        <h3>Need to inspect or download raw uncompressed streams?</h3>
-        <p>Use FB4KDownloader to extract original High Definition MP4 video streams directly from Meta edge CDNs without generational compression losses.</p>
-        <a href="/" class="btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--primary-gradient); color: #fff; font-weight: 800; border-radius: 999px; text-decoration: none;"><i class="fa-solid fa-cloud-arrow-down"></i> Open Facebook 4K Downloader</a>
-      </div>
 
       <div class="article-tool-cta">
         <h3>Ready to download or archive Facebook video in 4K?</h3>

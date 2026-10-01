@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/styles.css?v=14.1">
+  <link rel="stylesheet" href="/styles.css?v=14.2">
 </head>
 <body class="min-h-screen pb-12 transition-colors duration-300">
   <!-- Navigation Header -->
@@ -66,31 +66,7 @@
       </div>
     </header>
 
-    
-      <div class="article-diagram-card">
-        <div class="article-diagram-title"><i class="fa-solid fa-microchip"></i> Video Codec Efficiency vs Licensing Spectrum</div>
-        <svg viewBox="0 0 800 220" style="width:100%;height:auto;display:block;">
-          <rect width="800" height="220" fill="#0b1120" rx="12"/>
-          <!-- H.264 -->
-          <rect x="50" y="40" width="210" height="140" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
-          <text x="155" y="75" fill="#38bdf8" font-size="16" font-weight="bold" text-anchor="middle" font-family="sans-serif">H.264 (AVC)</text>
-          <text x="155" y="100" fill="#f8fafc" font-size="12" text-anchor="middle" font-family="sans-serif">Compatibility: 99.9%</text>
-          <text x="155" y="120" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif">Standard 1080p Web Video</text>
-          <text x="155" y="145" fill="#10b981" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">Universal Hardware Playback</text>
-          <!-- HEVC -->
-          <rect x="295" y="40" width="210" height="140" rx="10" fill="#1e293b" stroke="#a855f7" stroke-width="2"/>
-          <text x="400" y="75" fill="#a855f7" font-size="16" font-weight="bold" text-anchor="middle" font-family="sans-serif">H.265 (HEVC)</text>
-          <text x="400" y="100" fill="#f8fafc" font-size="12" text-anchor="middle" font-family="sans-serif">+50% Compression Gain</text>
-          <text x="400" y="120" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif">Standard 4K Broadcast / TV</text>
-          <text x="400" y="145" fill="#f59e0b" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">Complex Patent Pools</text>
-          <!-- AV1 -->
-          <rect x="540" y="40" width="210" height="140" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
-          <text x="645" y="75" fill="#10b981" font-size="16" font-weight="bold" text-anchor="middle" font-family="sans-serif">AV1 (AOMedia)</text>
-          <text x="645" y="100" fill="#f8fafc" font-size="12" text-anchor="middle" font-family="sans-serif">+30% Over HEVC Efficiency</text>
-          <text x="645" y="120" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif">100% Royalty-Free</text>
-          <text x="645" y="145" fill="#00f2fe" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">Backed by Google & Apple</text>
-        </svg>
-      </div>
+    <div class="article-hero-media"><img src="/images/video-codecs.jpg" alt="Video Codecs Explained: H.264 (AVC) vs H.265 (HEVC) vs AV1"></div>
     
       <div class="metric-grid-3">
         <div class="metric-pill"><div class="metric-val">H.264</div><div class="metric-lbl">Most Compatible</div></div>
@@ -103,23 +79,9 @@
       <p>
         The world of digital video compression is currently undergoing its most significant generational shift in two decades. While <strong>H.264 (AVC)</strong> has served as the backbone of online streaming since the mid-2000s, rising 4K and 8K display penetration has forced engineers to seek higher compression efficiency.
       </p>
+      <h2>H.264 vs HEVC vs AV1 Comparison</h2>
       <p>
-        Today, the battle for the future of video is fought between <strong>H.265 (HEVC)</strong> and the revolutionary open-source <strong>AV1</strong> standard. Understanding the strengths, hardware support, and licensing nuances of each format will help you future-proof your digital media assets.
-      </p>
-
-      <h2>1. H.264 (AVC): The Reliable Veteran</h2>
-      <p>
-        Released in 2003, H.264 utilizes 16x16 macroblock partitions and directional spatial intra-prediction. Its biggest asset is not compression efficiency, but <strong>ubiquitous silicon hardware support</strong>. Every low-cost Smart TV, car entertainment screen, and decade-old smartphone decodes H.264 with near-zero battery drain. For maximum social media upload reliability, H.264 remains the safest choice today.
-      </p>
-
-      <h2>2. H.265 (HEVC): High Efficiency with Patent Complications</h2>
-      <p>
-        HEVC expands macroblocks into flexible <strong>Coding Tree Units (CTUs)</strong> up to 64x64 pixels, cutting required bitrates by 50% for identical visual quality compared to H.264. It is the mandatory codec for 4K Blu-ray and modern action cameras (GoPro, DJI). However, fragmented patent pools led web browsers like Chrome and Firefox to avoid supporting HEVC for years, crippling its web streaming dominance.
-      </p>
-
-      <h2>3. AV1: The Open-Source Future</h2>
-      <p>
-        Formed by the <strong>Alliance for Open Media (AOMedia)</strong>—comprising Apple, Google, Meta, Netflix, Microsoft, and Amazon—AV1 is a 100% royalty-free video standard. AV1 beats HEVC compression by 30% and H.264 by over 50%. With native hardware decoding now present in Apple M3/A17 chips, Intel Arc, and Nvidia RTX 40-series cards, AV1 is rapidly becoming the web's default master codec.
+        H.264 offers 99.9% device compatibility. HEVC cuts bitrates by 50% but suffers from complex patent licensing royalties. AV1 is the 100% royalty-free open standard backed by Apple, Google, Meta, and Netflix, offering 30% higher compression efficiency than HEVC.
       </p>
 
       <div class="article-tool-cta">

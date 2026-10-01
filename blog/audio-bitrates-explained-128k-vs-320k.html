@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/styles.css?v=14.1">
+  <link rel="stylesheet" href="/styles.css?v=14.2">
 </head>
 <body class="min-h-screen pb-12 transition-colors duration-300">
   <!-- Navigation Header -->
@@ -66,37 +66,7 @@
       </div>
     </header>
 
-    
-      <div class="article-diagram-card">
-        <div class="article-diagram-title"><i class="fa-solid fa-wave-square"></i> Audio Frequency Cutoff Spectrogram</div>
-        <svg viewBox="0 0 800 240" style="width:100%;height:auto;display:block;">
-          <defs>
-            <linearGradient id="specGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#00f2fe"/>
-              <stop offset="100%" stop-color="#4facfe"/>
-            </linearGradient>
-            <linearGradient id="specGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#a855f7"/>
-              <stop offset="100%" stop-color="#ec4899"/>
-            </linearGradient>
-          </defs>
-          <rect width="800" height="240" fill="#0b1120" rx="12"/>
-          <line x1="80" y1="20" x2="80" y2="200" stroke="#334155" stroke-width="2"/>
-          <line x1="80" y1="200" x2="760" y2="200" stroke="#334155" stroke-width="2"/>
-          <text x="30" y="30" fill="#94a3b8" font-size="12" font-family="sans-serif">22 kHz</text>
-          <text x="30" y="85" fill="#94a3b8" font-size="12" font-family="sans-serif">16 kHz</text>
-          <text x="30" y="145" fill="#94a3b8" font-size="12" font-family="sans-serif">10 kHz</text>
-          <text x="30" y="205" fill="#94a3b8" font-size="12" font-family="sans-serif">0 Hz</text>
-          <!-- 320k Curve -->
-          <path d="M 80,45 Q 300,50 500,60 T 720,70 L 720,200 L 80,200 Z" fill="url(#specGrad1)" opacity="0.45"/>
-          <path d="M 80,45 Q 300,50 500,60 T 720,70" stroke="#00f2fe" stroke-width="3" fill="none"/>
-          <text x="730" y="70" fill="#00f2fe" font-size="12" font-weight="bold" font-family="sans-serif">320k (20.5 kHz)</text>
-          <!-- 128k Low Pass Brickwall -->
-          <path d="M 80,95 Q 300,98 520,105 L 540,200 L 80,200 Z" fill="url(#specGrad2)" opacity="0.6"/>
-          <path d="M 80,95 Q 300,98 520,105 L 540,200" stroke="#ec4899" stroke-width="3" fill="none"/>
-          <text x="548" y="125" fill="#ec4899" font-size="12" font-weight="bold" font-family="sans-serif">128k Brickwall (16 kHz)</text>
-        </svg>
-      </div>
+    <div class="article-hero-media"><img src="/images/audio-bitrates.jpg" alt="128kbps vs 320kbps MP3: Spectral Frequency Analysis & Differences"></div>
     
       <div class="metric-grid-3">
         <div class="metric-pill"><div class="metric-val">16,000 Hz</div><div class="metric-lbl">128k Low-Pass Cutoff</div></div>
@@ -107,12 +77,8 @@
     <article class="article-content">
       
       <p>
-        Audio quality discussions online are often polarized between audiophiles who claim lossy MP3 files sound terrible and everyday listeners who insist they cannot hear any difference. But when you put audio files under a spectral frequency analyzer, the differences between <strong>128 kbps</strong> and <strong>320 kbps</strong> are not a matter of subjective opinion—they are mathematical facts.
-      </p>
-      <p>
         The human hearing frequency spectrum spans from roughly 20 Hz to 20,000 Hz. In a 128kbps MP3 stream, the encoder applies a ruthless <strong>16 kHz low-pass brickwall filter</strong>. Every subtle overtone, acoustic room reverb tail, and cymbal shimmer above 16,000 Hz is permanently discarded to conserve bits.
       </p>
-
       <h2>Perceptual Masking and Double Compression</h2>
       <p>
         When you upload a video or podcast to Facebook, Meta automatically compresses the audio track down to 128kbps AAC. If you subsequently download that audio using a generic downloader that outputs 128kbps MP3, your file undergoes <strong>generational double-lossy compression</strong>.

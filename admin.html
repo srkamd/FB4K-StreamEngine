@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard - Paid VIP Email Management | FDOWN</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=15.0-light">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Popunder Ad Script -->
   <script src="https://pl31769223.profitableratecpmnetwork.com/24/c2/65/24c265c87577d30b381ddafb430d03e7.js"></script>
@@ -50,7 +50,7 @@
 
       <!-- Add New Paid User Email Form -->
       <form id="add-email-form" style="margin: 25px 0; background: var(--bg-input); border: 1px solid var(--border-color); padding: 20px; border-radius: var(--radius-md);">
-        <label style="font-weight: 600; font-size: 0.95rem; color: #fff; display: block; margin-bottom: 8px;">
+        <label style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary); display: block; margin-bottom: 8px;">
           <i class="fa-solid fa-user-plus" style="color: var(--primary-teal);"></i> Add New Paid VIP User Email:
         </label>
 
@@ -126,11 +126,11 @@
 
         emails.forEach(email => {
           const item = document.createElement('div');
-          item.style.cssText = 'background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px 18px; display: flex; justify-content: space-between; align-items: center;';
+          item.style.cssText = 'background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px 18px; display: flex; justify-content: space-between; align-items: center;';
           item.innerHTML = `
             <div style="display: flex; align-items: center; gap: 10px;">
               <i class="fa-solid fa-circle-check" style="color: var(--accent-green);"></i>
-              <strong style="color: #fff; font-size: 0.95rem;">${email}</strong>
+              <strong style="color: var(--text-primary); font-size: 0.95rem;">${email}</strong>
               <span class="badge-hd" style="background: rgba(139, 92, 246, 0.2); color: #a78bfa; border: 1px solid #8b5cf6;">Unlimited 4K Pass</span>
             </div>
             <button type="button" class="btn-info btn-remove-email" data-email="${email}" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.3); font-size: 0.8rem; padding: 6px 12px;">

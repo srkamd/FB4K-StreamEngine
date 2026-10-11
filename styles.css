@@ -2355,3 +2355,27 @@ body::after {
     padding: 16px !important;
   }
 }
+
+/* Native Banner Ad Container */
+.native-ad-wrapper {
+  margin: 28px auto;
+  max-width: 920px;
+  width: 100%;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(0, 242, 254, 0.15);
+  border-radius: var(--radius-xl);
+  padding: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.native-ad-label {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+  font-weight: 700;
+}

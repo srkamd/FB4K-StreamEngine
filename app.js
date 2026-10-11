@@ -35,21 +35,59 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4500);
   }
 
-  // Paste from Clipboard
+  // URL Validation Helper
+  function isFacebookUrl(str) {
+    if (!str || typeof str !== 'string') return false;
+    return /facebook\.com|fb\.watch|fb\.gg|fb\.me/i.test(str.trim());
+  }
+
+  // Clear URL (✕) Button Handler
+  const btnClearUrl = document.getElementById('btn-clear-url');
+  if (videoUrlInput && btnClearUrl) {
+    videoUrlInput.addEventListener('input', () => {
+      if (videoUrlInput.value.trim().length > 0) {
+        btnClearUrl.classList.add('show');
+      } else {
+        btnClearUrl.classList.remove('show');
+      }
+    });
+
+    btnClearUrl.addEventListener('click', () => {
+      videoUrlInput.value = '';
+      btnClearUrl.classList.remove('show');
+      if (resultCard) resultCard.style.display = 'none';
+      videoUrlInput.focus();
+    });
+  }
+
+  // 1-Tap Smart Paste & Auto-Extraction
   if (btnPaste) {
     btnPaste.addEventListener('click', async () => {
       try {
         if (navigator.clipboard && navigator.clipboard.readText) {
           const text = await navigator.clipboard.readText();
-          if (text) {
-            videoUrlInput.value = text;
-            showToast('Pasted link from clipboard!');
+          const cleanText = text ? text.trim() : '';
+          if (cleanText) {
+            videoUrlInput.value = cleanText;
+            if (btnClearUrl) btnClearUrl.classList.add('show');
+            
+            // Smart Frictionless Auto-Fetch
+            if (isFacebookUrl(cleanText)) {
+              showToast('⚡ Link detected! Fetching video...');
+              performExtraction(cleanText);
+            } else {
+              showToast('Link pasted! Tap Download to fetch.');
+            }
           } else {
             showToast('Clipboard is empty.');
           }
+        } else {
+          videoUrlInput.focus();
+          showToast('Please paste the video link.');
         }
       } catch (err) {
-        showToast('Unable to read clipboard.');
+        videoUrlInput.focus();
+        showToast('Please paste the video link directly.');
       }
     });
   }
@@ -258,6 +296,22 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('fb4k_cookie_accepted', 'true');
       cookieDiv.classList.remove('show');
       setTimeout(() => cookieDiv.remove(), 500);
+    });
+  }
+
+  // Mobile Collapsible Guide Toggle
+  const btnGuideToggle = document.getElementById('btn-guide-toggle');
+  const guideBody = document.getElementById('guide-body-collapsible');
+  if (btnGuideToggle && guideBody) {
+    btnGuideToggle.addEventListener('click', () => {
+      const isOpen = guideBody.classList.toggle('open');
+      btnGuideToggle.classList.toggle('expanded', isOpen);
+      const titleSpan = btnGuideToggle.querySelector('span');
+      if (titleSpan) {
+        titleSpan.innerHTML = isOpen 
+          ? '<i class="fa-solid fa-chevron-up"></i> Hide Detailed Specifications & Guide'
+          : '<i class="fa-solid fa-book-open"></i> Read Complete Guide & Specifications';
+      }
     });
   }
 });

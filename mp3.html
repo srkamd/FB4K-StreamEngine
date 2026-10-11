@@ -29,6 +29,13 @@
     "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "11800" }
   }
   </script>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#030712">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="FB4K">
+
 </head>
 <body>
 
@@ -111,12 +118,33 @@
             <div class="input-wrapper">
               <i class="fa-solid fa-link input-icon"></i>
               <input type="url" id="video-url" class="url-input" placeholder="Paste Facebook Link to convert to MP3..." autocomplete="off" spellcheck="false">
+              <button id="btn-clear-url" class="btn-clear-url" type="button" title="Clear input" aria-label="Clear input"><i class="fa-solid fa-xmark"></i></button>
               <button id="btn-paste" class="btn-paste" type="button" title="Paste Link from Clipboard"><i class="fa-regular fa-paste"></i> Paste</button>
             </div>
             <button id="btn-submit" type="submit" class="btn-download">
               <i class="fa-solid fa-download"></i> Convert to MP3
             </button>
           </form>
+
+          <!-- 3-Step Mobile Friendly Guide Strip -->
+          <div class="mobile-quick-steps">
+            <div class="quick-step-pill">
+              <span class="step-num">1</span>
+              <i class="fa-solid fa-share-nodes"></i>
+              <span>FB <strong>Share</strong></span>
+            </div>
+            <div class="quick-step-pill">
+              <span class="step-num">2</span>
+              <i class="fa-solid fa-copy"></i>
+              <span><strong>Copy Link</strong></span>
+            </div>
+            <div class="quick-step-pill">
+              <span class="step-num">3</span>
+              <i class="fa-solid fa-cloud-arrow-down"></i>
+              <span><strong>Paste & Save</strong></span>
+            </div>
+          </div>
+
 
           <!-- RESULT CONTAINER -->
           <div id="result-card" class="result-card">
@@ -430,5 +458,30 @@
   <div id="toast" class="toast"><i class="fa-solid fa-circle-check"></i> <span>Link pasted! Click Download to start.</span></div>
 
   <script src="app.js?v=2.1"></script>
+
+  <!-- Mobile App-Style Bottom Navigation Bar (Thumb Friendly) -->
+  <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+    <a href="/" class="mobile-nav-item ">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </a>
+    <a href="/facebook-reels-downloader" class="mobile-nav-item ">
+      <i class="fa-solid fa-clapperboard"></i>
+      <span>Reels</span>
+    </a>
+    <a href="/fb-to-mp3" class="mobile-nav-item active">
+      <i class="fa-solid fa-music"></i>
+      <span>MP3</span>
+    </a>
+    <a href="/bulk-fb-reel-downloader" class="mobile-nav-item ">
+      <i class="fa-solid fa-list-check"></i>
+      <span>Bulk</span>
+    </a>
+    <a href="/blog" class="mobile-nav-item ">
+      <i class="fa-solid fa-newspaper"></i>
+      <span>Blog</span>
+    </a>
+  </nav>
+
 </body>
 </html>

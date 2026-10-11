@@ -93,6 +93,13 @@
   <link rel="stylesheet" href="styles.css?v=14.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#030712">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="FB4K">
+
 </head>
 <body>
 
@@ -176,12 +183,33 @@
             <div class="input-wrapper">
               <i class="fa-solid fa-link input-icon"></i>
               <input type="url" id="video-url" class="url-input" placeholder="Paste Facebook Video or Reel Link here..." autocomplete="off" spellcheck="false">
+              <button id="btn-clear-url" class="btn-clear-url" type="button" title="Clear input" aria-label="Clear input"><i class="fa-solid fa-xmark"></i></button>
               <button id="btn-paste" class="btn-paste" type="button" title="Paste Link from Clipboard"><i class="fa-regular fa-paste"></i> Paste</button>
             </div>
             <button id="btn-submit" type="submit" class="btn-download">
               <i class="fa-solid fa-download"></i> Download
             </button>
           </form>
+
+          <!-- 3-Step Mobile Friendly Guide Strip -->
+          <div class="mobile-quick-steps">
+            <div class="quick-step-pill">
+              <span class="step-num">1</span>
+              <i class="fa-solid fa-share-nodes"></i>
+              <span>FB <strong>Share</strong></span>
+            </div>
+            <div class="quick-step-pill">
+              <span class="step-num">2</span>
+              <i class="fa-solid fa-copy"></i>
+              <span><strong>Copy Link</strong></span>
+            </div>
+            <div class="quick-step-pill">
+              <span class="step-num">3</span>
+              <i class="fa-solid fa-cloud-arrow-down"></i>
+              <span><strong>Paste & Save</strong></span>
+            </div>
+          </div>
+
 
           <div class="hero-actions">
             <a href="/bulk-fb-reel-downloader" class="btn-info"><i class="fa-solid fa-list-check"></i> Try Bulk Links List Downloader (.TXT Import)</a>
@@ -230,6 +258,14 @@
             <div class="card-header-icon">
               <i class="fa-solid fa-book-open"></i>
             </div>
+          <!-- Collapsible Guide Toggle for Mobile View -->
+          <div class="guide-toggle-bar">
+            <button type="button" class="btn-guide-toggle" id="btn-guide-toggle">
+              <span><i class="fa-solid fa-book-open"></i> Read Complete Guide & Specifications</span>
+              <i class="fa-solid fa-chevron-down chevron"></i>
+            </button>
+          </div>
+          <div class="guide-body-collapsible" id="guide-body-collapsible">
             <h2>FB4KDownloader.com — Free 4K Facebook Video & Reels Downloader Guide</h2>
           </div>
           <div style="color: var(--text-secondary); line-height: 1.8; font-size: 0.96rem; display: flex; flex-direction: column; gap: 16px;">
@@ -417,7 +453,8 @@
               FB4KDownloader.com does not host, replicate, or store any media files on its servers. We only provide a browser utility to pipe public CDN links directly from Facebook servers to your device. We strongly advocate for intellectual property protection. Users are advised to download videos only for personal offline viewing, educational purposes, or under the fair use doctrine. Downloading copyrighted material without the creator's permission for distribution or commercial monetization is strictly prohibited and violates Facebook's Terms of Service.
             </p>
           </div>
-        </article>
+        
+          </div></article>
 
         <!-- FAQ & UPDATES GRID -->
         <div class="content-grid">
@@ -737,5 +774,30 @@
   <div id="toast" class="toast"><i class="fa-solid fa-circle-check"></i> <span>Link pasted! Click Download to start.</span></div>
 
   <script src="app.js?v=2.1"></script>
+
+  <!-- Mobile App-Style Bottom Navigation Bar (Thumb Friendly) -->
+  <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+    <a href="/" class="mobile-nav-item active">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </a>
+    <a href="/facebook-reels-downloader" class="mobile-nav-item ">
+      <i class="fa-solid fa-clapperboard"></i>
+      <span>Reels</span>
+    </a>
+    <a href="/fb-to-mp3" class="mobile-nav-item ">
+      <i class="fa-solid fa-music"></i>
+      <span>MP3</span>
+    </a>
+    <a href="/bulk-fb-reel-downloader" class="mobile-nav-item ">
+      <i class="fa-solid fa-list-check"></i>
+      <span>Bulk</span>
+    </a>
+    <a href="/blog" class="mobile-nav-item ">
+      <i class="fa-solid fa-newspaper"></i>
+      <span>Blog</span>
+    </a>
+  </nav>
+
 </body>
 </html>

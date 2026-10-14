@@ -173,10 +173,10 @@ A key highlight for academic evaluation, scholarship boards, and technical leade
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/srkamd/fb4kdownloader.git
+git clone https://github.com/srkamd/FB4K-StreamEngine.git
 
 # 2. Enter workspace
-cd fb4kdownloader
+cd FB4K-StreamEngine
 
 # 3. Install dependencies
 npm install

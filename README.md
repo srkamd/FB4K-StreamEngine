@@ -18,6 +18,40 @@
 
 ---
 
+## 📸 Live Production Interface & User Experience
+
+<div align="center">
+
+### 🖥️ Universal Video Downloader Interface
+*Real-time public video stream extraction with instant quality format selector and creator rights notice.*
+<br><br>
+<img src="images/preview-desktop-home.png" alt="FB4KDownloader Home Interface" width="900" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 1px solid #e2e8f0;">
+
+<br><br>
+
+### 📱 Dedicated Facebook Reels & 9:16 Vertical Video Engine
+*Mobile-first vertical layout rendering with responsive stream preview and zero-watermark downloads.*
+<br><br>
+<img src="images/preview-reels.png" alt="FB4KDownloader Reels Downloader" width="900" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 1px solid #e2e8f0;">
+
+<br><br>
+
+### 🎧 High-Fidelity Facebook to MP3 Audio Converter
+*FFmpeg demuxing engine converting media streams into clean 320kbps Constant Bitrate (CBR) audio.*
+<br><br>
+<img src="images/preview-mp3.png" alt="FB4KDownloader MP3 Audio Engine" width="900" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 1px solid #e2e8f0;">
+
+<br><br>
+
+### 📚 Publisher Knowledge Base & Engineering Blog
+*18 comprehensive, original technical guides authored by Shahrukh Ahmad (SRK AMD) covering video codecs and Fair Use.*
+<br><br>
+<img src="images/preview-blog.png" alt="FB4KDownloader Knowledge Base" width="900" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 1px solid #e2e8f0;">
+
+</div>
+
+---
+
 ## 📑 Executive Summary (For Recruiters, Evaluators & Scholarship Panels)
 
 **FB4KDownloader** is a production-grade, distributed web application and content delivery utility engineered from scratch by **Shahrukh Ahmad (SRK AMD)**. It was developed to solve systemic performance, privacy, and integrity flaws pervasive across online multimedia converters. Conventional third-party downloader platforms are notorious for aggressive telemetry, security vulnerabilities, ad-injection vectors, and deceptive resolution claims.

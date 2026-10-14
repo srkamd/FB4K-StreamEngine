@@ -1,297 +1,138 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Contact Us - FB4KDownloader.com</title>
-  <meta name="description" content="Contact FB4KDownloader.com support team directly at support@fb4kdownloader.com or fill out our contact form for inquiries, feedback, or DMCA requests. Created by Shahrukh Ahmad (SRK AMD).">
+  <meta name="description" content="Contact Shahrukh Ahmad (SRK AMD) and the FB4KDownloader.com support team for technical inquiries, bug reports, and feedback.">
+  <meta name="author" content="Shahrukh Ahmad (SRK AMD)">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0e1836">
   <link rel="canonical" href="https://fb4kdownloader.com/contact">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="styles.css?v=15.0-light">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  
-  <!-- Google AdSense Verification & Auto Ads Code -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9504324837751358" crossorigin="anonymous"></script>
 
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#ffffff">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="FB4K">
+  <link rel="stylesheet" href="/theme.css">
 
   <!-- Popunder Ad Script -->
   <script src="https://pl31769223.profitableratecpmnetwork.com/24/c2/65/24c265c87577d30b381ddafb430d03e7.js"></script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Header / Glassmorphic Navigation -->
-  <header class="navbar">
-    <div class="nav-container">
-                  <a href="/" class="brand-logo">
-        <div class="logo-icon">
-          <i class="fa-solid fa-cloud-arrow-down"></i>
-        </div>
-        <div class="logo-text">FB4K<span>Downloader</span></div>
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="FB4KDownloader home">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <rect width="40" height="40" rx="10" fill="#ffb020"/>
+        <path d="M20 10v14m0 0-6-6m6 6 6-6M12 30h16" fill="none" stroke="#0e1836" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>FB4K<b>Downloader</b></span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Open menu"><span class="bars"></span></button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/facebook-reels-downloader">Reels</a></li>
+        <li><a href="/fb-to-mp3">FB to MP3</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/how-to-use">How to Use</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact" aria-current="page">Contact</a></li>
+      </ul>
+      <a class="btn btn-accent btn-sm nav-cta" href="https://chromewebstore.google.com/detail/fb4kdownloader-4k-faceboo/cmhlgochpmciomoodleglljgmoclhcif" target="_blank" rel="noopener">Get extension</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="wrap">
+      <ul class="crumbs" aria-label="Breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li>Contact Us</li>
+      </ul>
+      <h1>Contact Us</h1>
+      <p class="lead">Questions, bug reports, feature suggestions or partnership inquiries? Get in touch with our team.</p>
+      <p class="meta">Direct email: <a href="mailto:support@fb4kdownloader.com" style="color:var(--accent);">support@fb4kdownloader.com</a></p>
+    </div>
+  </section>
+
+  <div class="wrap content-grid" style="grid-template-columns: 1fr; max-width: 680px; margin: 0 auto;">
+    <form class="form" id="contact-form" action="#" method="post" onsubmit="event.preventDefault(); document.getElementById('contact-status').textContent = 'Thank you! Your message has been received. Our team will reply within 24-48 business hours.'; document.getElementById('contact-status').className = 'tool-msg is-ok'; this.reset();">
+      <label>
+        Your Name
+        <input name="name" type="text" autocomplete="name" placeholder="Full name" required>
+      </label>
+      <label>
+        Email Address
+        <input name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+      </label>
+      <label>
+        Topic / Subject
+        <input name="subject" type="text" placeholder="e.g. Bug report, Feature request, Technical question" required>
+      </label>
+      <label>
+        Message
+        <textarea name="message" placeholder="Please provide as much detail as possible..." required></textarea>
+      </label>
+      <button class="btn btn-accent" type="submit">Send Message</button>
+      <p id="contact-status" class="tool-msg" role="status" aria-live="polite"></p>
+      <p class="note">
+        For copyright and DMCA takedown requests, please email <a href="mailto:dmca@fb4kdownloader.com">dmca@fb4kdownloader.com</a> or view our <a href="/dmca">DMCA Procedures</a>.
+      </p>
+    </form>
+  </div>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="wrap footer-main">
+    <div class="footer-brand">
+      <a class="brand" href="/" aria-label="FB4KDownloader home">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+          <rect width="40" height="40" rx="10" fill="#ffb020"/>
+          <path d="M20 10v14m0 0-6-6m6 6 6-6M12 30h16" fill="none" stroke="#0e1836" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>FB4K<b>Downloader</b></span>
       </a>
-
-            <div class="nav-links-wrapper">
-        <ul class="nav-links">
-          <li class="nav-item"><a href="/" class="nav-link "><i class="fa-solid fa-house"></i> Home</a></li>
-          <li class="nav-item"><a href="/facebook-reels-downloader" class="nav-link "><i class="fa-solid fa-clapperboard"></i> Reels</a></li>
-          <li class="nav-item"><a href="/fb-to-mp3" class="nav-link "><i class="fa-solid fa-music"></i> FB to MP3</a></li>
-          <li class="nav-item"><a href="/bulk-fb-reel-downloader" class="nav-link "><i class="fa-solid fa-list-check"></i> Bulk</a></li>
-          <li class="nav-item"><a href="/blog" class="nav-link "><i class="fa-solid fa-newspaper"></i> Blog</a></li>
-          <li class="nav-item">
-            <a href="#" class="nav-link active"><i class="fa-solid fa-compass"></i> Resources ▾</a>
-            <div class="dropdown-menu">
-              <a href="/how-to-use" class="dropdown-item"><i class="fa-solid fa-circle-question"></i> How to Use</a>
-              <a href="/about" class="dropdown-item"><i class="fa-solid fa-circle-info"></i> About Us</a>
-              <a href="/privacy" class="dropdown-item"><i class="fa-solid fa-user-shield"></i> Privacy Policy</a>
-              <a href="/terms" class="dropdown-item"><i class="fa-solid fa-file-contract"></i> Terms of Service</a>
-              <a href="/dmca" class="dropdown-item"><i class="fa-solid fa-scale-balanced"></i> DMCA Policy</a>
-              <a href="/contact" class="dropdown-item"><i class="fa-regular fa-envelope"></i> Contact Us</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="nav-actions">
-        <a href="https://chromewebstore.google.com/detail/fb4kdownloader-4k-faceboo/cmhlgochpmciomoodleglljgmoclhcif" target="_blank" class="btn-extension-nav">
-          <i class="fa-brands fa-chrome"></i> Extension
-        </a>
-      </div>
+      <p>An honest, lightweight media resource and utility for personal video backups and creator guidance.</p>
+      <span class="status"><i aria-hidden="true"></i>All systems operational</span>
     </div>
-  </header>
-
-  <!-- Main Content -->
-  <main class="main-content">
-    <div class="page-layout">
-      
-      <!-- Left Skyscraper (Commented Out for AdSense Review)
-      <aside class="ad-skyscraper ad-left">
-        <span class="ad-label">Advertisement</span>
-        <div class="ad-content">
-          <p class="ad-placeholder-text"><i class="fa-solid fa-rectangle-ad"></i> Ad Placement</p>
-        </div>
-      </aside>
-      -->
-
-      <div class="center-content">
-        
-        <!-- Top Ad Placement (Commented Out for AdSense Review)
-        <div class="ad-placement ad-leaderboard">
-          <span class="ad-label">Advertisement</span>
-          <div class="ad-content">
-            <p class="ad-placeholder-text"><i class="fa-solid fa-rectangle-ad"></i> Ad Banner Placement #1</p>
-          </div>
-        </div>
-        -->
-
-        <div class="card-box" style="margin-top: 20px; padding: 40px;">
-          
-          <div class="card-header" style="border-bottom: 1px solid var(--border-glass); padding-bottom: 15px; margin-bottom: 25px;">
-            <div class="card-header-icon">
-              <i class="fa-solid fa-paper-plane"></i>
-            </div>
-            <h2>Get in Touch with Support</h2>
-          </div>
-
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
-            
-            <!-- Direct Support Info -->
-            <div style="background: var(--bg-input); padding: 25px; border-radius: 18px; border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 16px;">
-              <h3 style="font-size: 1.2rem; color: var(--text-primary); display: flex; align-items: center; gap: 10px; font-weight: 800;">
-                <i class="fa-solid fa-headset" style="color: var(--neon-cyan);"></i> Official Support Email
-              </h3>
-              <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
-                Have questions, feature requests, or DMCA inquiries? Email our support team directly. We answer within 24 hours.
-              </p>
-              
-              <div style="background: rgba(0, 242, 254, 0.1); border: 1px solid var(--neon-cyan); padding: 16px; border-radius: 14px; display: flex; align-items: center; gap: 12px;">
-                <i class="fa-solid fa-envelope-open-text" style="color: var(--neon-cyan); font-size: 1.5rem;"></i>
-                <div>
-                  <span style="font-size: 0.78rem; color: var(--text-muted); display: block; font-weight: 800;">EMAIL SUPPORT DESK</span>
-                  <a href="mailto:support@fb4kdownloader.com" style="color: var(--text-primary); font-weight: 800; font-size: 1.05rem; text-decoration: underline;">support@fb4kdownloader.com</a>
-                </div>
-              </div>
-
-              <!-- Author / Creator Card -->
-              <div style="margin-top: 10px; border-top: 1px solid var(--border-glass); padding-top: 16px; display: flex; align-items: center; gap: 14px;">
-                <img src="https://github.com/srkamd.png" alt="Shahrukh Ahmad (SRK AMD)" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--neon-cyan); object-fit: cover;">
-                <div>
-                  <h4 style="font-size: 0.98rem; color: var(--text-primary); margin: 0; font-weight: 800;">Shahrukh Ahmad (SRK AMD)</h4>
-                  <span style="font-size: 0.82rem; color: var(--neon-cyan); font-weight: 600;">Creator & Lead Developer</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Interactive Form -->
-            <form onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent to support@fb4kdownloader.com');" style="display: flex; flex-direction: column; gap: 16px;">
-              <div>
-                <label style="display: block; font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 6px; font-weight: 600;">Your Name</label>
-                <input type="text" required placeholder="Shahrukh Ahmad" class="url-input" style="padding: 14px 18px;">
-              </div>
-
-              <div>
-                <label style="display: block; font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 6px; font-weight: 600;">Your Email Address</label>
-                <input type="email" required placeholder="user@example.com" class="url-input" style="padding: 14px 18px;">
-              </div>
-
-              <div>
-                <label style="display: block; font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 6px; font-weight: 600;">Message</label>
-                <textarea required rows="4" placeholder="Type your message or inquiry here..." class="url-input" style="padding: 14px 18px; height: 110px; resize: vertical;"></textarea>
-              </div>
-
-              <button type="submit" class="btn-download" style="justify-content: center; width: 100%; padding: 16px; margin-top: 5px;">
-                <i class="fa-solid fa-paper-plane"></i> Send Message
-              </button>
-            </form>
-
-          </div>
-
-        </div>
-
-        
-        
-
-        
-        <!-- Bottom Ad Placement (Commented Out for AdSense Review)
-        <div class="ad-placement ad-bottom" style="margin-top: 40px;">
-          <span class="ad-label">Advertisement</span>
-          <div class="ad-content">
-            <p class="ad-placeholder-text"><i class="fa-solid fa-rectangle-ad"></i> Ad Banner Placement #2 (Bottom Leaderboard 728x90)</p>
-          </div>
-        </div>
-        -->
-
-      </div>
-
-      <!-- Right Skyscraper (Commented Out for AdSense Review)
-      <aside class="ad-skyscraper ad-right">
-        <span class="ad-label">Advertisement</span>
-        <div class="ad-content">
-          <p class="ad-placeholder-text"><i class="fa-solid fa-rectangle-ad"></i> Ad Placement</p>
-        </div>
-      </aside>
-      -->
-
+    <nav class="footer-col" aria-label="Tools">
+      <h4>Tools</h4>
+      <ul>
+        <li><a href="/">Facebook Downloader</a></li>
+        <li><a href="/facebook-reels-downloader">Reels Downloader</a></li>
+        <li><a href="/fb-to-mp3">FB to MP3</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-col" aria-label="Publisher & Legal">
+      <h4>Guides & Legal</h4>
+      <ul>
+        <li><a href="/blog">Blog & Guides</a></li>
+        <li><a href="/how-to-use">How to Use</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/contact" aria-current="page">Contact Us</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/terms">Terms of Service</a></li>
+        <li><a href="/dmca">DMCA Policy</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <div class="wrap">
+      <p>&copy; <span id="year">2026</span> FB4KDownloader.com &nbsp;&middot;&nbsp; <a href="mailto:support@fb4kdownloader.com">support@fb4kdownloader.com</a></p>
+      <p class="legal">Independent resource. Not affiliated with or endorsed by Meta Platforms, Inc.</p>
     </div>
-  </main>
+  </div>
+</footer>
 
-  <!-- Footer -->
-  
-  <!-- Footer -->
-    <!-- Executive Corporate Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-grid">
-        
-        <!-- Column 1: Brand & Trust Badges -->
-        <div class="footer-col brand-col">
-          <a href="/" class="brand-logo" style="margin-bottom: 16px;">
-            <div class="logo-icon">
-              <i class="fa-solid fa-cloud-arrow-down"></i>
-            </div>
-            <div class="logo-text">FB4K<span>Downloader</span></div>
-          </a>
-          <p class="brand-desc">
-            The internet's leading high-performance media archiving utility. Convert and download Facebook videos, reels, and audio lists in native 4K Ultra HD.
-          </p>
-          <div class="footer-trust-badges">
-            <span class="trust-badge-pill"><i class="fa-solid fa-shield-halved"></i> 256-Bit SSL</span>
-            <span class="trust-badge-pill"><i class="fa-solid fa-bolt"></i> 100% Free & Safe</span>
-            <span class="trust-badge-pill"><i class="fa-solid fa-lock"></i> No Logs Policy</span>
-          </div>
-          <div style="font-size: 0.82rem; color: var(--text-muted);">
-            &copy; 2026 FB4KDownloader.com. All rights reserved.
-          </div>
-        </div>
+<button class="to-top" type="button" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>
+</button>
 
-        <!-- Column 2: Downloader Tools -->
-        <div class="footer-col">
-          <h4>Downloader Tools</h4>
-          <ul>
-            <li><a href="/"><i class="fa-solid fa-house"></i> Facebook Downloader</a></li>
-            <li><a href="/facebook-reels-downloader"><i class="fa-solid fa-clapperboard"></i> Reels Downloader</a></li>
-            <li><a href="/fb-to-mp3"><i class="fa-solid fa-music"></i> FB to MP3 Audio</a></li>
-            <li><a href="/facebook-private-video-downloader"><i class="fa-solid fa-lock"></i> Private Downloader</a></li>
-            <li><a href="/bulk-fb-reel-downloader"><i class="fa-solid fa-list-check"></i> Bulk Downloader</a></li>
-          </ul>
-        </div>
-
-        <!-- Column 3: Help & Policies -->
-        <div class="footer-col">
-          <h4>Help & Policies</h4>
-          <ul>
-            <li><a href="/how-to-use">How to Use</a></li>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/contact">Contact Us</a></li>
-            <li><a href="/privacy">Privacy Policy</a></li>
-            <li><a href="/terms">Terms of Service</a></li>
-            <li><a href="/dmca">DMCA Disclaimer</a></li>
-          </ul>
-        </div>
-
-        <!-- Column 4: System Status & Edge Nodes -->
-        <div class="footer-col status-col">
-          <h4>System Status</h4>
-          <div>
-            <div class="status-item">
-              <span class="status-dot-pulse"></span>
-              CDN Edge Nodes: <strong style="color: var(--text-primary); margin-left: 4px;">Active (100%)</strong>
-            </div>
-            <div class="status-item">
-              <span class="status-dot-pulse"></span>
-              4K FFmpeg Engine: <strong style="color: var(--text-primary); margin-left: 4px;">Online</strong>
-            </div>
-            <div class="status-item">
-              <span class="status-dot-pulse"></span>
-              API v2.4 Latency: <strong style="color: var(--text-primary); margin-left: 4px;">12ms (Optimal)</strong>
-            </div>
-            <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; margin-top: 14px;">
-              Designed by <a href="/about" style="color: var(--accent-cyan);">SRK AMD</a>.<br>
-              Support: <a href="mailto:support@fb4kdownloader.com" style="color: var(--accent-cyan);">support@fb4kdownloader.com</a>
-            </p>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Legal Disclaimer -->
-      <div class="footer-disclaimer">
-        FB4KDownloader is an independent utility and is not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc. or Facebook. All trademarks and logos are the property of their respective owners.
-      </div>
-    </div>
-  </footer>
-
-
-
-  <!-- Mobile App-Style Bottom Navigation Bar (Thumb Friendly) -->
-  <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
-    <a href="/" class="mobile-nav-item active">
-      <i class="fa-solid fa-house"></i>
-      <span>Home</span>
-    </a>
-    <a href="/facebook-reels-downloader" class="mobile-nav-item ">
-      <i class="fa-solid fa-clapperboard"></i>
-      <span>Reels</span>
-    </a>
-    <a href="/fb-to-mp3" class="mobile-nav-item ">
-      <i class="fa-solid fa-music"></i>
-      <span>MP3</span>
-    </a>
-    <a href="/bulk-fb-reel-downloader" class="mobile-nav-item ">
-      <i class="fa-solid fa-list-check"></i>
-      <span>Bulk</span>
-    </a>
-    <a href="/blog" class="mobile-nav-item ">
-      <i class="fa-solid fa-newspaper"></i>
-      <span>Blog</span>
-    </a>
-  </nav>
-
+<script src="/theme.js"></script>
 </body>
 </html>

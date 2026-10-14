@@ -146,6 +146,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      let processUrls = urlsArray;
+      if (urlsArray.length > 10) {
+        processUrls = urlsArray.slice(0, 10);
+        showToast('Personal archive limit: processing first 10 URLs. For larger archives, use Facebook official export.');
+      }
+
       const originalBtn = btnBatchSubmit.innerHTML;
       btnBatchSubmit.disabled = true;
 
@@ -154,10 +160,10 @@ document.addEventListener('DOMContentLoaded', () => {
       batchResultContainer.style.display = 'block';
       batchResultContainer.scrollIntoView({ behavior: 'smooth' });
 
-      showToast(`Processing ${urlsArray.length} Facebook video links using Home Page extractor...`);
+      showToast(`Processing ${processUrls.length} links in personal archive queue...`);
 
-      for (let i = 0; i < urlsArray.length; i++) {
-        const url = urlsArray[i];
+      for (let i = 0; i < processUrls.length; i++) {
+        const url = processUrls[i];
         btnBatchSubmit.innerHTML = `<span class="spinner"></span> Extracting Video (${i + 1}/${urlsArray.length})...`;
 
         try {

@@ -131,7 +131,7 @@ app.get('/terms', (req, res) => res.sendFile(path.join(__dirname, 'terms.html'))
 app.get('/dmca', (req, res) => res.sendFile(path.join(__dirname, 'dmca.html')));
 app.get('/contact', (req, res) => res.sendFile(path.join(__dirname, 'contact.html')));
 app.get('/facebook-reels-downloader', (req, res) => res.sendFile(path.join(__dirname, 'reels.html')));
-app.get('/facebook-private-video-downloader', (req, res) => res.sendFile(path.join(__dirname, 'private.html')));
+app.get(['/facebook-private-video-downloader', '/private'], (req, res) => res.redirect(301, '/'));
 app.get('/fb-to-mp3', (req, res) => res.sendFile(path.join(__dirname, 'mp3.html')));
 app.get('/blog', (req, res) => res.sendFile(path.join(__dirname, 'blog.html')));
 app.get('/guides', (req, res) => res.redirect(301, '/blog'));
@@ -744,15 +744,9 @@ app.get('/api/test-transcode', async (req, res) => {
   });
 });
 
-// Download Chrome Extension ZIP Endpoint
+// Official Chrome Web Store Redirect
 app.get('/api/download-extension', (req, res) => {
-  res.setHeader('Content-Type', 'application/zip');
-  res.setHeader('Content-Disposition', 'attachment; filename="fb4kdownloader-chrome-extension.zip"');
-
-  const archive = archiver('zip', { zlib: { level: 9 } });
-  archive.pipe(res);
-  archive.directory(path.join(__dirname, 'extension'), false);
-  archive.finalize();
+  res.redirect(301, 'https://chromewebstore.google.com/detail/fb4kdownloader-4k-faceboo/cmhlgochpmciomoodleglljgmoclhcif');
 });
 
 app.listen(PORT, () => {

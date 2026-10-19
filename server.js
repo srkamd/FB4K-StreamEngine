@@ -482,7 +482,7 @@ app.get('/api/proxy-download', async (req, res) => {
         const ffmpeg = spawn(ffmpegPath, [
           '-i', tempInput,
           '-threads', '1', // Force exactly 1 thread to bypass Hostinger CPU/NPROC account limit blocks!
-          '-vf', 'scale=3840:2160:flags=bilinear', // REAL 4K upscaling!
+          '-vf', "scale='if(gte(iw,ih),3840,-2)':'if(gte(iw,ih),-2,3840)':flags=bilinear", // Smart 4K Upscale: 2160x3840 for 9:16 Reels & 3840x2160 for 16:9 Videos!
           '-c:v', 'libx264',
           '-preset', 'ultrafast', // Minimum CPU complexity
           '-crf', '24', // Target quality for 40-50MB file size outputs
@@ -695,7 +695,7 @@ app.get('/api/test-transcode', async (req, res) => {
       const ffmpeg = spawn(ffmpegPath, [
         '-i', testInput,
         '-threads', '1', // Force exactly 1 thread
-        '-vf', 'scale=3840:2160:flags=bilinear', // Scale to 4K!
+        '-vf', "scale='if(gte(iw,ih),3840,-2)':'if(gte(iw,ih),-2,3840)':flags=bilinear", // Smart 4K Upscale: 2160x3840 for 9:16 Reels & 3840x2160 for 16:9 Videos!
         '-c:v', 'libx264',
         '-preset', 'ultrafast', // Minimum CPU complexity
         '-crf', '30', // Very light quality to lower frame buffer sizes

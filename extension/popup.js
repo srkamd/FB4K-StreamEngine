@@ -1,152 +1,102 @@
 document.addEventListener('DOMContentLoaded', () => {
   const urlInput = document.getElementById('ext-url-input');
-  const btnDownload = document.getElementById('btn-ext-download');
-  const btnPaste = document.getElementById('btn-ext-paste');
-  const btnOpenWebapp = document.getElementById('btn-open-webapp');
-  const statusText = document.getElementById('status-text');
-  const tabStatus = document.getElementById('tab-status');
+  const btnDownload = document.getElementById('btn-download');
+  const btnText = document.getElementById('btn-text');
+  const btnPaste = document.getElementById('btn-paste');
+  const statusCard = document.getElementById('status-card');
+  const statusMsg = document.getElementById('status-msg');
+  const fmtButtons = document.querySelectorAll('.fmt-btn');
 
-  const WEB_APP_URL = (chrome.runtime.id === 'cmhlgochpmciomoodleglljgmoclhcif')
-    ? 'https://fb4kdownloader.com'
-    : 'http://localhost:3000';
+  let selectedFormat = '4k';
 
-  // Detect Active Chrome Tab
+  // 1. Detect Active Chrome Tab
   if (chrome.tabs && chrome.tabs.query) {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       if (tabs && tabs[0] && tabs[0].url) {
         const activeUrl = tabs[0].url;
+
         if (activeUrl.includes('facebook.com') || activeUrl.includes('fb.watch')) {
           urlInput.value = activeUrl;
-          if (statusText) statusText.textContent = 'Facebook Video Tab Detected!';
-          if (tabStatus) {
-            tabStatus.style.background = 'rgba(16, 185, 129, 0.1)';
-            tabStatus.style.borderColor = 'rgba(16, 185, 129, 0.25)';
+          statusCard.classList.add('active');
+
+          if (activeUrl.includes('/reel/')) {
+            statusMsg.textContent = 'Active Facebook Reel Detected!';
+          } else if (activeUrl.includes('/watch/')) {
+            statusMsg.textContent = 'Facebook Watch Video Detected!';
+          } else {
+            statusMsg.textContent = 'Facebook Tab Detected!';
           }
         } else {
-          if (statusText) statusText.textContent = 'Open a Facebook video tab to auto-detect!';
-          if (tabStatus) {
-            tabStatus.style.background = 'rgba(255, 255, 255, 0.05)';
-            tabStatus.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-          }
+          statusMsg.textContent = 'Open any Facebook Reel to auto-detect!';
         }
       }
     });
   }
 
-  // Paste Action
+  // 2. Format Selection Logic
+  fmtButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      fmtButtons.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedFormat = btn.getAttribute('data-format') || '4k';
+      btnText.textContent = `Download in ${selectedFormat.toUpperCase()}`;
+    });
+  });
+
+  // 3. Paste Button
   if (btnPaste) {
     btnPaste.addEventListener('click', async () => {
       try {
         const text = await navigator.clipboard.readText();
-        if (text) {
-          urlInput.value = text;
+        if (text && text.startsWith('http')) {
+          urlInput.value = text.trim();
+          statusCard.classList.add('active');
+          statusMsg.textContent = 'Link pasted from clipboard!';
         }
       } catch (err) {
-        console.error('Clipboard error:', err);
+        console.error('Clipboard paste error:', err);
       }
     });
   }
 
-  // Trigger Download Action
+  // 4. Download Trigger
   if (btnDownload) {
-    btnDownload.addEventListener('click', async () => {
+    btnDownload.addEventListener('click', () => {
       const url = urlInput.value.trim();
       if (!url) {
         urlInput.focus();
+        statusMsg.textContent = 'Please enter or paste a valid URL!';
         return;
       }
 
-      const originalBtnText = btnDownload.innerHTML;
-      btnDownload.innerHTML = `<span class="spinner"></span> Extracting...`;
       btnDownload.disabled = true;
+      btnText.textContent = `Extracting ${selectedFormat.toUpperCase()} Stream...`;
 
-      try {
-        const formatSelect = document.getElementById('ext-format-select');
-        const selectedFormat = formatSelect ? formatSelect.value : '4k';
-
-        const response = await fetch(`${WEB_APP_URL}/api/extract?url=${encodeURIComponent(url)}`);
-        const data = await response.json();
-
-        let downloadPath = '';
-        let filename = 'fb4kdownloader_video.mp4';
-
-        if (selectedFormat === '4k') {
-          downloadPath = data.fourKUrl || data.hdUrl || data.sdUrl;
-          filename = 'fb4kdownloader_video_4k.mp4';
-        } else if (selectedFormat === '1080p') {
-          downloadPath = data.hdUrl || data.sdUrl;
-          filename = 'fb4kdownloader_video_1080p.mp4';
-        } else if (selectedFormat === '720p') {
-          downloadPath = data.sdUrl || data.hdUrl;
-          filename = 'fb4kdownloader_video_720p.mp4';
-        } else if (selectedFormat === 'mp3') {
-          downloadPath = data.mp3Url;
-          filename = 'fb4kdownloader_audio.mp3';
-        }
-
-        if (data.success && downloadPath) {
-          const absoluteDownloadUrl = `${WEB_APP_URL}${downloadPath}`;
-
-          if (chrome.downloads && chrome.downloads.download) {
-            chrome.downloads.download({
-              url: absoluteDownloadUrl,
-              filename: filename,
-              saveAs: true
-            }, (downloadId) => {
-              btnDownload.innerHTML = originalBtnText;
-              btnDownload.disabled = false;
-              if (chrome.runtime.lastError) {
-                const targetUrl = `${WEB_APP_URL}?url=${encodeURIComponent(url)}`;
-                if (chrome.tabs && chrome.tabs.create) {
-                  chrome.tabs.create({ url: targetUrl });
-                } else {
-                  window.open(targetUrl, '_blank');
-                }
-              }
-            });
-          } else {
-            const targetUrl = `${WEB_APP_URL}?url=${encodeURIComponent(url)}`;
-            if (chrome.tabs && chrome.tabs.create) {
-              chrome.tabs.create({ url: targetUrl });
-            } else {
-              window.open(targetUrl, '_blank');
-            }
-            btnDownload.innerHTML = originalBtnText;
-            btnDownload.disabled = false;
-          }
-        } else {
-          const targetUrl = `${WEB_APP_URL}?url=${encodeURIComponent(url)}`;
-          if (chrome.tabs && chrome.tabs.create) {
-            chrome.tabs.create({ url: targetUrl });
-          } else {
-            window.open(targetUrl, '_blank');
-          }
-          btnDownload.innerHTML = originalBtnText;
+      chrome.runtime.sendMessage(
+        {
+          action: 'download_video_stream',
+          url: url,
+          format: selectedFormat
+        },
+        (res) => {
           btnDownload.disabled = false;
-        }
 
-      } catch (err) {
-        console.error('Extension download flow error:', err);
-        const targetUrl = `${WEB_APP_URL}?url=${encodeURIComponent(url)}`;
-        if (chrome.tabs && chrome.tabs.create) {
-          chrome.tabs.create({ url: targetUrl });
-        } else {
-          window.open(targetUrl, '_blank');
-        }
-        btnDownload.innerHTML = originalBtnText;
-        btnDownload.disabled = false;
-      }
-    });
-  }
+          if (res && res.success) {
+            btnText.textContent = '✅ Download Started!';
+            statusMsg.textContent = 'Download initiated! Check your downloads folder.';
+            statusCard.classList.add('active');
 
-  // Open WebApp Action
-  if (btnOpenWebapp) {
-    btnOpenWebapp.addEventListener('click', () => {
-      if (chrome.tabs && chrome.tabs.create) {
-        chrome.tabs.create({ url: WEB_APP_URL });
-      } else {
-        window.open(WEB_APP_URL, '_blank');
-      }
+            setTimeout(() => {
+              btnText.textContent = `Download Reel Now`;
+            }, 3000);
+          } else {
+            // Fallback: Open web app
+            const targetUrl = `https://fb4kdownloader.com?url=${encodeURIComponent(url)}`;
+            chrome.tabs.create({ url: targetUrl });
+            btnText.textContent = `Opened on FB4KDownloader.com`;
+          }
+        }
+      );
     });
   }
 });

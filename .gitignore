@@ -14,5 +14,6 @@ test_*.js
 !images/*.jpg
 !images/*.png
 !images/*.jpeg
+!extension/*.png
 !favicon.svg
 scratch/

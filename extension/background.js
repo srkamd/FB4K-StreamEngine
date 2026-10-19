@@ -1,110 +1,138 @@
 /**
- * FB4KDownloader — Background Service Worker v2.0.0
- * Handles direct stream extraction and seamless chrome.downloads API triggers
+ * FB4KDownloader — Background Service Worker v2.1.0
+ * Pure Direct Client-Side Stream Interceptor & Downloader
+ * Downloads Facebook Reels & Videos directly to the browser without any website redirects.
  */
 
-const PRODUCTION_API = 'https://fb4kdownloader.com';
-const LOCAL_API = 'http://localhost:3000';
+// In-memory store of live video stream URLs per tab
+// tabId -> Array of stream objects: { url, time }
+const tabStreams = {};
 
-// Determine API Endpoint based on environment
-const API_BASE = (chrome.runtime.id === 'cmhlgochpmciomoodleglljgmoclhcif')
-  ? PRODUCTION_API
-  : PRODUCTION_API; // Always use production for reliable downloads
-
-// Sanitize filename to avoid OS-level invalid characters
-function getCleanFilename(title, format) {
+// Clean Filename Sanitizer
+function sanitizeName(title, format) {
   const ext = (format === 'mp3') ? 'mp3' : 'mp4';
-  const cleanTitle = (title || 'fb4k_reel')
+  const clean = (title || 'Facebook_Reel')
     .replace(/[^a-zA-Z0-9_\-\s]/g, '')
     .trim()
     .replace(/\s+/g, '_')
     .slice(0, 45);
-  return `${cleanTitle}_${format || '4k'}.${ext}`;
+  return `${clean || 'Facebook_Reel'}_${format || '4K'}.${ext}`;
 }
 
-// Main Message Listener
+// Intercept live video stream requests from Facebook CDN (fbcdn.net)
+if (chrome.webRequest && chrome.webRequest.onBeforeRequest) {
+  chrome.webRequest.onBeforeRequest.addListener(
+    (details) => {
+      const url = details.url;
+      const tabId = details.tabId;
+
+      if (tabId && tabId > 0 && url.includes('.fbcdn.net/')) {
+        // Detect video stream requests
+        if (url.includes('.mp4') || url.includes('/v/t') || url.includes('bytestart') || url.includes('&efg=')) {
+          if (!tabStreams[tabId]) {
+            tabStreams[tabId] = [];
+          }
+
+          // Keep pristine stream url (strip byterange query if necessary to get full stream)
+          let cleanStream = url;
+          if (cleanStream.includes('&bytestart=') || cleanStream.includes('?bytestart=')) {
+            cleanStream = cleanStream.replace(/[?&]bytestart=\d+/, '').replace(/[?&]byteend=\d+/, '');
+          }
+
+          // Unshift to keep most recent at top
+          if (!tabStreams[tabId].some(item => item.url === cleanStream)) {
+            tabStreams[tabId].unshift({
+              url: cleanStream,
+              rawUrl: url,
+              time: Date.now()
+            });
+
+            // Keep max 20 recent streams per tab
+            if (tabStreams[tabId].length > 20) {
+              tabStreams[tabId].pop();
+            }
+
+            console.log(`[FB4K] Captured live FB video stream on Tab ${tabId}:`, cleanStream.slice(0, 90));
+          }
+        }
+      }
+    },
+    { urls: ['*://*.fbcdn.net/*'] }
+  );
+}
+
+// Clean up memory when tab is closed
+if (chrome.tabs && chrome.tabs.onRemoved) {
+  chrome.tabs.onRemoved.addListener((tabId) => {
+    delete tabStreams[tabId];
+  });
+}
+
+// Message Dispatcher
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === 'download_video_stream' && request.url) {
-    const targetUrl = request.url;
-    const format = request.format || '4k';
+  if (request.action === 'download_reel_direct') {
+    const tabId = sender.tab ? sender.tab.id : request.tabId;
+    let finalUrl = request.streamUrl;
 
-    (async () => {
-      try {
-        console.log(`[FB4K] Extracting Reel Stream: ${targetUrl} [${format}]`);
+    // Layer 1: If DOM didn't supply stream, check captured webRequest streams
+    if (!finalUrl && tabId && tabStreams[tabId] && tabStreams[tabId].length > 0) {
+      finalUrl = tabStreams[tabId][0].url;
+      console.log(`[FB4K] Using webRequest stream for Tab ${tabId}`);
+    }
 
-        // Query the extraction API
-        const extractRes = await fetch(`${API_BASE}/api/extract?url=${encodeURIComponent(targetUrl)}`);
-        const data = await extractRes.json();
+    if (!finalUrl) {
+      console.warn('[FB4K] No stream URL found for tab:', tabId);
+      sendResponse({ success: false, message: 'Stream not loaded yet. Play the video for 1 second!' });
+      return true;
+    }
 
-        if (!data || !data.success) {
-          console.warn('[FB4K] Extraction API could not resolve stream:', data);
-          sendResponse({ success: false, message: data?.message || 'Could not resolve stream' });
-          return;
-        }
+    // Determine filename
+    const tabTitle = (sender.tab && sender.tab.title) ? sender.tab.title : 'Facebook_Reel';
+    const filename = sanitizeName(tabTitle, request.format || '4K');
 
-        // Determine download path
-        let relativeDownloadPath = '';
-        if (format === '4k') {
-          relativeDownloadPath = data.fourKUrl || data.hdUrl || data.sdUrl;
-        } else if (format === '1080p') {
-          relativeDownloadPath = data.hdUrl || data.sdUrl;
-        } else if (format === '720p') {
-          relativeDownloadPath = data.sdUrl || data.hdUrl;
-        } else if (format === 'mp3') {
-          relativeDownloadPath = data.mp3Url;
-        } else {
-          relativeDownloadPath = data.fourKUrl || data.hdUrl;
-        }
+    console.log(`[FB4K] Initiating direct Chrome download: ${filename}`);
 
-        if (!relativeDownloadPath) {
-          sendResponse({ success: false, message: 'Stream URL not found' });
-          return;
-        }
-
-        const finalDownloadUrl = relativeDownloadPath.startsWith('http')
-          ? relativeDownloadPath
-          : `${API_BASE}${relativeDownloadPath}`;
-
-        const filename = getCleanFilename(data.title, format);
-
-        // Trigger direct browser download
+    // Trigger Direct Browser Download
+    chrome.downloads.download({
+      url: finalUrl,
+      filename: filename,
+      saveAs: false // Download straight to user's computer without prompt
+    }, (downloadId) => {
+      if (chrome.runtime.lastError) {
+        console.warn('[FB4K] Download with saveAs:false failed, retrying with saveAs:true...', chrome.runtime.lastError.message);
+        
         chrome.downloads.download({
-          url: finalDownloadUrl,
+          url: finalUrl,
           filename: filename,
-          saveAs: false // Download immediately without prompt
-        }, (downloadId) => {
+          saveAs: true
+        }, (dlId2) => {
           if (chrome.runtime.lastError) {
-            console.error('[FB4K] Chrome download error:', chrome.runtime.lastError.message);
-            // Fallback: Open tab
-            chrome.tabs.create({ url: finalDownloadUrl });
-            sendResponse({ success: true, fallback: true });
+            console.error('[FB4K] Direct download failed:', chrome.runtime.lastError.message);
+            sendResponse({ success: false, error: chrome.runtime.lastError.message });
           } else {
-            console.log('[FB4K] Download started with ID:', downloadId);
-            sendResponse({ success: true, downloadId, filename });
+            console.log('[FB4K] Download started with ID:', dlId2);
+            sendResponse({ success: true, downloadId: dlId2, filename });
           }
         });
-
-      } catch (err) {
-        console.error('[FB4K] Background handler error:', err);
-        sendResponse({ success: false, error: err.message });
+      } else {
+        console.log('[FB4K] Download started successfully with ID:', downloadId);
+        sendResponse({ success: true, downloadId, filename });
       }
-    })();
+    });
 
     return true; // Keep message channel open for async response
   }
 
-  if (request.action === 'open_webapp') {
-    const target = request.url ? `${API_BASE}?url=${encodeURIComponent(request.url)}` : API_BASE;
-    chrome.tabs.create({ url: target });
-    sendResponse({ success: true });
+  // Query captured streams for active tab (used by popup)
+  if (request.action === 'get_active_tab_stream') {
+    const tabId = request.tabId;
+    if (tabId && tabStreams[tabId] && tabStreams[tabId].length > 0) {
+      sendResponse({ success: true, streamUrl: tabStreams[tabId][0].url });
+    } else {
+      sendResponse({ success: false });
+    }
+    return true;
   }
 });
 
-// Download progress listener
-if (chrome.downloads && chrome.downloads.onChanged) {
-  chrome.downloads.onChanged.addListener((delta) => {
-    if (delta.state && delta.state.current === 'complete') {
-      console.log(`[FB4K] Download ${delta.id} completed successfully!`);
-    }
-  });
-}
+console.log('⚡ FB4KDownloader Service Worker v2.1.0 Ready (Direct Stream Engine)');

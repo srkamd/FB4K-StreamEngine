@@ -8,15 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const fmtButtons = document.querySelectorAll('.fmt-btn');
 
   let selectedFormat = '4k';
+  let activeTabId = null;
 
   // 1. Detect Active Chrome Tab
   if (chrome.tabs && chrome.tabs.query) {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (tabs && tabs[0] && tabs[0].url) {
-        const activeUrl = tabs[0].url;
+      if (tabs && tabs[0]) {
+        activeTabId = tabs[0].id;
+        const activeUrl = tabs[0].url || '';
 
         if (activeUrl.includes('facebook.com') || activeUrl.includes('fb.watch')) {
-          urlInput.value = activeUrl;
+          urlInput.value = activeUrl.split('?')[0];
           statusCard.classList.add('active');
 
           if (activeUrl.includes('/reel/')) {
@@ -59,13 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 4. Download Trigger
+  // 4. Download Trigger (Direct Download, No Redirects)
   if (btnDownload) {
     btnDownload.addEventListener('click', () => {
       const url = urlInput.value.trim();
       if (!url) {
         urlInput.focus();
-        statusMsg.textContent = 'Please enter or paste a valid URL!';
+        statusMsg.textContent = 'Please enter or open a Facebook Reel!';
         return;
       }
 
@@ -74,8 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       chrome.runtime.sendMessage(
         {
-          action: 'download_video_stream',
-          url: url,
+          action: 'download_reel_direct',
+          tabId: activeTabId,
+          streamUrl: null,
           format: selectedFormat
         },
         (res) => {
@@ -83,17 +86,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
           if (res && res.success) {
             btnText.textContent = '✅ Download Started!';
-            statusMsg.textContent = 'Download initiated! Check your downloads folder.';
+            statusMsg.textContent = 'Download started! Saved to your Downloads folder.';
             statusCard.classList.add('active');
 
             setTimeout(() => {
               btnText.textContent = `Download Reel Now`;
             }, 3000);
           } else {
-            // Fallback: Open web app
-            const targetUrl = `https://fb4kdownloader.com?url=${encodeURIComponent(url)}`;
-            chrome.tabs.create({ url: targetUrl });
-            btnText.textContent = `Opened on FB4KDownloader.com`;
+            btnText.textContent = `Play Reel & Retry`;
+            statusMsg.textContent = 'Please play the video on Facebook for 1 second, then click Download!';
+            statusCard.classList.remove('active');
           }
         }
       );

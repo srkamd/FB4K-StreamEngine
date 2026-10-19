@@ -1,15 +1,15 @@
 /**
- * FB4KDownloader — Content Script v2.0.0
- * Injects sleek, 1-click 4K download buttons directly onto Facebook Reels & Videos
+ * FB4KDownloader — Content Script v2.1.0
+ * 1-Click On-Reel Video Downloader (Pure Direct In-Page Download)
+ * Zero website redirects — downloads directly to your device via Chrome Download Manager.
  */
 
 (function () {
   'use strict';
 
-  const WEB_APP_URL = 'https://fb4kdownloader.com';
   const INJECT_FLAG = 'data-fb4k-injected';
 
-  // Inline SVG Icons for optimal performance & CSP safety
+  // Inline Vector Icons for performance & zero CSP issues
   const SVG_DOWNLOAD = `
     <svg class="fb4k-icon-svg" viewBox="0 0 24 24">
       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -32,45 +32,74 @@
       <polyline points="6 9 12 15 18 9"></polyline>
     </svg>`;
 
-  // Extract clean Reel / Video URL from any container
-  function extractTargetUrl(container) {
-    // 1. If currently on a specific reel or watch page
-    const currentLoc = window.location.href;
-    if (currentLoc.includes('/reel/') || currentLoc.includes('/watch/')) {
-      const match = currentLoc.match(/(?:reel\/|watch\/\?v=|videos\/)(\d+)/);
-      if (match) return currentLoc.split('?')[0];
-    }
-
-    // 2. Check within container for specific link
-    if (container) {
-      const links = container.querySelectorAll('a[href*="/reel/"], a[href*="/watch/"], a[href*="/videos/"]');
-      for (const link of links) {
-        if (link.href && (link.href.includes('/reel/') || link.href.includes('/watch/'))) {
-          return link.href.split('?')[0];
-        }
-      }
-
-      // Check parent containers for links
-      const parent = container.closest('[role="article"], [data-pagelet*="Reel"], [role="dialog"], [data-pagelet*="FeedUnit"]');
-      if (parent) {
-        const parentLinks = parent.querySelectorAll('a[href*="/reel/"], a[href*="/watch/"], a[href*="/videos/"]');
-        for (const link of parentLinks) {
-          if (link.href) return link.href.split('?')[0];
-        }
-      }
-    }
-
-    return currentLoc.split('?')[0];
+  // Clean and unescape JSON/URL strings from Facebook HTML
+  function cleanUrl(raw) {
+    if (!raw || typeof raw !== 'string') return null;
+    return raw
+      .replace(/\\u0026/g, '&')
+      .replace(/&amp;/g, '&')
+      .replace(/\\\//g, '/')
+      .replace(/\\/g, '')
+      .split('"')[0]
+      .split('\'')[0]
+      .trim();
   }
 
-  // Display unobtrusive floating toast message
+  // Find direct MP4 stream in the DOM or scripts
+  function findStreamInDom(container) {
+    // 1. Direct <video> tag in container
+    if (container) {
+      const v = container.querySelector('video');
+      if (v) {
+        if (v.src && v.src.startsWith('http') && v.src.includes('fbcdn.net')) return v.src;
+        if (v.currentSrc && v.currentSrc.startsWith('http') && v.currentSrc.includes('fbcdn.net')) return v.currentSrc;
+      }
+    }
+
+    // 2. Active playing / visible video in viewport
+    const allVideos = document.querySelectorAll('video');
+    for (const v of allVideos) {
+      const rect = v.getBoundingClientRect();
+      if (rect.top >= -100 && rect.bottom <= window.innerHeight + 100) {
+        if (v.src && v.src.startsWith('http') && v.src.includes('fbcdn.net')) return v.src;
+        if (v.currentSrc && v.currentSrc.startsWith('http') && v.currentSrc.includes('fbcdn.net')) return v.currentSrc;
+      }
+    }
+
+    // 3. Scan script tags & page HTML for browser_native_hd_url / browser_native_sd_url
+    const html = document.documentElement.innerHTML;
+
+    // HD stream
+    const hdMatch = html.match(/"browser_native_hd_url":"([^"]+)"/) ||
+                    html.match(/"playable_url_quality_hd":"([^"]+)"/);
+    if (hdMatch && hdMatch[1]) {
+      return cleanUrl(hdMatch[1]);
+    }
+
+    // SD stream
+    const sdMatch = html.match(/"browser_native_sd_url":"([^"]+)"/) ||
+                    html.match(/"playable_url":"([^"]+)"/);
+    if (sdMatch && sdMatch[1]) {
+      return cleanUrl(sdMatch[1]);
+    }
+
+    // Any fbcdn .mp4 URL
+    const mp4Match = html.match(/(https?:\\\/\\\/[^\s"'<>]+\.fbcdn\.net[^\s"'<>]+\.mp4[^\s"'>]*)/i);
+    if (mp4Match && mp4Match[1]) {
+      return cleanUrl(mp4Match[1]);
+    }
+
+    return null;
+  }
+
+  // Floating Toast Notification
   function showToast(message, isError = false) {
     const existingToast = document.querySelector('.fb4k-toast');
     if (existingToast) existingToast.remove();
 
     const toast = document.createElement('div');
     toast.className = 'fb4k-toast';
-    toast.style.borderColor = isError ? '#ef4444' : '#06b6d4';
+    toast.style.borderColor = isError ? '#ef4444' : '#10b981';
     toast.innerHTML = `<span>${isError ? '⚠️' : '⚡'}</span> ${message}`;
 
     document.body.appendChild(toast);
@@ -78,45 +107,41 @@
       toast.style.opacity = '0';
       toast.style.transition = 'opacity 0.4s ease';
       setTimeout(() => toast.remove(), 400);
-    }, 3500);
+    }, 3800);
   }
 
-  // Perform Download Flow
-  async function triggerDownload(url, format, btnElement, labelElement) {
-    if (!url || !url.includes('facebook.com')) {
-      showToast('Please open or click on a Facebook Reel first!', true);
-      return;
-    }
-
-    // Set Loading State
+  // Direct In-Page Download Execution (Zero Redirects)
+  function triggerDirectDownload(container, format, btnElement) {
+    // Set Loading UI
     btnElement.classList.add('fb4k-btn-loading');
     btnElement.innerHTML = `${SVG_SPINNER} <span class="fb4k-pill-label">Downloading <strong>${format.toUpperCase()}</strong>...</span>`;
-    showToast(`Extracting 4K stream for Reel...`);
+    showToast(`Grabbing ${format.toUpperCase()} stream...`);
 
-    // Send request to background service worker
+    // Extract stream URL
+    const streamUrl = findStreamInDom(container);
+
+    // Send direct download request to background service worker
     chrome.runtime.sendMessage(
       {
-        action: 'download_video_stream',
-        url: url,
+        action: 'download_reel_direct',
+        streamUrl: streamUrl,
         format: format
       },
-      (response) => {
+      (res) => {
         btnElement.classList.remove('fb4k-btn-loading');
 
-        if (response && response.success) {
+        if (res && res.success) {
           btnElement.classList.add('fb4k-btn-success');
           btnElement.innerHTML = `${SVG_CHECK} <span class="fb4k-pill-label">Downloaded!</span>`;
-          showToast(`Download started successfully! Saving to your computer.`);
+          showToast(`✅ Video download started! Check your browser downloads.`);
 
           setTimeout(() => {
             btnElement.classList.remove('fb4k-btn-success');
             resetBtnContent(btnElement);
-          }, 3000);
+          }, 3200);
         } else {
-          // Fallback: Open web app with prefilled URL
-          const fallbackUrl = `${WEB_APP_URL}?url=${encodeURIComponent(url)}`;
-          window.open(fallbackUrl, '_blank');
-          showToast(`Opening FB4KDownloader web app...`);
+          // Inform user clearly without redirecting anywhere
+          showToast(`⚠️ Video stream not loaded yet. Play the Reel for 1-2 seconds, then click Download again!`, true);
           resetBtnContent(btnElement);
         }
       }
@@ -127,26 +152,25 @@
     btn.innerHTML = `${SVG_DOWNLOAD} <span class="fb4k-pill-label"><strong>4K</strong> Reel</span> ${SVG_ARROW}`;
   }
 
-  // Create On-Reel Floating Badge Element
+  // Create On-Reel Badge Button
   function createBadge(container) {
     const wrapper = document.createElement('div');
     wrapper.className = 'fb4k-reel-badge-wrapper';
 
-    // Main 1-Click Button (Defaults to 4K)
+    // 1-Click Button (Defaults to 4K)
     const btn = document.createElement('div');
     btn.className = 'fb4k-reel-btn';
-    btn.title = 'Click to Download Reel in 4K (FB4KDownloader)';
+    btn.title = 'Click to Download Reel in 4K (Direct Download)';
     resetBtnContent(btn);
 
     // Click handler for 1-click download
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       e.preventDefault();
-      const targetUrl = extractTargetUrl(container);
-      triggerDownload(targetUrl, '4k', btn);
+      triggerDirectDownload(container, '4k', btn);
     });
 
-    // Options dropdown for selecting other formats
+    // Options menu on hover
     const menu = document.createElement('div');
     menu.className = 'fb4k-options-menu';
 
@@ -154,7 +178,7 @@
       { id: '4k', label: '4K Ultra HD', badge: 'Best' },
       { id: '1080p', label: '1080p Full HD', badge: 'HD' },
       { id: '720p', label: '720p Standard', badge: 'Fast' },
-      { id: 'mp3', label: '320kbps MP3', badge: 'Audio' }
+      { id: 'mp3', label: 'MP3 Audio Format', badge: 'Audio' }
     ];
 
     formats.forEach((fmt) => {
@@ -165,8 +189,7 @@
       item.addEventListener('click', (e) => {
         e.stopPropagation();
         e.preventDefault();
-        const targetUrl = extractTargetUrl(container);
-        triggerDownload(targetUrl, fmt.id, btn);
+        triggerDirectDownload(container, fmt.id, btn);
       });
 
       menu.appendChild(item);
@@ -177,23 +200,19 @@
     return wrapper;
   }
 
-  // Scan and Inject Badges on all active Reels and Video Players
+  // Inject badges on all active video containers
   function scanAndInject() {
-    // 1. Facebook Reels Dedicated Fullscreen / Feed Containers
     const videoElements = document.querySelectorAll('video');
 
     videoElements.forEach((video) => {
-      // Find suitable parent wrapper for the video player
       const videoBox = video.closest('[role="dialog"], [data-pagelet*="Reel"], [aria-label*="Reel"], .x1n2onr6, .x78zum5') || video.parentElement;
 
       if (!videoBox) return;
 
-      // Skip if already has button
       if (videoBox.hasAttribute(INJECT_FLAG) || videoBox.querySelector('.fb4k-reel-badge-wrapper')) {
         return;
       }
 
-      // Ensure parent has relative/absolute positioning so badge anchors correctly
       const computedPos = window.getComputedStyle(videoBox).position;
       if (computedPos === 'static') {
         videoBox.style.position = 'relative';
@@ -205,7 +224,7 @@
     });
   }
 
-  // Initialize MutationObserver to catch dynamically loaded Reels as user scrolls
+  // MutationObserver for infinite scrolling Reels
   const observer = new MutationObserver(() => {
     scanAndInject();
   });
@@ -215,11 +234,8 @@
     subtree: true
   });
 
-  // Initial Scan
   scanAndInject();
+  setInterval(scanAndInject, 1500);
 
-  // Periodic safety check for URL changes or new tabs
-  setInterval(scanAndInject, 2000);
-
-  console.log('⚡ FB4KDownloader 2.0 active: 1-click on-reel icons ready.');
+  console.log('⚡ FB4KDownloader v2.1 active (Direct In-Page Download, No Redirects)');
 })();

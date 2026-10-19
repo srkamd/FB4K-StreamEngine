@@ -1,22 +1,21 @@
 {
   "manifest_version": 3,
   "name": "FB4KDownloader — 4K Facebook Reel & Video Downloader",
-  "version": "2.0.0",
-  "description": "1-Click download for Facebook Reels and videos in 4K Ultra HD, 1080p Full HD, and 320kbps MP3 audio with direct on-reel download icon.",
+  "version": "2.1.0",
+  "description": "1-Click direct download for Facebook Reels and videos in 4K Ultra HD, 1080p Full HD, and MP3 audio right on Facebook without leaving the page.",
   "permissions": [
     "activeTab",
     "downloads",
-    "storage"
+    "storage",
+    "webRequest"
   ],
   "host_permissions": [
     "*://*.facebook.com/*",
-    "*://*.fbcdn.net/*",
-    "https://fb4kdownloader.com/*",
-    "http://localhost:3000/*"
+    "*://*.fbcdn.net/*"
   ],
   "action": {
     "default_popup": "popup.html",
-    "default_title": "FB4KDownloader — Click to Download Facebook Video",
+    "default_title": "FB4KDownloader — 1-Click Facebook Reel Downloader",
     "default_icon": {
       "16": "icon16.png",
       "32": "icon32.png",

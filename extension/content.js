@@ -1,7 +1,7 @@
 /**
- * FB4KDownloader — Content Script v2.2.0
- * Multi-Layer Direct Video Engine with In-Page Blob Saving
- * 100% Reliable | Zero Redirects | Zero Failed .txt Downloads
+ * FB4KDownloader — Content Script v2.3.0
+ * 1-Click On-Reel Video & Audio Downloader
+ * Downloads Real Full-Length Video (Not Audio Chunks)
  */
 
 (function () {
@@ -35,7 +35,7 @@
   // Clean filename generator
   function getFilename(format) {
     let title = document.title || 'Facebook_Reel';
-    title = title.replace(/^\(\d+\)\s*/, ''); // Remove notification counts like "(9) "
+    title = title.replace(/^\(\d+\)\s*/, ''); // Remove notification counts
     title = title.replace(/[^a-zA-Z0-9_\-\s]/g, '').trim().replace(/\s+/g, '_').slice(0, 35);
     if (!title) title = 'Facebook_Reel';
     const ext = (format === 'mp3') ? 'mp3' : 'mp4';
@@ -60,7 +60,7 @@
     }, 4000);
   }
 
-  // Safely clean CDN stream URL
+  // Clean stream URL
   function cleanStreamUrl(url) {
     if (!url || typeof url !== 'string') return null;
     try {
@@ -82,68 +82,27 @@
     }
   }
 
-  // Layer 1: Extract from <video> element
-  function getStreamFromVideoTag(container) {
+  // Scan DOM Video Tag for Direct Video Stream
+  function getDirectVideoTagStream(container) {
     const v = (container && container.querySelector('video')) || document.querySelector('video');
     if (v) {
-      if (v.src && v.src.startsWith('http') && v.src.includes('fbcdn.net')) return cleanStreamUrl(v.src);
-      if (v.currentSrc && v.currentSrc.startsWith('http') && v.currentSrc.includes('fbcdn.net')) return cleanStreamUrl(v.currentSrc);
-
-      // Inspect React Fiber props on the video element
-      try {
-        const fiberKey = Object.keys(v).find(k => k.startsWith('__reactFiber') || k.startsWith('__reactProps'));
-        if (fiberKey && v[fiberKey]) {
-          let node = v[fiberKey];
-          let depth = 0;
-          while (node && depth < 8) {
-            const props = node.memoizedProps || node.props;
-            if (props) {
-              const possibleUrl = props.hd_src || props.sd_src || props.src || props.playable_url || (props.videoData && (props.videoData.hd_src || props.videoData.sd_src));
-              if (possibleUrl && typeof possibleUrl === 'string' && possibleUrl.includes('fbcdn.net')) {
-                return cleanStreamUrl(possibleUrl);
-              }
-            }
-            node = node.return;
-            depth++;
-          }
-        }
-      } catch (e) {}
+      // Check src if it is a real video link
+      if (v.src && v.src.startsWith('http') && v.src.includes('fbcdn.net') && !v.src.includes('_a.mp4')) {
+        return cleanStreamUrl(v.src);
+      }
+      if (v.currentSrc && v.currentSrc.startsWith('http') && v.currentSrc.includes('fbcdn.net') && !v.currentSrc.includes('_a.mp4')) {
+        return cleanStreamUrl(v.currentSrc);
+      }
     }
     return null;
   }
 
-  // Layer 2: Extract from page HTML & scripts
-  function getStreamFromScripts() {
-    const html = document.documentElement.innerHTML;
-
-    // Search for explicit HD/SD properties
-    const hdMatch = html.match(/"browser_native_hd_url":"([^"]+)"/) ||
-                    html.match(/"playable_url_quality_hd":"([^"]+)"/);
-    if (hdMatch && hdMatch[1]) {
-      return cleanStreamUrl(hdMatch[1]);
-    }
-
-    const sdMatch = html.match(/"browser_native_sd_url":"([^"]+)"/) ||
-                    html.match(/"playable_url":"([^"]+)"/);
-    if (sdMatch && sdMatch[1]) {
-      return cleanStreamUrl(sdMatch[1]);
-    }
-
-    // Search for any fbcdn video stream
-    const mp4Match = html.match(/(https?:\\?\/\\?\/[^\s"'<>]+\.fbcdn\.net[^\s"'<>]+\.mp4[^\s"'>]*)/i);
-    if (mp4Match && mp4Match[1]) {
-      return cleanStreamUrl(mp4Match[1]);
-    }
-
-    return null;
-  }
-
-  // Layer 3: Query background script for intercepted stream
-  function getStreamFromBackground() {
+  // Query Background Service Worker for Best Stream (Separated Video vs Audio)
+  function queryBackgroundStream(format) {
     return new Promise((resolve) => {
-      chrome.runtime.sendMessage({ action: 'get_tab_stream' }, (res) => {
+      chrome.runtime.sendMessage({ action: 'get_best_stream', format: format }, (res) => {
         if (res && res.success && res.streamUrl) {
-          resolve(cleanStreamUrl(res.streamUrl));
+          resolve(res.streamUrl);
         } else {
           resolve(null);
         }
@@ -151,33 +110,16 @@
     });
   }
 
-  // Master Stream Locator
-  async function resolveStreamUrl(container) {
-    // Try Video Tag & React Fiber
-    let streamUrl = getStreamFromVideoTag(container);
-    if (streamUrl) return streamUrl;
-
-    // Try Intercepted WebRequest Stream from Background
-    streamUrl = await getStreamFromBackground();
-    if (streamUrl) return streamUrl;
-
-    // Try Page HTML & Scripts
-    streamUrl = getStreamFromScripts();
-    if (streamUrl) return streamUrl;
-
-    return null;
-  }
-
-  // Download File Directly (Attempts In-Page Blob first, then Chrome Download API)
-  async function downloadVideoFile(streamUrl, format, btnElement) {
+  // Download File via in-page blob or chrome.downloads
+  async function executeDownload(streamUrl, format, btnElement) {
     const filename = getFilename(format);
 
     btnElement.innerHTML = `${SVG_SPINNER} <span class="fb4k-pill-label">Saving <strong>${format.toUpperCase()}</strong>...</span>`;
-    showToast(`Downloading video stream...`);
+    showToast(`Downloading ${format.toUpperCase()} video stream...`);
 
-    // Method A: In-Page Fetch as Blob (Bypasses all hotlinking & session issues)
+    // In-page Blob Fetch (Fastest, avoids hotlinking issues)
     try {
-      console.log('[FB4K] Attempting in-page fetch blob:', streamUrl);
+      console.log('[FB4K] Attempting in-page fetch for:', streamUrl);
       const res = await fetch(streamUrl, {
         method: 'GET',
         credentials: 'omit',
@@ -203,7 +145,7 @@
         btnElement.classList.remove('fb4k-btn-loading');
         btnElement.classList.add('fb4k-btn-success');
         btnElement.innerHTML = `${SVG_CHECK} <span class="fb4k-pill-label">Downloaded!</span>`;
-        showToast(`✅ Reel downloaded successfully! Check your downloads.`);
+        showToast(`✅ Video downloaded successfully! Check your downloads.`);
 
         setTimeout(() => {
           btnElement.classList.remove('fb4k-btn-success');
@@ -211,11 +153,11 @@
         }, 3000);
         return;
       }
-    } catch (fetchErr) {
-      console.warn('[FB4K] In-page fetch fallback to Chrome downloads API:', fetchErr);
+    } catch (err) {
+      console.warn('[FB4K] In-page fetch skipped, using Chrome Downloads API:', err);
     }
 
-    // Method B: Chrome Downloads API via Background Service Worker
+    // Chrome Downloads API Fallback
     chrome.runtime.sendMessage(
       {
         action: 'download_file',
@@ -236,26 +178,36 @@
             resetBtnContent(btnElement);
           }, 3000);
         } else {
-          showToast(`⚠️ Please play the video for 1-2 seconds so the stream buffers, then click Download!`, true);
+          showToast(`⚠️ Please let the video play for 1-2 seconds, then click Download again!`, true);
           resetBtnContent(btnElement);
         }
       }
     );
   }
 
-  // Trigger Download Flow
-  async function triggerDownload(container, format, btnElement) {
+  // Master Download Handler
+  async function handleDownload(container, format, btnElement) {
     btnElement.classList.add('fb4k-btn-loading');
-    btnElement.innerHTML = `${SVG_SPINNER} <span class="fb4k-pill-label">Grabbing <strong>${format.toUpperCase()}</strong>...</span>`;
-    showToast(`Detecting Reel stream...`);
+    btnElement.innerHTML = `${SVG_SPINNER} <span class="fb4k-pill-label">Detecting <strong>${format.toUpperCase()}</strong>...</span>`;
+    showToast(`Locating video stream...`);
 
-    const streamUrl = await resolveStreamUrl(container);
+    // 1. Try DOM direct video tag (if format is video)
+    let streamUrl = null;
+    if (format !== 'mp3') {
+      streamUrl = getDirectVideoTagStream(container);
+    }
+
+    // 2. Query Background Stream Registry (Separated Video & Audio channels)
+    if (!streamUrl) {
+      streamUrl = await queryBackgroundStream(format);
+    }
 
     if (streamUrl) {
-      await downloadVideoFile(streamUrl, format, btnElement);
+      console.log(`[FB4K] Downloading resolved stream [${format}]:`, streamUrl);
+      await executeDownload(streamUrl, format, btnElement);
     } else {
       btnElement.classList.remove('fb4k-btn-loading');
-      showToast(`⚠️ Please let the Reel play for 1 second, then click Download again!`, true);
+      showToast(`⚠️ Please let the Reel play for 1 second so the video stream buffers, then click Download!`, true);
       resetBtnContent(btnElement);
     }
   }
@@ -272,14 +224,14 @@
     // 1-Click Button (Defaults to 4K)
     const btn = document.createElement('div');
     btn.className = 'fb4k-reel-btn';
-    btn.title = 'Click to Download Reel in 4K (Instant Download)';
+    btn.title = 'Click to Download Reel in 4K Video (Instant Download)';
     resetBtnContent(btn);
 
     // 1-Click handler
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       e.preventDefault();
-      triggerDownload(container, '4k', btn);
+      handleDownload(container, '4k', btn);
     });
 
     // Options dropdown for selecting other formats
@@ -287,10 +239,10 @@
     menu.className = 'fb4k-options-menu';
 
     const formats = [
-      { id: '4k', label: '4K Ultra HD', badge: 'Best' },
-      { id: '1080p', label: '1080p Full HD', badge: 'HD' },
-      { id: '720p', label: '720p Standard', badge: 'Fast' },
-      { id: 'mp3', label: 'MP3 Audio Format', badge: 'Audio' }
+      { id: '4k', label: '4K Ultra HD (Video)', badge: 'Best' },
+      { id: '1080p', label: '1080p Full HD (Video)', badge: 'HD' },
+      { id: '720p', label: '720p Standard (Video)', badge: 'Fast' },
+      { id: 'mp3', label: '320kbps MP3 (Audio Only)', badge: 'Audio' }
     ];
 
     formats.forEach((fmt) => {
@@ -301,7 +253,7 @@
       item.addEventListener('click', (e) => {
         e.stopPropagation();
         e.preventDefault();
-        triggerDownload(container, fmt.id, btn);
+        handleDownload(container, fmt.id, btn);
       });
 
       menu.appendChild(item);
@@ -349,5 +301,5 @@
   scanAndInject();
   setInterval(scanAndInject, 1500);
 
-  console.log('⚡ FB4KDownloader v2.2 active: Direct in-page blob engine ready.');
+  console.log('⚡ FB4KDownloader v2.3 active: Dual-channel video & audio engine ready.');
 })();

@@ -1,18 +1,18 @@
 /**
- * FB4KDownloader — Background Service Worker v2.2.0
- * High-Precision Stream Interceptor & Native Chrome Downloader
+ * FB4KDownloader — Background Service Worker v2.3.0
+ * Dual-Channel Stream Engine: Distinguishes Real Video Streams from Audio Tracks
  */
 
-// In-memory store of live video streams per tab
-const tabStreams = {};
+// In-memory stream registries per tab
+const tabVideoStreams = {};
+const tabAudioStreams = {};
 
 // Clean Filename Generator
 function sanitizeFilename(title, format) {
   const ext = (format === 'mp3') ? 'mp3' : 'mp4';
   
-  // Clean tab title, remove notification counts like "(9) "
   let clean = (title || 'Facebook_Reel')
-    .replace(/^\(\d+\)\s*/, '')
+    .replace(/^\(\d+\)\s*/, '') // Strip notification counts e.g. "(9) "
     .replace(/[^a-zA-Z0-9_\-\s]/g, '')
     .trim()
     .replace(/\s+/g, '_')
@@ -22,11 +22,10 @@ function sanitizeFilename(title, format) {
   return `${clean}_${format || '4K'}.${ext}`;
 }
 
-// Safely clean stream URL using URL API (Preserves all signatures and query params)
+// Safely clean CDN URL preserving signature
 function cleanCdnUrl(rawUrl) {
   try {
     const parsed = new URL(rawUrl);
-    // Only strip chunk range parameters if present, never alter other signed params
     parsed.searchParams.delete('bytestart');
     parsed.searchParams.delete('byteend');
     return parsed.toString();
@@ -35,66 +34,113 @@ function cleanCdnUrl(rawUrl) {
   }
 }
 
-// Intercept live video streams from Facebook CDN
-if (chrome.webRequest && chrome.webRequest.onBeforeRequest) {
-  chrome.webRequest.onBeforeRequest.addListener(
+// Track live network streams from Facebook CDN
+if (chrome.webRequest && chrome.webRequest.onResponseStarted) {
+  chrome.webRequest.onResponseStarted.addListener(
     (details) => {
       const url = details.url;
       const tabId = details.tabId;
 
-      if (tabId && tabId > 0 && url.includes('.fbcdn.net/')) {
-        // Filter for actual video streams (exclude static images/scripts)
-        const isVideo = (url.includes('.mp4') || url.includes('/v/t') || url.includes('&efg=') || url.includes('video-fallback')) &&
-                        !url.includes('.jpg') && !url.includes('.png') && !url.includes('.webp') && !url.includes('.js') && !url.includes('.css');
+      if (!tabId || tabId <= 0 || !url.includes('.fbcdn.net/')) return;
 
-        if (isVideo) {
-          if (!tabStreams[tabId]) tabStreams[tabId] = [];
+      // Inspect Response Headers for Content-Type & Content-Length
+      const headers = details.responseHeaders || [];
+      let contentType = '';
+      let contentLength = 0;
 
-          const fullStreamUrl = cleanCdnUrl(url);
+      for (const h of headers) {
+        const name = (h.name || '').toLowerCase();
+        if (name === 'content-type') contentType = (h.value || '').toLowerCase();
+        if (name === 'content-length') contentLength = parseInt(h.value, 10) || 0;
+      }
 
-          // Store if not duplicate
-          if (!tabStreams[tabId].some(item => item.url === fullStreamUrl)) {
-            tabStreams[tabId].unshift({
-              url: fullStreamUrl,
-              rawUrl: url,
-              time: Date.now()
-            });
+      // Ignore static assets
+      if (url.includes('.jpg') || url.includes('.png') || url.includes('.webp') || url.includes('.js') || url.includes('.css')) {
+        return;
+      }
 
-            // Keep up to 20 recent streams
-            if (tabStreams[tabId].length > 20) {
-              tabStreams[tabId].pop();
-            }
+      const cleanStream = cleanCdnUrl(url);
 
-            console.log(`[FB4K] Captured video stream on Tab ${tabId}:`, fullStreamUrl.slice(0, 100));
-          }
+      // Detect whether stream is Audio or Video
+      const isAudioExplicit = contentType.includes('audio') || url.includes('_a.mp4') || url.includes('fb_audio');
+      const isVideoExplicit = contentType.includes('video') || url.includes('_v.mp4') || url.includes('fb_video');
+
+      if (isAudioExplicit) {
+        // Record Audio Stream
+        if (!tabAudioStreams[tabId]) tabAudioStreams[tabId] = [];
+        if (!tabAudioStreams[tabId].some(i => i.url === cleanStream)) {
+          tabAudioStreams[tabId].unshift({
+            url: cleanStream,
+            size: contentLength,
+            time: Date.now()
+          });
+          if (tabAudioStreams[tabId].length > 15) tabAudioStreams[tabId].pop();
+          console.log(`[FB4K] 🎵 Captured AUDIO Stream (${(contentLength / 1024).toFixed(0)} KB):`, cleanStream.slice(0, 80));
+        }
+      } else if (isVideoExplicit || (!isAudioExplicit && (url.includes('.mp4') || url.includes('/v/t')))) {
+        // Record Video Stream
+        if (!tabVideoStreams[tabId]) tabVideoStreams[tabId] = [];
+        if (!tabVideoStreams[tabId].some(i => i.url === cleanStream)) {
+          tabVideoStreams[tabId].unshift({
+            url: cleanStream,
+            size: contentLength,
+            time: Date.now()
+          });
+
+          // Sort video streams by size descending so largest / highest-quality stream is at index 0
+          tabVideoStreams[tabId].sort((a, b) => (b.size || 0) - (a.size || 0));
+
+          if (tabVideoStreams[tabId].length > 15) tabVideoStreams[tabId].pop();
+          console.log(`[FB4K] 🎬 Captured REAL VIDEO Stream (${(contentLength / 1024 / 1024).toFixed(2)} MB):`, cleanStream.slice(0, 80));
         }
       }
     },
-    { urls: ['*://*.fbcdn.net/*'] }
+    { urls: ['*://*.fbcdn.net/*'] },
+    ['responseHeaders']
   );
 }
 
 // Clean up memory on tab close
 if (chrome.tabs && chrome.tabs.onRemoved) {
   chrome.tabs.onRemoved.addListener((tabId) => {
-    delete tabStreams[tabId];
+    delete tabVideoStreams[tabId];
+    delete tabAudioStreams[tabId];
   });
 }
 
-// Handle messages from content script & popup
+// Handle Messages from Content Script & Popup
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  // Query active stream for tab
-  if (request.action === 'get_tab_stream') {
-    const tabId = sender.tab ? sender.tab.id : request.tabId;
-    if (tabId && tabStreams[tabId] && tabStreams[tabId].length > 0) {
-      sendResponse({ success: true, streamUrl: tabStreams[tabId][0].url });
+  const tabId = sender.tab ? sender.tab.id : request.tabId;
+
+  // Resolve best stream for requested format
+  if (request.action === 'get_best_stream') {
+    const format = request.format || '4k';
+    let selectedUrl = null;
+
+    if (format === 'mp3') {
+      // Pick Audio Stream
+      if (tabId && tabAudioStreams[tabId] && tabAudioStreams[tabId].length > 0) {
+        selectedUrl = tabAudioStreams[tabId][0].url;
+      }
     } else {
-      sendResponse({ success: false });
+      // Pick Video Stream (4K / 1080p / 720p)
+      if (tabId && tabVideoStreams[tabId] && tabVideoStreams[tabId].length > 0) {
+        // Index 0 has the largest / highest bitrate video stream
+        selectedUrl = tabVideoStreams[tabId][0].url;
+      }
+    }
+
+    if (selectedUrl) {
+      sendResponse({ success: true, streamUrl: selectedUrl });
+    } else {
+      // Fallback: Check if any video stream available at all
+      const fallbackUrl = (tabVideoStreams[tabId] && tabVideoStreams[tabId][0]) ? tabVideoStreams[tabId][0].url : null;
+      sendResponse({ success: !!fallbackUrl, streamUrl: fallbackUrl });
     }
     return true;
   }
 
-  // Trigger download via Chrome Downloads API
+  // Download Trigger
   if (request.action === 'download_file') {
     const targetUrl = request.url;
     const tabTitle = (sender.tab && sender.tab.title) ? sender.tab.title : request.title;
@@ -105,7 +151,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       return true;
     }
 
-    console.log(`[FB4K] Downloading: ${filename}`);
+    console.log(`[FB4K] Starting download for: ${filename}`);
 
     chrome.downloads.download({
       url: targetUrl,
@@ -113,7 +159,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       saveAs: false
     }, (downloadId) => {
       if (chrome.runtime.lastError) {
-        console.warn('[FB4K] Download failed with saveAs:false, retrying with saveAs:true:', chrome.runtime.lastError.message);
+        console.warn('[FB4K] Retrying download with saveAs:true:', chrome.runtime.lastError.message);
         
         chrome.downloads.download({
           url: targetUrl,
@@ -121,14 +167,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           saveAs: true
         }, (dlId2) => {
           if (chrome.runtime.lastError) {
-            console.error('[FB4K] Both download attempts failed:', chrome.runtime.lastError.message);
             sendResponse({ success: false, error: chrome.runtime.lastError.message });
           } else {
             sendResponse({ success: true, downloadId: dlId2, filename });
           }
         });
       } else {
-        console.log('[FB4K] Download started successfully. ID:', downloadId);
+        console.log('[FB4K] Download started successfully with ID:', downloadId);
         sendResponse({ success: true, downloadId, filename });
       }
     });
@@ -137,4 +182,4 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-console.log('⚡ FB4KDownloader Service Worker v2.2.0 Active');
+console.log('⚡ FB4KDownloader Service Worker v2.3.0 Ready (Dual-Channel Video/Audio Separation)');

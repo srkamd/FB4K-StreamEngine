@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
       fmtButtons.forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');
       selectedFormat = btn.getAttribute('data-format') || '4k';
-      btnText.textContent = `Download in ${selectedFormat.toUpperCase()}`;
+      btnText.textContent = `Download ${selectedFormat.toUpperCase()} Video`;
     });
   });
 
@@ -64,35 +64,41 @@ document.addEventListener('DOMContentLoaded', () => {
   // 4. Download Trigger (Direct Download, No Redirects)
   if (btnDownload) {
     btnDownload.addEventListener('click', () => {
-      const url = urlInput.value.trim();
-      if (!url) {
-        urlInput.focus();
-        statusMsg.textContent = 'Please enter or open a Facebook Reel!';
-        return;
-      }
-
       btnDownload.disabled = true;
-      btnText.textContent = `Extracting ${selectedFormat.toUpperCase()} Stream...`;
+      btnText.textContent = `Resolving ${selectedFormat.toUpperCase()} Video...`;
 
       chrome.runtime.sendMessage(
         {
-          action: 'download_reel_direct',
+          action: 'get_best_stream',
           tabId: activeTabId,
-          streamUrl: null,
           format: selectedFormat
         },
         (res) => {
-          btnDownload.disabled = false;
-
-          if (res && res.success) {
-            btnText.textContent = '✅ Download Started!';
-            statusMsg.textContent = 'Download started! Saved to your Downloads folder.';
-            statusCard.classList.add('active');
-
-            setTimeout(() => {
-              btnText.textContent = `Download Reel Now`;
-            }, 3000);
+          if (res && res.success && res.streamUrl) {
+            chrome.runtime.sendMessage(
+              {
+                action: 'download_file',
+                url: res.streamUrl,
+                format: selectedFormat,
+                title: 'Facebook_Video'
+              },
+              (dlRes) => {
+                btnDownload.disabled = false;
+                if (dlRes && dlRes.success) {
+                  btnText.textContent = '✅ Download Started!';
+                  statusMsg.textContent = 'Video is downloading! Check your downloads.';
+                  statusCard.classList.add('active');
+                  setTimeout(() => {
+                    btnText.textContent = `Download Reel Now`;
+                  }, 3000);
+                } else {
+                  btnText.textContent = `Retry Download`;
+                  statusMsg.textContent = 'Download error. Please play the video and retry!';
+                }
+              }
+            );
           } else {
+            btnDownload.disabled = false;
             btnText.textContent = `Play Reel & Retry`;
             statusMsg.textContent = 'Please play the video on Facebook for 1 second, then click Download!';
             statusCard.classList.remove('active');

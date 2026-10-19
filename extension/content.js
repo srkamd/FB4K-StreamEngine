@@ -1,13 +1,44 @@
 /**
- * FB4KDownloader — Content Script v2.3.0
+ * FB4KDownloader — Content Script v2.3.1
  * 1-Click On-Reel Video & Audio Downloader
- * Downloads Real Full-Length Video (Not Audio Chunks)
+ * Protected against Extension Context Invalidation
  */
 
 (function () {
   'use strict';
 
   const INJECT_FLAG = 'data-fb4k-injected';
+
+  // Helper: Check if Extension Context is still alive
+  function isExtensionValid() {
+    return typeof chrome !== 'undefined' && chrome.runtime && !!chrome.runtime.id;
+  }
+
+  // Safe Messenger: Wraps chrome.runtime.sendMessage to prevent uncaught "Extension context invalidated" errors
+  function safeSendMessage(message) {
+    return new Promise((resolve) => {
+      if (!isExtensionValid()) {
+        showToast('⚡ Extension reloaded! Please refresh (F5) this Facebook tab.', true);
+        resolve({ success: false, contextInvalidated: true });
+        return;
+      }
+
+      try {
+        chrome.runtime.sendMessage(message, (response) => {
+          if (chrome.runtime.lastError) {
+            console.warn('[FB4K] Runtime message error:', chrome.runtime.lastError.message);
+            resolve({ success: false, error: chrome.runtime.lastError.message });
+          } else {
+            resolve(response || { success: false });
+          }
+        });
+      } catch (err) {
+        console.warn('[FB4K] Extension context invalidated error caught gracefully:', err.message);
+        showToast('⚡ Extension reloaded! Please refresh (F5) this Facebook tab.', true);
+        resolve({ success: false, contextInvalidated: true });
+      }
+    });
+  }
 
   // SVG Icons
   const SVG_DOWNLOAD = `
@@ -35,7 +66,7 @@
   // Clean filename generator
   function getFilename(format) {
     let title = document.title || 'Facebook_Reel';
-    title = title.replace(/^\(\d+\)\s*/, ''); // Remove notification counts
+    title = title.replace(/^\(\d+\)\s*/, ''); // Remove notification counts e.g. "(9) "
     title = title.replace(/[^a-zA-Z0-9_\-\s]/g, '').trim().replace(/\s+/g, '_').slice(0, 35);
     if (!title) title = 'Facebook_Reel';
     const ext = (format === 'mp3') ? 'mp3' : 'mp4';
@@ -86,7 +117,6 @@
   function getDirectVideoTagStream(container) {
     const v = (container && container.querySelector('video')) || document.querySelector('video');
     if (v) {
-      // Check src if it is a real video link
       if (v.src && v.src.startsWith('http') && v.src.includes('fbcdn.net') && !v.src.includes('_a.mp4')) {
         return cleanStreamUrl(v.src);
       }
@@ -97,17 +127,13 @@
     return null;
   }
 
-  // Query Background Service Worker for Best Stream (Separated Video vs Audio)
-  function queryBackgroundStream(format) {
-    return new Promise((resolve) => {
-      chrome.runtime.sendMessage({ action: 'get_best_stream', format: format }, (res) => {
-        if (res && res.success && res.streamUrl) {
-          resolve(res.streamUrl);
-        } else {
-          resolve(null);
-        }
-      });
-    });
+  // Query Background Service Worker for Best Stream (Safe)
+  async function queryBackgroundStream(format) {
+    const res = await safeSendMessage({ action: 'get_best_stream', format: format });
+    if (res && res.success && res.streamUrl) {
+      return res.streamUrl;
+    }
+    return null;
   }
 
   // Download File via in-page blob or chrome.downloads
@@ -157,32 +183,33 @@
       console.warn('[FB4K] In-page fetch skipped, using Chrome Downloads API:', err);
     }
 
-    // Chrome Downloads API Fallback
-    chrome.runtime.sendMessage(
-      {
-        action: 'download_file',
-        url: streamUrl,
-        format: format,
-        title: document.title
-      },
-      (res) => {
-        btnElement.classList.remove('fb4k-btn-loading');
+    // Chrome Downloads API Fallback via Safe Messenger
+    const res = await safeSendMessage({
+      action: 'download_file',
+      url: streamUrl,
+      format: format,
+      title: document.title
+    });
 
-        if (res && res.success) {
-          btnElement.classList.add('fb4k-btn-success');
-          btnElement.innerHTML = `${SVG_CHECK} <span class="fb4k-pill-label">Downloaded!</span>`;
-          showToast(`✅ Video download started! Check your downloads.`);
+    btnElement.classList.remove('fb4k-btn-loading');
 
-          setTimeout(() => {
-            btnElement.classList.remove('fb4k-btn-success');
-            resetBtnContent(btnElement);
-          }, 3000);
-        } else {
-          showToast(`⚠️ Please let the video play for 1-2 seconds, then click Download again!`, true);
-          resetBtnContent(btnElement);
-        }
+    if (res && res.success) {
+      btnElement.classList.add('fb4k-btn-success');
+      btnElement.innerHTML = `${SVG_CHECK} <span class="fb4k-pill-label">Downloaded!</span>`;
+      showToast(`✅ Video download started! Check your downloads.`);
+
+      setTimeout(() => {
+        btnElement.classList.remove('fb4k-btn-success');
+        resetBtnContent(btnElement);
+      }, 3000);
+    } else {
+      if (res && res.contextInvalidated) {
+        showToast(`⚡ Extension updated. Please refresh (F5) this tab!`, true);
+      } else {
+        showToast(`⚠️ Please let the video play for 1-2 seconds, then click Download again!`, true);
       }
-    );
+      resetBtnContent(btnElement);
+    }
   }
 
   // Master Download Handler
@@ -266,6 +293,10 @@
 
   // Scan and Inject Badges on video containers
   function scanAndInject() {
+    if (!isExtensionValid()) {
+      return; // Stop if extension context was invalidated
+    }
+
     const videoElements = document.querySelectorAll('video');
 
     videoElements.forEach((video) => {
@@ -290,6 +321,10 @@
 
   // MutationObserver for infinite scroll
   const observer = new MutationObserver(() => {
+    if (!isExtensionValid()) {
+      observer.disconnect();
+      return;
+    }
     scanAndInject();
   });
 
@@ -299,7 +334,15 @@
   });
 
   scanAndInject();
-  setInterval(scanAndInject, 1500);
 
-  console.log('⚡ FB4KDownloader v2.3 active: Dual-channel video & audio engine ready.');
+  const scanTimer = setInterval(() => {
+    if (!isExtensionValid()) {
+      clearInterval(scanTimer);
+      if (observer) observer.disconnect();
+      return;
+    }
+    scanAndInject();
+  }, 1500);
+
+  console.log('⚡ FB4KDownloader v2.3.1 active (Protected Context Engine)');
 })();

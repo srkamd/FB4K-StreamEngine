@@ -558,3 +558,45 @@ button { font: inherit; color: inherit; cursor: pointer; }
   letter-spacing: 0.6px;
   box-shadow: 0 2px 6px rgba(245, 158, 11, 0.35);
 }
+
+
+/* FAQ Accordion Component */
+.faq-group { margin-bottom: 28px; }
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  margin-bottom: 12px;
+  padding: 16px 20px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.faq-item:hover {
+  border-color: var(--navy-line, #3b82f6);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+.faq-item summary {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text, #0f172a);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+";
+  font-size: 1.4rem;
+  color: var(--accent, #f59e0b);
+  font-weight: bold;
+  line-height: 1;
+}
+.faq-item[open] summary::after {
+  content: "−";
+}
+.faq-item p {
+  margin: 10px 0 0;
+  color: var(--muted, #475569);
+  line-height: 1.65;
+}

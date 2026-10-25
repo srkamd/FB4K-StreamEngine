@@ -122,10 +122,28 @@ document.addEventListener('DOMContentLoaded', () => {
         'mp3': 'fb4kdownloader_audio.mp3'
       };
       const fname = filenames[format] || 'fb4kdownloader_video.mp4';
+
+      // Native Android App Bridge integration (AdMob Interstitial & Rewarded Video)
+      if (window.AndroidBridge && typeof window.AndroidBridge.onDownloadTriggered === 'function') {
+        window.AndroidBridge.onDownloadTriggered(targetUrl, format || 'standard', fname);
+        e.preventDefault();
+        return;
+      }
+
       triggerDirectDownload(targetUrl, fname);
       e.preventDefault();
     }
   });
+
+  // Auto-fill & auto-extract if URL query parameter is passed (from Android App Share Intent or Clipboard)
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const sharedUrl = urlParams.get('url');
+    if (sharedUrl && videoUrlInput) {
+      videoUrlInput.value = sharedUrl;
+      setTimeout(() => performExtraction(sharedUrl), 350);
+    }
+  } catch (ignored) {}
 // Google Play Coming Soon Handler
   document.addEventListener('click', (e) => {
     const playBtn = e.target.closest('#googlePlayBtn') || e.target.closest('.btn-google-play');

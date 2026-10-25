@@ -19,4 +19,5 @@ test_*.js
 !favicon*.png
 !apple-touch-icon.png
 !favicon.ico
+!android_app/**/*.png
 scratch/

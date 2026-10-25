@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#00F2FE</color>
-    <color name="purple_500">#4FACFE</color>
-    <color name="purple_700">#030712</color>
-    <color name="teal_200">#00F2FE</color>
-    <color name="teal_700">#00F2FE</color>
+    <color name="bg_dark">#030712</color>
+    <color name="card_dark">#0F172A</color>
+    <color name="border_dark">#1F2937</color>
+    <color name="primary_cyan">#00F2FE</color>
+    <color name="accent_gold">#F59E0B</color>
+    <color name="accent_gold_bright">#FBBF24</color>
+    <color name="text_light">#F9FAFB</color>
+    <color name="text_muted">#9CA3AF</color>
     <color name="black">#030712</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

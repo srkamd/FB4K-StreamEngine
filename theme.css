@@ -498,7 +498,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .footer-bottom a { color: var(--on-navy); }
 @media (max-width: 380px) { .footer-main { grid-template-columns: 1fr; } }
 @media (min-width: 900px) {
-  .footer-main { grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; }
+  .footer-main { grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 36px 28px; }
   .footer-brand { grid-column: auto; }
   .footer-bottom .wrap { grid-template-columns: 1fr auto; align-items: center; gap: 24px; }
   .footer-bottom .legal { text-align: right; }

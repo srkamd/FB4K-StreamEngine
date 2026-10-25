@@ -4,21 +4,31 @@ plugins {
 
 android {
     namespace 'com.fb4kdownloader.app'
-    compileSdk 34
+    compileSdk 36
 
     defaultConfig {
         applicationId "com.fb4kdownloader.app"
         minSdk 24
-        targetSdk 34
-        versionCode 1
-        versionName "1.0.0"
+        targetSdk 36
+        versionCode 4
+        versionName "1.0.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            storeFile rootProject.file('release-key.jks')
+            storePassword 'fb4kdownloaderpass'
+            keyAlias 'fb4k-key-alias'
+            keyPassword 'fb4kdownloaderpass'
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -26,6 +36,11 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 

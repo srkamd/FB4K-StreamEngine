@@ -1,11 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#06b6d4" />
-      <stop offset="100%" stop-color="#3b82f6" />
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0f19" />
+      <stop offset="100%" stop-color="#111827" />
     </linearGradient>
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#fbbf24" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#06b6d4" flood-opacity="0.35"/>
+    </filter>
   </defs>
-  <rect width="512" height="512" rx="128" fill="url(#grad)"/>
-  <path d="M256 120c-44.2 0-80 35.8-80 80 0 4.1.3 8.2.9 12.2C140.2 219.8 112 249.7 112 288c0 44.2 35.8 80 80 80h136c39.8 0 72-32.2 72-72 0-35.8-26.2-65.4-60.6-70.8 1.7-5.9 2.6-12.2 2.6-18.7 0-40.9-33.1-74-74-74-4.1 0-8.1.3-12 1z" fill="#ffffff" opacity="0.95"/>
-  <path d="M256 210v100m-30-30l30 30 30-30" stroke="#06b6d4" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Base Dark Squircle with Cyan Neon Border -->
+  <rect x="16" y="16" width="480" height="480" rx="110" fill="url(#bgGrad)" stroke="#06b6d4" stroke-width="16" filter="url(#glow)"/>
+
+  <!-- Inner Subtle Slate Card -->
+  <rect x="48" y="48" width="416" height="416" rx="88" fill="#0f172a" fill-opacity="0.85" stroke="#1e293b" stroke-width="4"/>
+
+  <!-- "4K" Cyan Pill Badge in Top Corner -->
+  <g transform="translate(320, 68)">
+    <rect width="112" height="52" rx="14" fill="#06b6d4" fill-opacity="0.2" stroke="#38bdf8" stroke-width="4"/>
+    <text x="56" y="36" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="30" font-weight="900" text-anchor="middle" letter-spacing="1">4K</text>
+  </g>
+
+  <!-- Golden / Amber Bold Downward Arrow -->
+  <!-- Shaft -->
+  <rect x="220" y="140" width="72" height="150" rx="16" fill="url(#arrowGrad)"/>
+  
+  <!-- Arrow Head -->
+  <path d="M144 260 L368 260 C382 260 390 274 380 286 L272 406 C264 416 248 416 240 406 L132 286 C122 274 130 260 144 260 Z" fill="url(#arrowGrad)"/>
+
+  <!-- Horizontal Base Accent Bar -->
+  <rect x="156" y="430" width="200" height="24" rx="12" fill="#38bdf8"/>
 </svg>

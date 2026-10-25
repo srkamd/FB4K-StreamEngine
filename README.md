@@ -4,7 +4,7 @@
 
 [![Live Production](https://img.shields.io/badge/Live_Platform-fb4kdownloader.com-00C2A8?style=for-the-badge&logo=googlechrome&logoColor=white)](https://fb4kdownloader.com)
 [![Privacy First](https://img.shields.io/badge/Privacy-Zero--Storage_RAM_Piped-5B5BFF?style=for-the-badge&logo=shield&logoColor=white)](https://fb4kdownloader.com/privacy)
-[![Chrome Web Store](https://img.shields.io/badge/Chrome_Extension-Official_Store-FFB547?style=for-the-badge&logo=googlechrome&logoColor=black)](https://chromewebstore.google.com/detail/fb4kdownloader-4k-faceboo/cmhlgochpmciomoodleglljgmoclhcif)
+[![Chrome Web Store](https://img.shields.io/badge/Chrome_Extension-Official_Store-FFB547?style=for-the-badge&logo=googlechrome&logoColor=black)](https://chromewebstore.google.com/detail/fb4kdownloader-%E2%80%94-4k-faceb/ppaccglfffbbilgiogijkggcldkmfbkh)
 [![Node.js Runtime](https://img.shields.io/badge/Node.js-v18%2B_LTS-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-gray?style=for-the-badge)](LICENSE)
 

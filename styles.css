@@ -506,3 +506,55 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
 @media print { .site-header, .site-footer, .ad-slot, .cta { display: none !important; } }
+
+
+/* Google Play Store Coming Soon Badge Button */
+.btn-google-play {
+  display: inline-flex;
+  align-items: center;
+  background: #0f172a;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  font-family: inherit;
+}
+.btn-google-play:hover {
+  background: #1e293b;
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+.btn-play-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.15;
+  margin-right: 10px;
+}
+.btn-play-text small {
+  font-size: 9px;
+  letter-spacing: 0.8px;
+  color: #94a3b8;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.btn-play-text strong {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+.badge-play-soon {
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  color: #0b0f19;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.35);
+}

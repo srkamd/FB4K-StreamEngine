@@ -16,4 +16,7 @@ test_*.js
 !images/*.jpeg
 !extension/*.png
 !favicon.svg
+!favicon*.png
+!apple-touch-icon.png
+!favicon.ico
 scratch/

@@ -126,4 +126,11 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
     }
   });
+// Google Play Coming Soon Handler
+  document.addEventListener('click', (e) => {
+    const playBtn = e.target.closest('#googlePlayBtn') || e.target.closest('.btn-google-play');
+    if (!playBtn) return;
+    e.preventDefault();
+    alert('FB4KDownloader Android App is currently in final testing and will be officially available on the Google Play Store soon!\n\nIn the meantime, you can use our mobile web downloader or Chrome extension for instant downloads.');
+  });
 });

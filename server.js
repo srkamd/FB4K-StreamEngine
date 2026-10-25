@@ -130,6 +130,9 @@ app.get('/privacy', (req, res) => res.sendFile(path.join(__dirname, 'privacy.htm
 app.get('/terms', (req, res) => res.sendFile(path.join(__dirname, 'terms.html')));
 app.get('/dmca', (req, res) => res.sendFile(path.join(__dirname, 'dmca.html')));
 app.get('/contact', (req, res) => res.sendFile(path.join(__dirname, 'contact.html')));
+app.get('/disclaimer', (req, res) => res.sendFile(path.join(__dirname, 'disclaimer.html')));
+app.get('/cookie-policy', (req, res) => res.sendFile(path.join(__dirname, 'cookie-policy.html')));
+app.get('/faq', (req, res) => res.sendFile(path.join(__dirname, 'faq.html')));
 app.get('/facebook-reels-downloader', (req, res) => res.sendFile(path.join(__dirname, 'reels.html')));
 app.get(['/facebook-private-video-downloader', '/private'], (req, res) => res.redirect(301, '/'));
 app.get('/fb-to-mp3', (req, res) => res.sendFile(path.join(__dirname, 'mp3.html')));
@@ -155,9 +158,9 @@ app.use(express.static(path.join(__dirname), {
 function cleanFbUrl(rawUrl) {
   if (!rawUrl || typeof rawUrl !== 'string') return null;
   let clean = rawUrl
-    .replace(/\\/g, '')
     .replace(/\\u0026/g, '&')
     .replace(/\\u0025/g, '%')
+    .replace(/\\/g, '')
     .replace(/&amp;/g, '&')
     .split('u003C')[0]
     .split('<')[0]
@@ -746,7 +749,7 @@ app.get('/api/test-transcode', async (req, res) => {
 
 // Official Chrome Web Store Redirect
 app.get('/api/download-extension', (req, res) => {
-  res.redirect(301, 'https://chromewebstore.google.com/detail/fb4kdownloader-4k-faceboo/cmhlgochpmciomoodleglljgmoclhcif');
+  res.redirect(301, 'https://chromewebstore.google.com/detail/fb4kdownloader-%E2%80%94-4k-faceb/ppaccglfffbbilgiogijkggcldkmfbkh');
 });
 
 app.listen(PORT, () => {

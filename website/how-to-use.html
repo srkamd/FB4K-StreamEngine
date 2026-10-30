@@ -203,7 +203,7 @@
       </p>
 
       <div style="margin: 24px 0; display: flex; flex-direction: column; gap: 16px;">
-        <div style="border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 18px; background: rgba(255,255,255,0.01);">
+        <div style="border: 1px solid var(--line); border-radius: 10px; padding: 18px; background: rgba(255,255,255,0.01);">
           <h3 style="color: #f87171; font-size: 1.1rem; margin-bottom: 8px;">Issue 1: "Video stream not found or invalid URL"</h3>
           <p style="font-size: 0.92rem; line-height: 1.6; color: var(--muted, #94a3b8);">
             <strong>Root Cause:</strong> This error occurs when the video post privacy is configured as "Friends", "Friends of Friends", or resides inside a closed Facebook Group. External web services cannot bypass Facebook's authentication firewall without user login credentials.<br>
@@ -211,7 +211,7 @@
           </p>
         </div>
 
-        <div style="border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 18px; background: rgba(255,255,255,0.01);">
+        <div style="border: 1px solid var(--line); border-radius: 10px; padding: 18px; background: rgba(255,255,255,0.01);">
           <h3 style="color: #f87171; font-size: 1.1rem; margin-bottom: 8px;">Issue 2: Mobile Safari Plays Video Instead of Downloading (iOS)</h3>
           <p style="font-size: 0.92rem; line-height: 1.6; color: var(--muted, #94a3b8);">
             <strong>Root Cause:</strong> Apple's iOS Safari browser default behavior is to stream MP4 media in full-screen mode rather than immediately triggering a file download save prompt.<br>
@@ -219,7 +219,7 @@
           </p>
         </div>
 
-        <div style="border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 18px; background: rgba(255,255,255,0.01);">
+        <div style="border: 1px solid var(--line); border-radius: 10px; padding: 18px; background: rgba(255,255,255,0.01);">
           <h3 style="color: #f87171; font-size: 1.1rem; margin-bottom: 8px;">Issue 3: Extracted Video Has No Sound</h3>
           <p style="font-size: 0.92rem; line-height: 1.6; color: var(--muted, #94a3b8);">
             <strong>Root Cause:</strong> Facebook uses DASH adaptive streaming, which occasionally separates high-definition 1080p video tracks from audio tracks on certain creator streams.<br>

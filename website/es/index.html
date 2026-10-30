@@ -148,7 +148,7 @@
 
         <!-- Prominent Creator Respect Notice -->
         <div style="background: rgba(255, 176, 32, 0.12); border: 1px solid rgba(255, 176, 32, 0.4); border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.88rem; color: #ffdfa0; display: flex; align-items: center; gap: 8px;">
-          <svg style="width: 18px; height: 18px; flex: none; color: #ffb020;" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+          <svg style="width: 18px; height: 18px; flex: none; color: var(--ink);" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
           <span><strong>Notice:</strong> Only download content you own or have permission to save. Respect creators' rights.</span>
         </div>
 
@@ -215,10 +215,8 @@
           <div class="sheet"><i class="grab"></i><b>Save Video</b>
             <ul><li><span>Full HD 1080p</span><em>Original MP4</em></li><li><span>HD 720p</span><em>Fast MP4</em></li><li><span>Audio only</span><em>MP3</em></li></ul>
             <span class="sheet-btn">Download</span></div>
-        </div></div>
+                </div></div>
       </div>
-    </div>
-
     </div>
   </section>
 
@@ -394,23 +392,23 @@
       </div>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; margin-bottom: 36px;">
-        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 24px;">
-          <h3 style="color: #ffb020; margin-bottom: 12px; font-size: 1.25rem;">Meta Dynamic Streaming (DASH)</h3>
-          <p style="font-size: 0.95rem; line-height: 1.6; color: #cbd5e1;">Facebook delivers media using Dynamic Adaptive Streaming over HTTP (DASH). Instead of serving a static MP4 file, Meta's content delivery network (CDN) fragments videos into small, variable-bitrate segments. Depending on your current network bandwidth and screen resolution, the player automatically throttles between 360p, 720p, and 1080p. FB4KDownloader communicates directly with the manifest layer to isolate and retrieve the highest uncompressed progressive native video stream available.</p>
+        <div style="background: #ffffff; border: 1px solid var(--line); border-radius: 12px; padding: 24px;">
+          <h3 style="color: var(--ink); margin-bottom: 12px; font-size: 1.25rem;">Meta Dynamic Streaming (DASH)</h3>
+          <p style="font-size: 0.95rem; line-height: 1.6; color: var(--muted);">Facebook delivers media using Dynamic Adaptive Streaming over HTTP (DASH). Instead of serving a static MP4 file, Meta's content delivery network (CDN) fragments videos into small, variable-bitrate segments. Depending on your current network bandwidth and screen resolution, the player automatically throttles between 360p, 720p, and 1080p. FB4KDownloader communicates directly with the manifest layer to isolate and retrieve the highest uncompressed progressive native video stream available.</p>
         </div>
-        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 24px;">
-          <h3 style="color: #ffb020; margin-bottom: 12px; font-size: 1.25rem;">Video Codecs: H.264 (AVC) vs VP9</h3>
-          <p style="font-size: 0.95rem; line-height: 1.6; color: #cbd5e1;">Meta employs two primary video compression algorithms: Advanced Video Coding (H.264/AVC) for universal cross-platform compatibility, and Google's VP9 codec for high-efficiency mobile streaming. Our download engine standardizes extracted files into the universally supported MP4 container with H.264 video and stereo AAC/MP3 audio. This ensures that every downloaded file opens natively on Windows Media Player, QuickTime, Android Gallery, iOS Files, VLC, and Premiere Pro without requiring third-party codec packs.</p>
+        <div style="background: #ffffff; border: 1px solid var(--line); border-radius: 12px; padding: 24px;">
+          <h3 style="color: var(--ink); margin-bottom: 12px; font-size: 1.25rem;">Video Codecs: H.264 (AVC) vs VP9</h3>
+          <p style="font-size: 0.95rem; line-height: 1.6; color: var(--muted);">Meta employs two primary video compression algorithms: Advanced Video Coding (H.264/AVC) for universal cross-platform compatibility, and Google's VP9 codec for high-efficiency mobile streaming. Our download engine standardizes extracted files into the universally supported MP4 container with H.264 video and stereo AAC/MP3 audio. This ensures that every downloaded file opens natively on Windows Media Player, QuickTime, Android Gallery, iOS Files, VLC, and Premiere Pro without requiring third-party codec packs.</p>
         </div>
       </div>
 
       <!-- Technical Comparison Matrix Table -->
       <h3 style="font-size: 1.3rem; margin-bottom: 14px;">Facebook Video Resolution &amp; Quality Matrix</h3>
-      <p style="font-size: 0.94rem; color: #94a3b8; margin-bottom: 18px;">Compare resolutions, target aspect ratios, approximate bitrates, and optimal playback hardware:</p>
-      <div style="overflow-x: auto; margin-bottom: 36px; border: 1px solid rgba(255,255,255,0.1); border-radius: 10px;">
+      <p style="font-size: 0.94rem; color: var(--muted); margin-bottom: 18px;">Compare resolutions, target aspect ratios, approximate bitrates, and optimal playback hardware:</p>
+      <div style="overflow-x: auto; margin-bottom: 36px; border: 1px solid var(--line); border-radius: 10px;">
         <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.92rem;">
           <thead>
-            <tr style="background: rgba(255, 176, 32, 0.12); color: #ffb020; border-bottom: 1px solid rgba(255,255,255,0.1);">
+            <tr style="background: var(--surface); color: var(--ink); border-bottom: 1px solid var(--line);">
               <th style="padding: 12px 16px;">Quality Tier</th>
               <th style="padding: 12px 16px;">Dimensions</th>
               <th style="padding: 12px 16px;">Aspect Ratio</th>
@@ -420,7 +418,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+            <tr style="border-bottom: 1px solid var(--line);">
               <td style="padding: 12px 16px;"><strong>Upscaled 4K Ultra HD</strong></td>
               <td style="padding: 12px 16px;">3840 &times; 2160</td>
               <td style="padding: 12px 16px;">16:9 / 9:16</td>
@@ -428,7 +426,7 @@
               <td style="padding: 12px 16px;">320 kbps Pristine</td>
               <td style="padding: 12px 16px;">Large 4K TVs, Retina displays, professional editing archives</td>
             </tr>
-            <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.01);">
+            <tr style="border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.01);">
               <td style="padding: 12px 16px;"><strong>Full HD 1080p (Native)</strong></td>
               <td style="padding: 12px 16px;">1920 &times; 1080</td>
               <td style="padding: 12px 16px;">16:9 Landscape</td>
@@ -436,7 +434,7 @@
               <td style="padding: 12px 16px;">192 kbps AAC</td>
               <td style="padding: 12px 16px;">Laptops, desktop PC monitors, high-definition presentations</td>
             </tr>
-            <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+            <tr style="border-bottom: 1px solid var(--line);">
               <td style="padding: 12px 16px;"><strong>HD 720p (Fast)</strong></td>
               <td style="padding: 12px 16px;">1280 &times; 720</td>
               <td style="padding: 12px 16px;">16:9 Landscape</td>
@@ -444,7 +442,7 @@
               <td style="padding: 12px 16px;">128 kbps AAC</td>
               <td style="padding: 12px 16px;">Smartphones, tablets, saving mobile data and cellular storage</td>
             </tr>
-            <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.01);">
+            <tr style="border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.01);">
               <td style="padding: 12px 16px;"><strong>MP3 Audio Extractor</strong></td>
               <td style="padding: 12px 16px;">Audio Only</td>
               <td style="padding: 12px 16px;">N/A</td>
@@ -457,11 +455,11 @@
       </div>
 
       <!-- Legal & Copyright Fair Use Section -->
-      <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 28px; margin-bottom: 36px;">
-        <h3 style="font-size: 1.25rem; color: #ffb020; margin-bottom: 14px;">Copyright Compliance &amp; Personal Fair Use Doctrine</h3>
-        <p style="font-size: 0.95rem; line-height: 1.7; color: #cbd5e1; margin-bottom: 14px;">FB4KDownloader operates strictly under the legal principles of personal digital archiving and the Fair Use doctrine established under <strong>17 U.S. Code &sect; 107</strong>. When archiving digital broadcasts, users are granted limited rights to create private personal copies for non-commercial educational review, news reporting, critical commentary, and private archival preservation.</p>
-        <p style="font-size: 0.95rem; line-height: 1.7; color: #cbd5e1; margin-bottom: 14px;">We explicitly encourage all users to uphold ethical content consumption standards:</p>
-        <ul style="padding-left: 20px; font-size: 0.93rem; line-height: 1.7; color: #94a3b8;">
+      <div style="background: #ffffff; border: 1px solid var(--line); border-radius: 12px; padding: 28px; margin-bottom: 36px;">
+        <h3 style="font-size: 1.25rem; color: var(--ink); margin-bottom: 14px;">Copyright Compliance &amp; Personal Fair Use Doctrine</h3>
+        <p style="font-size: 0.95rem; line-height: 1.7; color: var(--muted); margin-bottom: 14px;">FB4KDownloader operates strictly under the legal principles of personal digital archiving and the Fair Use doctrine established under <strong>17 U.S. Code &sect; 107</strong>. When archiving digital broadcasts, users are granted limited rights to create private personal copies for non-commercial educational review, news reporting, critical commentary, and private archival preservation.</p>
+        <p style="font-size: 0.95rem; line-height: 1.7; color: var(--muted); margin-bottom: 14px;">We explicitly encourage all users to uphold ethical content consumption standards:</p>
+        <ul style="padding-left: 20px; font-size: 0.93rem; line-height: 1.7; color: var(--muted);">
           <li><strong>Respect Intellectual Property:</strong> Never re-upload, broadcast, or commercially monetize downloaded media without express written permission or licensing from the original creator.</li>
           <li><strong>Personal Backups:</strong> Use this tool to archive your own content, family videos, public community speeches, open-source educational lessons, and Creative Commons media.</li>
           <li><strong>No Circumvention:</strong> FB4KDownloader does not bypass digital rights management (DRM) technologies or private user access controls. Only public videos accessible on the open web can be retrieved.</li>
@@ -471,27 +469,26 @@
       <!-- Troubleshooting Detailed Checklist -->
       <div style="margin-bottom: 36px;">
         <h3 style="font-size: 1.3rem; margin-bottom: 14px;">Troubleshooting: Why a Facebook Video Fails to Download &amp; Fixes</h3>
-        <p style="font-size: 0.94rem; color: #94a3b8; margin-bottom: 16px;">If your download link does not immediately generate preview buttons, consult this 5-point technical diagnostic guide:</p>
+        <p style="font-size: 0.94rem; color: var(--muted); margin-bottom: 16px;">If your download link does not immediately generate preview buttons, consult this 5-point technical diagnostic guide:</p>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px;">
           <div style="border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 16px; background: rgba(255,255,255,0.01);">
             <h4 style="color: #f87171; font-size: 1rem; margin-bottom: 8px;">1. Post Privacy Set to Friends Only</h4>
-            <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.5;">If the video creator set their post privacy to "Friends" or "Custom", external servers cannot access the stream. The post must have a public globe icon to download directly.</p>
+            <p style="font-size: 0.88rem; color: var(--muted); line-height: 1.5;">If the video creator set their post privacy to "Friends" or "Custom", external servers cannot access the stream. The post must have a public globe icon to download directly.</p>
           </div>
           <div style="border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 16px; background: rgba(255,255,255,0.01);">
             <h4 style="color: #f87171; font-size: 1rem; margin-bottom: 8px;">2. Video Resides in a Closed Group</h4>
-            <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.5;">Closed and secret Facebook groups require user authentication cookies. For private group media, use our dedicated <a href="/facebook-private-video-downloader" style="color: #ffb020;">Private Video Downloader</a>.</p>
+            <p style="font-size: 0.88rem; color: var(--muted); line-height: 1.5;">Closed and secret Facebook groups require user authentication cookies. For private group media, use our dedicated <a href="/facebook-private-video-downloader" style="color: var(--ink);">Private Video Downloader</a>.</p>
           </div>
           <div style="border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 16px; background: rgba(255,255,255,0.01);">
             <h4 style="color: #f87171; font-size: 1rem; margin-bottom: 8px;">3. Trailing Tracking Parameters in URL</h4>
-            <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.5;">URLs copied from the mobile app often contain tracking tags like <code>?mibextid=...</code> or <code>&amp;rdid=...</code>. While our backend strips these automatically, clean links process fastest.</p>
+            <p style="font-size: 0.88rem; color: var(--muted); line-height: 1.5;">URLs copied from the mobile app often contain tracking tags like <code>?mibextid=...</code> or <code>&amp;rdid=...</code>. While our backend strips these automatically, clean links process fastest.</p>
           </div>
           <div style="border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 16px; background: rgba(255,255,255,0.01);">
             <h4 style="color: #f87171; font-size: 1rem; margin-bottom: 8px;">4. Ongoing Live Broadcast Stream</h4>
-            <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.5;">Facebook Live streams cannot be converted while currently active. Wait until the broadcast concludes and Facebook finalizes the full-length recording stream.</p>
+            <p style="font-size: 0.88rem; color: var(--muted); line-height: 1.5;">Facebook Live streams cannot be converted while currently active. Wait until the broadcast concludes and Facebook finalizes the full-length recording stream.</p>
           </div>
         </div>
       </div>
-    </div>
   </section>
 
   <!-- ================= FAQ ================= -->

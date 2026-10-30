@@ -153,20 +153,20 @@ https://www.facebook.com/reel/987654321"></textarea>
     
     <!-- ================= COMPREHENSIVE BATCH ARCHIVING EDITORIAL ================= -->
     <div style="margin-top: 48px; border-top: 1px solid var(--line, rgba(255,255,255,0.1)); padding-top: 36px;">
-      <h2 style="font-size: 1.4rem; color: #ffb020; margin-bottom: 16px;">The Engineering Behind Batch Media Archiving</h2>
+      <h2 style="font-size: 1.4rem; color: var(--ink); margin-bottom: 16px;">The Engineering Behind Batch Media Archiving</h2>
       <p style="font-size: 0.96rem; line-height: 1.7; color: var(--ink, #cbd5e1); margin-bottom: 20px;">
         Archiving multiple social media videos individually is a tedious, repetitive workflow. For video creators, research scholars, and digital media archivists, downloading dozens of educational lessons or campaign reels one-by-one requires continuous manual URL switching and multiple browser tab navigations. The FB4KDownloader Batch Queue solves this efficiency bottleneck by introducing a parallel client-side extraction queue that processes up to 10 video links simultaneously.
       </p>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 32px;">
-        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 20px;">
-          <h3 style="color: #ffb020; font-size: 1.15rem; margin-bottom: 10px;">Parallel Stream Manifest Parsing</h3>
+        <div style="background: #ffffff; border: 1px solid var(--line); border-radius: 10px; padding: 20px;">
+          <h3 style="color: var(--ink); font-size: 1.15rem; margin-bottom: 10px;">Parallel Stream Manifest Parsing</h3>
           <p style="font-size: 0.9rem; line-height: 1.6; color: var(--muted, #94a3b8);">
             When you submit a list of links, our asynchronous queue dispatches parallel HTTP HEAD requests to analyze each post's CDN manifest. This determines video availability, native resolutions (1080p vs 720p), and duration in under 2 seconds, displaying a unified visual review table before any file transfers begin.
           </p>
         </div>
-        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 20px;">
-          <h3 style="color: #ffb020; font-size: 1.15rem; margin-bottom: 10px;">Zero-Disk Memory Streaming</h3>
+        <div style="background: #ffffff; border: 1px solid var(--line); border-radius: 10px; padding: 20px;">
+          <h3 style="color: var(--ink); font-size: 1.15rem; margin-bottom: 10px;">Zero-Disk Memory Streaming</h3>
           <p style="font-size: 0.9rem; line-height: 1.6; color: var(--muted, #94a3b8);">
             Unlike cloud scraper services that hoard downloaded files on centralized databases, our server streams the video bytes straight through temporary in-memory RAM buffers into your browser. Your private IP address and batch queuing history are purged the moment your session completes.
           </p>
@@ -185,15 +185,15 @@ https://www.facebook.com/reel/987654321"></textarea>
       <!-- Batch FAQ Accordion -->
       <h3 style="font-size: 1.25rem; margin-bottom: 16px;">Frequently Asked Questions About Bulk Archiving</h3>
       <div class="faq" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px;">
-        <details style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 14px;">
+        <details style="background: #ffffff; border: 1px solid var(--line); border-radius: 8px; padding: 14px;">
           <summary style="font-weight: 600; cursor: pointer; color: var(--ink, #fff);">Why is the queue limited to 10 URLs per batch?</summary>
           <p style="font-size: 0.9rem; color: var(--muted, #94a3b8); margin-top: 8px; line-height: 1.6;">To prevent automated abusive scraping, protect Facebook server bandwidth, and ensure instantaneous response times for all users, batches are capped at 10 items. You can process unlimited successive batches.</p>
         </details>
-        <details style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 14px;">
+        <details style="background: #ffffff; border: 1px solid var(--line); border-radius: 8px; padding: 14px;">
           <summary style="font-weight: 600; cursor: pointer; color: var(--ink, #fff);">Can I download reels and normal landscape videos in the same batch?</summary>
           <p style="font-size: 0.9rem; color: var(--muted, #94a3b8); margin-top: 8px; line-height: 1.6;">Yes! The queue automatically inspects each URL and applies appropriate 9:16 vertical scaling for Reels and 16:9 widescreen scaling for standard landscape posts.</p>
         </details>
-        <details style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 14px;">
+        <details style="background: #ffffff; border: 1px solid var(--line); border-radius: 8px; padding: 14px;">
           <summary style="font-weight: 600; cursor: pointer; color: var(--ink, #fff);">Does bulk downloading compress or reduce video bitrate?</summary>
           <p style="font-size: 0.9rem; color: var(--muted, #94a3b8); margin-top: 8px; line-height: 1.6;">No. Every video in your queue is fetched at its highest original native master resolution (1080p or 720p) provided by Facebook's media CDN.</p>
         </details>

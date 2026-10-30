@@ -846,3 +846,46 @@ button { font: inherit; color: inherit; cursor: pointer; }
   box-shadow: 0 8px 22px rgba(245, 158, 11, 0.5);
   color: #000;
 }
+
+
+/* Footer Dual Sub-Columns Alignment */
+.footer-col-double {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 24px;
+}
+
+.footer-col-sub h4 {
+  margin: 0 0 14px;
+  color: #ffffff;
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.footer-col-sub ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col-sub a {
+  display: inline-block;
+  padding: 4px 0;
+  color: var(--on-navy-muted);
+  text-decoration: none;
+  font-size: 0.91rem;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.footer-col-sub a:hover {
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+@media (max-width: 480px) {
+  .footer-col-double {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}

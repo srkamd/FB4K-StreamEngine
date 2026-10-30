@@ -68,6 +68,7 @@ RewriteRule ^mp3/?$ /fb-to-mp3 [R=301,L,NC]
 RewriteRule ^batch/?$ /bulk-fb-reel-downloader [R=301,L,NC]
 RewriteRule ^private/?$ /facebook-private-video-downloader [R=301,L,NC]
 RewriteRule ^guides/?$ /blog [R=301,L,NC]
+RewriteRule ^blog/how-much-storage-do-videos-use-file-size-guide/?$ /blog/how-much-storage-do-videos-use-simple-guide [R=301,L,NC]
 
 # 8. Clean URL for blog hub: /blog -> /blog.html
 RewriteRule ^blog/?$ /blog.html [L,NC]

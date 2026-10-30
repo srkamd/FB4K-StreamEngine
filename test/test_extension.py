@@ -11,7 +11,7 @@ import re
 import zipfile
 
 EXTENSION_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'extension'))
-ZIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'FB4KDownloader-v2.1.1.zip'))
+ZIP_PATH = os.path.abspath(os.path.join(EXTENSION_DIR, 'FB4KDownloader-v2.1.1.zip'))
 
 class TestChromeExtension(unittest.TestCase):
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent_gold">#F59E0B</color>
+    <color name="accent_gold_bright">#FBBF24</color>
+    <color name="bg_dark">#030712</color>
+    <color name="black">#030712</color>
+    <color name="border_dark">#1F2937</color>
+    <color name="card_dark">#0F172A</color>
+    <color name="primary_cyan">#00F2FE</color>
+    <color name="text_light">#F9FAFB</color>
+    <color name="text_muted">#9CA3AF</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="ad_banner_loading">Loading sponsored message...</string>
+    <string name="app_name">FB4K — Video Saver</string>
+    <string name="clipboard_action_dismiss">Dismiss</string>
+    <string name="clipboard_action_fetch">⚡ Fetch &amp; Download</string>
+    <string name="clipboard_detected_msg">Would you like to fetch and download this video now?</string>
+    <string name="clipboard_detected_title">📋 Facebook Video Link Detected!</string>
+    <string name="download_started">📥 Video Download Started! Saved in Downloads/FB4KDownloader</string>
+    <string name="rate_action_later">Maybe Later</string>
+    <string name="rate_action_yes">⭐ Rate 5 Stars</string>
+    <string name="rate_message">If you love downloading 4K videos with FB4K, please take 5 seconds to rate us on Google Play! Your support keeps the servers fast and free.</string>
+    <string name="rate_title">⭐ Enjoying FB4K?</string>
+    <string name="reward_action_cancel">Download Standard HD</string>
+    <string name="reward_action_watch">🎬 Watch Ad &amp; Unlock 4K</string>
+    <string name="reward_message">Watch a short 15-30 second sponsor video to activate high-speed 4K 60FPS download servers for this video.</string>
+    <string name="reward_title">⚡ Unlock 4K Ultra HD Transcoding</string>
+    <style name="Theme.FB4KDownloader" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_cyan</item>
+        <item name="colorPrimaryDark">@color/bg_dark</item>
+        <item name="colorAccent">@color/accent_gold</item>
+        <item name="android:windowBackground">@color/bg_dark</item>
+        <item name="android:statusBarColor">@color/bg_dark</item>
+        <item name="android:navigationBarColor">@color/bg_dark</item>
+    </style>
+</resources>

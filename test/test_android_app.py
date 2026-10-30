@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 class TestAndroidApp(unittest.TestCase):
     def setUp(self):
         self.base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        self.android_dir = os.path.join(self.base_dir, 'android_app')
+        self.android_dir = os.path.join(self.base_dir, 'mobile_app', 'android_app')
         self.app_dir = os.path.join(self.android_dir, 'app')
         self.src_dir = os.path.join(self.app_dir, 'src', 'main')
 

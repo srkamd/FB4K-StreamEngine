@@ -1,0 +1,34 @@
+R_DEF: Internal format may change without notice
+local
+color accent_gold
+color accent_gold_bright
+color bg_dark
+color black
+color border_dark
+color card_dark
+color primary_cyan
+color text_light
+color text_muted
+color white
+id adBannerContainer
+id progressBar
+id swipeRefreshLayout
+id webview
+layout activity_main
+mipmap ic_launcher
+string ad_banner_loading
+string app_name
+string clipboard_action_dismiss
+string clipboard_action_fetch
+string clipboard_detected_msg
+string clipboard_detected_title
+string download_started
+string rate_action_later
+string rate_action_yes
+string rate_message
+string rate_title
+string reward_action_cancel
+string reward_action_watch
+string reward_message
+string reward_title
+style Theme.FB4KDownloader

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Baixar Stories do Facebook - Salvar Stories com Música Online | FB4KDownloader.com</title>
   <meta name="description" content="Baixe Stories do Facebook com música e áudio em Full HD 1080p antes que expirem em 24 horas.">
-  <meta name="keywords" content="facebook story downloader, download facebook stories, save fb story, download facebook story with music, fb story saver online">
+  <meta name="keywords" content="facebook reels downloader, save facebook reels, download fb reels, facebook vertical video saver">
   <meta name="author" content="Shahrukh Ahmad (SRK AMD)">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0e1836">
@@ -25,12 +25,12 @@
       {
         "@type": "WebApplication",
         "@id": "https://fb4kdownloader.com/facebook-reels-downloader#webapp",
-        "name": "FB4KDownloader - Facebook Story Downloader",
-        "url": "https://fb4kdownloader.com/facebook-story-downloader",
+        "name": "FB4KDownloader - Baixar Stories do Facebook",
+        "url": "https://fb4kdownloader.com/pt/facebook-story-downloader",
         "applicationCategory": "MultimediaApplication",
         "operatingSystem": "All",
         "browserRequirements": "Requires JavaScript. Requires HTML5.",
-        "description": "Download public Facebook Stories with audio in original Full HD quality for personal offline viewing.",
+        "description": "Save public Facebook Reels in original vertical 9:16 aspect ratio in 1080p Full HD, 720p, or MP3 audio for free.",
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -69,6 +69,12 @@
     ]
   }
   </script>
+  <link rel="alternate" hreflang="x-default" href="https://fb4kdownloader.com/" />
+  <link rel="alternate" hreflang="en" href="https://fb4kdownloader.com/" />
+  <link rel="alternate" hreflang="es" href="https://fb4kdownloader.com/es/" />
+  <link rel="alternate" hreflang="pt" href="https://fb4kdownloader.com/pt/" />
+  <link rel="alternate" hreflang="ru" href="https://fb4kdownloader.com/ru/" />
+  <link rel="alternate" hreflang="it" href="https://fb4kdownloader.com/it/" />
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -76,7 +82,7 @@
 <!-- ================= HEADER ================= -->
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="brand" href="/pt/" aria-label="FB4KDownloader home">
+    <a class="brand" href="/" aria-label="FB4KDownloader home">
       <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
         <rect width="40" height="40" rx="10" fill="#ffb020"/>
         <path d="M20 10v14m0 0-6-6m6 6 6-6M12 30h16" fill="none" stroke="#0e1836" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -86,14 +92,23 @@
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Open menu"><span class="bars"></span></button>
     <nav class="nav" id="nav" aria-label="Main">
       <ul class="nav-list">
-        <li><a href="/pt/">Home</a></li>
-        <li><a href="/pt/facebook-reels-downloader" aria-current="page">Reels</a></li>
-        <li><a href="/pt/fb-to-mp3">FB to MP3</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/facebook-reels-downloader" aria-current="page">Reels</a></li>
+        <li><a href="/fb-to-mp3">FB to MP3</a></li>
         <li><a href="/blog">Blog</a></li>
         <li><a href="/how-to-use">How to Use</a></li>
         <li><a href="/about">About</a></li>
         <li><a href="/contact">Contact</a></li>
       </ul>
+            <div class="lang-picker" style="display:inline-flex;align-items:center;margin-left:8px;">
+        <select onchange="if(this.value) window.location.href=this.value;" style="background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:5px 8px;font-size:0.84rem;cursor:pointer;outline:none;" aria-label="Select Language">
+          <option value="/" >🌐 English</option>
+          <option value="/es/" >Español (ES)</option>
+          <option value="/pt/" selected>Português (PT)</option>
+          <option value="/ru/" >Русский (RU)</option>
+          <option value="/it/" >Italiano (IT)</option>
+        </select>
+      </div>
       <a class="btn btn-accent btn-sm nav-cta" href="https://chromewebstore.google.com/detail/fb4kdownloader-%E2%80%94-4k-faceb/ppaccglfffbbilgiogijkggcldkmfbkh" target="_blank" rel="noopener">Get extension</a>
     </nav>
   </div>
@@ -105,7 +120,7 @@
     <div class="wrap hero-grid">
       <div>
         <h1>Baixar Stories do Facebook</h1>
-        <p class="lead">Salve Stories públicos do Facebook com áudio original antes de expirarem. Download rápido em 1080p.</p>
+        <p class="lead">Salve Stories públicos do Facebook com áudio original antes de expirarem.</p>
 
         <!-- Prominent Creator Respect Notice -->
         <div style="background: rgba(255, 176, 32, 0.12); border: 1px solid rgba(255, 176, 32, 0.4); border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.88rem; color: #ffdfa0; display: flex; align-items: center; gap: 8px;">
@@ -143,7 +158,7 @@
           <div class="result-card">
             <div class="thumb" id="result-thumb"><span class="time" id="result-time">00:00</span></div>
             <div>
-              <h2 class="result-title" id="result-title">Facebook Story</h2>
+              <h2 class="result-title" id="result-title">Facebook Reel</h2>
               <p class="result-meta">Choose a format to save the Reel:</p>
               <div class="format-list">
                 <div class="format-row">
@@ -188,15 +203,15 @@
   <section class="section">
     <div class="wrap">
       <div class="section-head">
-        <h2>How to save a public Facebook Story</h2>
+        <h2>How to save a public Facebook Reel</h2>
         <p>Three simple steps to archive vertical video on mobile or desktop.</p>
       </div>
       <ol class="steps">
         <li>
           <span class="n">1</span>
           <div>
-            <h3>Copy the Story Link</h3>
-            <p>Tap the <strong>Share</strong> icon or the three dots on the Facebook Story and tap <strong>Copy link to story</strong>.</p>
+            <h3>Copy the Reel Link</h3>
+            <p>On the Facebook mobile app, tap the <strong>Share</strong> button on the Reel and select <strong>Copy Link</strong>.</p>
           </div>
         </li>
         <li>
@@ -330,7 +345,7 @@
 <footer class="site-footer">
     <div class="wrap footer-main">
     <div class="footer-brand">
-      <a class="brand" href="/pt/" aria-label="FB4KDownloader home">
+      <a class="brand" href="/" aria-label="FB4KDownloader home">
         <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
           <rect width="40" height="40" rx="10" fill="#ffb020"/>
           <path d="M20 10v14m0 0-6-6m6 6 6-6M12 30h16" fill="none" stroke="#0e1836" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -343,10 +358,18 @@
     <nav class="footer-col" aria-label="Tools">
       <h4>Tools</h4>
       <ul>
-        <li><a href="/pt/">Facebook Downloader</a></li>
-        <li><a href="/pt/facebook-reels-downloader">Reels Downloader</a></li>
-        <li><a href="/pt/fb-to-mp3">FB to MP3</a></li>
-        <li><a href="/bulk-fb-reel-downloader">Bulk Downloader</a></li>
+        <li><a href="/">Facebook Downloader</a></li>
+        <li><a href="/facebook-reels-downloader">Reels Downloader</a></li>
+        <li><a href="/fb-to-mp3">FB to MP3 Converter</a></li>
+        <li><a href="/facebook-story-downloader">Story Downloader</a></li>
+        <li><a href="/facebook-watch-downloader">Watch Downloader</a></li>
+        <li><a href="/facebook-4k-video-downloader">4K Downloader</a></li>
+        <li><a href="/facebook-live-video-downloader">Live Video Downloader</a></li>
+        <li><a href="/facebook-group-video-downloader">Group Video Downloader</a></li>
+        <li><a href="/facebook-video-downloader-without-watermark">No Watermark Saver</a></li>
+        <li><a href="/facebook-video-downloader-pc">PC &amp; Mac Downloader</a></li>
+        <li><a href="/facebook-video-downloader-mobile">Mobile Safari &amp; Android</a></li>
+        <li><a href="/bulk-fb-reel-downloader">Bulk Batch Downloader</a></li>
       </ul>
     </nav>
     <nav class="footer-col" aria-label="Guides & Support">
@@ -370,6 +393,14 @@
       </ul>
     </nav>
   </div>
+      <div class="lang-bar" style="border-top:1px solid rgba(255,255,255,0.08);padding:18px 0;text-align:center;font-size:0.88rem;color:#94a3b8;margin-top:20px;">
+      <span style="color:#ffb020;font-weight:600;margin-right:8px;">🌐 International Editions:</span>
+      <a href="/" style="color:#ffffff;font-weight:700;padding:0 8px;text-decoration:none;">English</a> &bull;
+      <a href="/es/" style="color:#cbd5e1;padding:0 8px;text-decoration:none;">Español</a> &bull;
+      <a href="/pt/" style="color:#cbd5e1;padding:0 8px;text-decoration:none;">Português</a> &bull;
+      <a href="/ru/" style="color:#cbd5e1;padding:0 8px;text-decoration:none;">Русский</a> &bull;
+      <a href="/it/" style="color:#cbd5e1;padding:0 8px;text-decoration:none;">Italiano</a>
+    </div>
   <div class="footer-bottom">
     <div class="wrap">
       <p>&copy; <span id="year">2026</span> FB4KDownloader.com &nbsp;&middot;&nbsp; <a href="mailto:support@fb4kdownloader.com">support@fb4kdownloader.com</a></p>

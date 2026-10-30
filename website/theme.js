@@ -168,4 +168,14 @@
       });
     }
   } catch (err) {}
+
+  // Register PWA Service Worker for instant loading & offline speed
+  try {
+    if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/service-worker.js').catch(function () {});
+      });
+    }
+  } catch (err) {}
+
 })();

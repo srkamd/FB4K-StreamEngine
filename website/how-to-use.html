@@ -185,6 +185,38 @@
       <p>
         For a comprehensive diagnostic checklist, see our <a href="/blog/facebook-video-troubleshooting-checklist-printable">troubleshooting checklist</a> or contact our technical support at <a href="mailto:support@fb4kdownloader.com">support@fb4kdownloader.com</a>.
       </p>
+    
+      <h2 id="deep-troubleshooting" style="margin-top: 2.5rem;">Comprehensive Error Resolution &amp; Troubleshooting Guide</h2>
+      <p>
+        While FB4KDownloader achieves a 99.4% success rate across public Facebook URLs, occasional network quirks, privacy settings, or browser cache mismatches can interrupt stream extraction. Here is our step-by-step diagnostic resolution matrix:
+      </p>
+
+      <div style="margin: 24px 0; display: flex; flex-direction: column; gap: 16px;">
+        <div style="border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 18px; background: rgba(255,255,255,0.01);">
+          <h3 style="color: #f87171; font-size: 1.1rem; margin-bottom: 8px;">Issue 1: "Video stream not found or invalid URL"</h3>
+          <p style="font-size: 0.92rem; line-height: 1.6; color: var(--muted, #94a3b8);">
+            <strong>Root Cause:</strong> This error occurs when the video post privacy is configured as "Friends", "Friends of Friends", or resides inside a closed Facebook Group. External web services cannot bypass Facebook's authentication firewall without user login credentials.<br>
+            <strong>Solution:</strong> Open the video post in an incognito/private browser window where you are not logged in. If Facebook prompts you to sign in to see the video, the post is private. Use our <a href="/facebook-private-video-downloader" style="color: #ffb020;">Private Video Downloader</a> page for authenticated personal media backups.
+          </p>
+        </div>
+
+        <div style="border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 18px; background: rgba(255,255,255,0.01);">
+          <h3 style="color: #f87171; font-size: 1.1rem; margin-bottom: 8px;">Issue 2: Mobile Safari Plays Video Instead of Downloading (iOS)</h3>
+          <p style="font-size: 0.92rem; line-height: 1.6; color: var(--muted, #94a3b8);">
+            <strong>Root Cause:</strong> Apple's iOS Safari browser default behavior is to stream MP4 media in full-screen mode rather than immediately triggering a file download save prompt.<br>
+            <strong>Solution:</strong> When clicking the <em>Download</em> button on iPhone or iPad, long-press (tap and hold) the button for 1 second until the contextual menu appears, then tap <strong>"Download Linked File"</strong>. Your video will save directly into the iOS Files app inside the Downloads folder.
+          </p>
+        </div>
+
+        <div style="border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 18px; background: rgba(255,255,255,0.01);">
+          <h3 style="color: #f87171; font-size: 1.1rem; margin-bottom: 8px;">Issue 3: Extracted Video Has No Sound</h3>
+          <p style="font-size: 0.92rem; line-height: 1.6; color: var(--muted, #94a3b8);">
+            <strong>Root Cause:</strong> Facebook uses DASH adaptive streaming, which occasionally separates high-definition 1080p video tracks from audio tracks on certain creator streams.<br>
+            <strong>Solution:</strong> FB4KDownloader automatically multiplexes video and audio together on our backend. If a specific source video lacks audio, select the <strong>HD 720p</strong> or <strong>Audio only (MP3)</strong> format option, which uses Facebook's progressive combined master feed.
+          </p>
+        </div>
+      </div>
+
     </article>
   </div>
 </main>

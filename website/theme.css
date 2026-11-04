@@ -489,7 +489,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .footer-brand p { max-width: 42ch; margin: 0 0 14px; }
 .status { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border: 1px solid var(--navy-line); border-radius: 999px; font-size: var(--fs-sm); color: var(--on-navy); }
 .status i { width: 8px; height: 8px; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 3px rgba(52, 211, 153, .22); }
-.footer-col h4 { margin: 0 0 10px; color: #fff; font-size: .95rem; letter-spacing: 0; }
+.footer-col h3, .footer-col h4 { margin: 0 0 10px; color: #fff; font-size: .95rem; letter-spacing: 0; }
 .footer-col a { display: inline-block; padding: 5px 0; color: var(--on-navy-muted); text-decoration: none; }
 .footer-col a:hover { color: #fff; text-decoration: underline; }
 .footer-bottom { border-top: 1px solid var(--navy-line); }
@@ -649,7 +649,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.22);
 }
 
-.footer-col h4 {
+.footer-col h3, .footer-col h4 {
   margin: 0 0 14px;
   color: #ffffff;
   font-size: 0.98rem;
@@ -855,7 +855,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   gap: 20px 24px;
 }
 
-.footer-col-sub h4 {
+.footer-col-sub h3, .footer-col-sub h4 {
   margin: 0 0 14px;
   color: #ffffff;
   font-size: 0.98rem;
